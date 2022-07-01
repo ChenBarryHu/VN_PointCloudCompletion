@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+log/
+.idea
+data/pcn
+data/
+extensions/
+images
