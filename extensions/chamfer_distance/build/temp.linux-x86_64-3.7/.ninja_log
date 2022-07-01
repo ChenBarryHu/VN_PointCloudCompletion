@@ -1,0 +1,3 @@
+# ninja log v5
+0	11670	1656614391833923332	/home/barry/guided_research/PCN-PyTorch/extensions/chamfer_distance/build/temp.linux-x86_64-3.7/chamfer3D.o	d1b961108594edb1
+0	12851	1656614393009910102	/home/barry/guided_research/PCN-PyTorch/extensions/chamfer_distance/build/temp.linux-x86_64-3.7/chamfer_cuda.o	7a2f73e46fa8c415
