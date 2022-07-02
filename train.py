@@ -2,6 +2,7 @@ import argparse
 import os
 import datetime
 import random
+from copy import deepcopy
 
 import torch
 import torch.optim as Optim
@@ -77,9 +78,21 @@ def train(params):
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=params.lr, betas=(0.9, 0.999))
-    lr_schedual = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
+    start_epoch = 0
+    if params.resume:
+        log(log_fd, f'Resume training from experiment: {params.exp_name}')
+        ckpt_dir = os.path.join(params.log_dir, params.exp_name, params.category, 'checkpoints')
+        model_path = os.path.join(ckpt_dir, 'model_last.pth')
+        optim_path = os.path.join(ckpt_dir, 'optim_last.pth')
+        model.load_state_dict(torch.load(model_path))
+        optim_dict = torch.load(optim_path)
+        optimizer.load_state_dict(optim_dict['optim_state_dict'])
+        start_epoch = optim_dict['epoch']
+
+    scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
 
     step = len(train_dataloader) // params.log_frequency
+    n_batches = len(train_dataloader)
 
     # load pretrained model and optimizer
     if params.ckpt_path is not None:
@@ -89,7 +102,7 @@ def train(params):
     best_cd_l1 = 1e8
     best_epoch_l1 = -1
     train_step, val_step = 0, 0
-    for epoch in range(1, params.epochs + 1):
+    for epoch in range(start_epoch, params.epochs + 1):
         # hyperparameter alpha
         if train_step < 10000:
             alpha = 0.01
@@ -132,15 +145,15 @@ def train(params):
             optimizer.step()
 
             if (i + 1) % step == 0:
-                log(log_fd, "Training Epoch [{:03d}/{:03d}] - Iteration [{:03d}/{:03d}]: coarse loss = {:.6f}, dense l1 cd = {:.6f}, total loss = {:.6f}"
-                    .format(epoch, params.epochs, i + 1, len(train_dataloader), loss1.item() * 1e3, loss2.item() * 1e3, loss.item() * 1e3))
+                log(log_fd, "Training Epoch [{:03d}/{:03d}] - Iteration [{:03d}/{:03d}]: coarse loss = {:.6f}, dense l1 cd = {:.6f}, total loss = {:.6f}, lr = {:.6f}"
+                    .format(epoch, params.epochs, i + 1, len(train_dataloader), loss1.item() * 1e3, loss2.item() * 1e3, loss.item() * 1e3, scheduler.get_last_lr()[0]))
             
+            train_step = epoch * n_batches + i
             train_writer.add_scalar('coarse', loss1.item(), train_step)
             train_writer.add_scalar('dense', loss2.item(), train_step)
             train_writer.add_scalar('total', loss.item(), train_step)
-            train_step += 1
         
-        lr_schedual.step()
+        scheduler.step()
 
         # evaluation
         model.eval()
@@ -177,7 +190,21 @@ def train(params):
         if total_cd_l1 < best_cd_l1:
             best_epoch_l1 = epoch
             best_cd_l1 = total_cd_l1
-            torch.save(model.state_dict(), os.path.join(ckpt_dir, 'best_l1_cd.pth'))
+            torch.save(model.state_dict(), os.path.join(ckpt_dir, 'model_best.pth'))
+            state_dict = deepcopy(optimizer.state_dict())
+
+            torch.save(
+                {"epoch": epoch, "optim_state_dict": state_dict},
+                os.path.join(ckpt_dir, 'optim_best.pth')
+            )
+        
+        torch.save(model.state_dict(), os.path.join(ckpt_dir, 'model_last.pth'))
+        state_dict = deepcopy(optimizer.state_dict())
+
+        torch.save(
+            {"epoch": epoch, "optim_state_dict": state_dict},
+            os.path.join(ckpt_dir, 'optim_last.pth')
+        )
             
     log(log_fd, 'Best l1 cd model in epoch {}, the minimum l1 cd is {}'.format(best_epoch_l1, best_cd_l1 * 1e3))
     log_fd.close()
@@ -189,6 +216,7 @@ if __name__ == '__main__':
     parser.add_argument('--only_coarse', action='store_true', help='Train on coarse prediction only')
     parser.add_argument('--VN', action='store_true', help='use VN network')
     parser.add_argument('--log_dir', type=str, default='log', help='Logger directory')
+    parser.add_argument('--resume', action='store_true', help='Resume training specified by the exp_name')
     parser.add_argument('--ckpt_path', type=str, default=None, help='The path of pretrained model')
     parser.add_argument('--lr', type=float, default=0.0001, help='Learning rate')
     parser.add_argument('--category', type=str, default='all', help='Category of point clouds')
