@@ -66,7 +66,7 @@ def train(config, args):
         model_path = os.path.join(exp_dir, 'models/model_last.pth')
         optim_path = os.path.join(exp_dir, 'optimizer/optim_last.pth')
         if os.path.exists(model_path) and os.path.exists(optim_path):
-            log.info(f'Resume training from experiment: {args.exp_name}')
+            log.info(f'Resume training from experiment: {args.name}')
             model.load_state_dict(torch.load(model_path))
             optim_dict = torch.load(optim_path)
             optimizer.load_state_dict(optim_dict['optim_state_dict'])

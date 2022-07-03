@@ -75,7 +75,7 @@ def main():
         return
 
     # setup device if --use-cuda has been specified
-    log.info(f"CUDA_VISIBLE_DEVICES: {str(os.environ['CUDA_VISIBLE_DEVICES'])}")
+    # log.info(f"CUDA_VISIBLE_DEVICES: {str(os.environ['CUDA_VISIBLE_DEVICES'])}")
     if torch.cuda.is_available():
         device = "cuda:0"
         log.info(f"Using device: {device}")
@@ -105,7 +105,8 @@ def main():
         config.overfit = True
 
     # create experiment
-    config = create_experiment(config)
+    if not args.resume:
+        config = create_experiment(config)
 
     # NOTE: do not modify config after this
     store_config(config)

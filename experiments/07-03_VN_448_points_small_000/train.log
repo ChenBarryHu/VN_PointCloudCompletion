@@ -1,0 +1,84 @@
+2022-07-03 13:31:22,175 - train - INFO - Model coarse part params 2564864
+2022-07-03 13:31:22,175 - train - INFO - Model dense part params 3358467
+2022-07-03 13:31:34,176 - train - INFO - Training Epoch [000/400] - Iteration [090/906]: coarse loss = 47.612719, dense l1 cd = 0.000000, total loss = 47.612719, lr = 0.000100
+2022-07-03 13:31:44,729 - train - INFO - Training Epoch [000/400] - Iteration [180/906]: coarse loss = 48.831426, dense l1 cd = 0.000000, total loss = 48.831426, lr = 0.000100
+2022-07-03 13:31:54,937 - train - INFO - Training Epoch [000/400] - Iteration [270/906]: coarse loss = 48.637904, dense l1 cd = 0.000000, total loss = 48.637904, lr = 0.000100
+2022-07-03 13:32:05,499 - train - INFO - Training Epoch [000/400] - Iteration [360/906]: coarse loss = 55.974852, dense l1 cd = 0.000000, total loss = 55.974852, lr = 0.000100
+2022-07-03 13:32:15,579 - train - INFO - Training Epoch [000/400] - Iteration [450/906]: coarse loss = 50.727047, dense l1 cd = 0.000000, total loss = 50.727047, lr = 0.000100
+2022-07-03 13:32:25,912 - train - INFO - Training Epoch [000/400] - Iteration [540/906]: coarse loss = 43.849163, dense l1 cd = 0.000000, total loss = 43.849163, lr = 0.000100
+2022-07-03 13:32:36,270 - train - INFO - Training Epoch [000/400] - Iteration [630/906]: coarse loss = 42.940278, dense l1 cd = 0.000000, total loss = 42.940278, lr = 0.000100
+2022-07-03 13:32:46,611 - train - INFO - Training Epoch [000/400] - Iteration [720/906]: coarse loss = 43.286312, dense l1 cd = 0.000000, total loss = 43.286312, lr = 0.000100
+2022-07-03 13:32:56,900 - train - INFO - Training Epoch [000/400] - Iteration [810/906]: coarse loss = 47.217403, dense l1 cd = 0.000000, total loss = 47.217403, lr = 0.000100
+2022-07-03 13:33:07,170 - train - INFO - Training Epoch [000/400] - Iteration [900/906]: coarse loss = 49.386099, dense l1 cd = 0.000000, total loss = 49.386099, lr = 0.000100
+2022-07-03 13:33:10,410 - train - INFO - Validate Epoch [000/400]: L1 Chamfer Distance = 44.891776
+2022-07-03 13:33:21,636 - train - INFO - Training Epoch [001/400] - Iteration [090/906]: coarse loss = 44.862323, dense l1 cd = 0.000000, total loss = 44.862323, lr = 0.000100
+2022-07-03 13:33:32,467 - train - INFO - Training Epoch [001/400] - Iteration [180/906]: coarse loss = 44.047192, dense l1 cd = 0.000000, total loss = 44.047192, lr = 0.000100
+2022-07-03 13:33:43,456 - train - INFO - Training Epoch [001/400] - Iteration [270/906]: coarse loss = 43.376643, dense l1 cd = 0.000000, total loss = 43.376643, lr = 0.000100
+2022-07-03 13:33:54,094 - train - INFO - Training Epoch [001/400] - Iteration [360/906]: coarse loss = 42.018093, dense l1 cd = 0.000000, total loss = 42.018093, lr = 0.000100
+2022-07-03 13:34:04,589 - train - INFO - Training Epoch [001/400] - Iteration [450/906]: coarse loss = 41.793220, dense l1 cd = 0.000000, total loss = 41.793220, lr = 0.000100
+2022-07-03 13:34:15,090 - train - INFO - Training Epoch [001/400] - Iteration [540/906]: coarse loss = 45.094658, dense l1 cd = 0.000000, total loss = 45.094658, lr = 0.000100
+2022-07-03 13:34:25,895 - train - INFO - Training Epoch [001/400] - Iteration [630/906]: coarse loss = 43.218154, dense l1 cd = 0.000000, total loss = 43.218154, lr = 0.000100
+2022-07-03 13:34:36,573 - train - INFO - Training Epoch [001/400] - Iteration [720/906]: coarse loss = 41.026115, dense l1 cd = 0.000000, total loss = 41.026115, lr = 0.000100
+2022-07-03 13:34:46,912 - train - INFO - Training Epoch [001/400] - Iteration [810/906]: coarse loss = 43.573853, dense l1 cd = 0.000000, total loss = 43.573853, lr = 0.000100
+2022-07-03 13:34:56,903 - train - INFO - Training Epoch [001/400] - Iteration [900/906]: coarse loss = 40.531497, dense l1 cd = 0.000000, total loss = 40.531497, lr = 0.000100
+2022-07-03 13:35:00,101 - train - INFO - Validate Epoch [001/400]: L1 Chamfer Distance = 41.041004
+2022-07-03 13:35:11,197 - train - INFO - Training Epoch [002/400] - Iteration [090/906]: coarse loss = 42.420499, dense l1 cd = 0.000000, total loss = 42.420499, lr = 0.000100
+2022-07-03 13:35:22,014 - train - INFO - Training Epoch [002/400] - Iteration [180/906]: coarse loss = 42.581547, dense l1 cd = 0.000000, total loss = 42.581547, lr = 0.000100
+2022-07-03 13:35:32,298 - train - INFO - Training Epoch [002/400] - Iteration [270/906]: coarse loss = 42.952232, dense l1 cd = 0.000000, total loss = 42.952232, lr = 0.000100
+2022-07-03 13:35:42,643 - train - INFO - Training Epoch [002/400] - Iteration [360/906]: coarse loss = 36.763385, dense l1 cd = 0.000000, total loss = 36.763385, lr = 0.000100
+2022-07-03 13:35:52,808 - train - INFO - Training Epoch [002/400] - Iteration [450/906]: coarse loss = 41.612417, dense l1 cd = 0.000000, total loss = 41.612417, lr = 0.000100
+2022-07-03 13:36:02,878 - train - INFO - Training Epoch [002/400] - Iteration [540/906]: coarse loss = 42.119760, dense l1 cd = 0.000000, total loss = 42.119760, lr = 0.000100
+2022-07-03 13:36:13,164 - train - INFO - Training Epoch [002/400] - Iteration [630/906]: coarse loss = 44.438913, dense l1 cd = 0.000000, total loss = 44.438913, lr = 0.000100
+2022-07-03 13:36:23,635 - train - INFO - Training Epoch [002/400] - Iteration [720/906]: coarse loss = 36.767125, dense l1 cd = 0.000000, total loss = 36.767125, lr = 0.000100
+2022-07-03 13:36:34,206 - train - INFO - Training Epoch [002/400] - Iteration [810/906]: coarse loss = 36.289066, dense l1 cd = 0.000000, total loss = 36.289066, lr = 0.000100
+2022-07-03 13:36:44,849 - train - INFO - Training Epoch [002/400] - Iteration [900/906]: coarse loss = 42.431820, dense l1 cd = 0.000000, total loss = 42.431820, lr = 0.000100
+2022-07-03 13:36:47,983 - train - INFO - Validate Epoch [002/400]: L1 Chamfer Distance = 38.861365
+2022-07-03 13:36:59,087 - train - INFO - Training Epoch [003/400] - Iteration [090/906]: coarse loss = 43.084756, dense l1 cd = 0.000000, total loss = 43.084756, lr = 0.000100
+2022-07-03 13:37:10,300 - train - INFO - Training Epoch [003/400] - Iteration [180/906]: coarse loss = 37.091687, dense l1 cd = 0.000000, total loss = 37.091687, lr = 0.000100
+2022-07-03 13:37:20,732 - train - INFO - Training Epoch [003/400] - Iteration [270/906]: coarse loss = 38.206324, dense l1 cd = 0.000000, total loss = 38.206324, lr = 0.000100
+2022-07-03 13:37:31,958 - train - INFO - Training Epoch [003/400] - Iteration [360/906]: coarse loss = 40.634118, dense l1 cd = 0.000000, total loss = 40.634118, lr = 0.000100
+2022-07-03 13:37:42,513 - train - INFO - Training Epoch [003/400] - Iteration [450/906]: coarse loss = 38.708791, dense l1 cd = 0.000000, total loss = 38.708791, lr = 0.000100
+2022-07-03 13:37:52,691 - train - INFO - Training Epoch [003/400] - Iteration [540/906]: coarse loss = 36.188457, dense l1 cd = 0.000000, total loss = 36.188457, lr = 0.000100
+2022-07-03 13:38:03,036 - train - INFO - Training Epoch [003/400] - Iteration [630/906]: coarse loss = 36.494579, dense l1 cd = 0.000000, total loss = 36.494579, lr = 0.000100
+2022-07-03 13:38:13,131 - train - INFO - Training Epoch [003/400] - Iteration [720/906]: coarse loss = 33.525825, dense l1 cd = 0.000000, total loss = 33.525825, lr = 0.000100
+2022-07-03 13:38:23,475 - train - INFO - Training Epoch [003/400] - Iteration [810/906]: coarse loss = 35.037149, dense l1 cd = 0.000000, total loss = 35.037149, lr = 0.000100
+2022-07-03 13:38:33,722 - train - INFO - Training Epoch [003/400] - Iteration [900/906]: coarse loss = 37.424576, dense l1 cd = 0.000000, total loss = 37.424576, lr = 0.000100
+2022-07-03 13:38:36,817 - train - INFO - Validate Epoch [003/400]: L1 Chamfer Distance = 37.223009
+2022-07-03 13:38:47,986 - train - INFO - Training Epoch [004/400] - Iteration [090/906]: coarse loss = 38.050152, dense l1 cd = 0.000000, total loss = 38.050152, lr = 0.000100
+2022-07-03 13:38:58,262 - train - INFO - Training Epoch [004/400] - Iteration [180/906]: coarse loss = 37.794363, dense l1 cd = 0.000000, total loss = 37.794363, lr = 0.000100
+2022-07-03 13:39:08,861 - train - INFO - Training Epoch [004/400] - Iteration [270/906]: coarse loss = 39.226256, dense l1 cd = 0.000000, total loss = 39.226256, lr = 0.000100
+2022-07-03 13:39:18,844 - train - INFO - Training Epoch [004/400] - Iteration [360/906]: coarse loss = 37.372325, dense l1 cd = 0.000000, total loss = 37.372325, lr = 0.000100
+2022-07-03 13:39:29,370 - train - INFO - Training Epoch [004/400] - Iteration [450/906]: coarse loss = 39.223745, dense l1 cd = 0.000000, total loss = 39.223745, lr = 0.000100
+2022-07-03 13:39:39,476 - train - INFO - Training Epoch [004/400] - Iteration [540/906]: coarse loss = 38.356505, dense l1 cd = 0.000000, total loss = 38.356505, lr = 0.000100
+2022-07-03 13:39:49,996 - train - INFO - Training Epoch [004/400] - Iteration [630/906]: coarse loss = 35.834853, dense l1 cd = 0.000000, total loss = 35.834853, lr = 0.000100
+2022-07-03 13:40:00,139 - train - INFO - Training Epoch [004/400] - Iteration [720/906]: coarse loss = 37.918959, dense l1 cd = 0.000000, total loss = 37.918959, lr = 0.000100
+2022-07-03 13:40:10,856 - train - INFO - Training Epoch [004/400] - Iteration [810/906]: coarse loss = 35.506934, dense l1 cd = 0.000000, total loss = 35.506934, lr = 0.000100
+2022-07-03 13:40:21,140 - train - INFO - Training Epoch [004/400] - Iteration [900/906]: coarse loss = 33.611920, dense l1 cd = 0.000000, total loss = 33.611920, lr = 0.000100
+2022-07-03 13:40:24,458 - train - INFO - Validate Epoch [004/400]: L1 Chamfer Distance = 35.858490
+2022-07-03 13:40:36,003 - train - INFO - Training Epoch [005/400] - Iteration [090/906]: coarse loss = 36.828198, dense l1 cd = 0.000000, total loss = 36.828198, lr = 0.000100
+2022-07-03 13:52:16,841 - train - INFO - Resume training from experiment: 07-03_VN_448_points_small_000
+2022-07-03 13:52:16,876 - train - INFO - Model coarse part params 2564864
+2022-07-03 13:52:16,876 - train - INFO - Model dense part params 3358467
+2022-07-03 13:52:29,286 - train - INFO - Training Epoch [004/400] - Iteration [090/906]: coarse loss = 31.869862, dense l1 cd = 0.000000, total loss = 31.869862, lr = 0.000100
+2022-07-03 13:52:39,543 - train - INFO - Training Epoch [004/400] - Iteration [180/906]: coarse loss = 37.539124, dense l1 cd = 0.000000, total loss = 37.539124, lr = 0.000100
+2022-07-03 13:52:49,839 - train - INFO - Training Epoch [004/400] - Iteration [270/906]: coarse loss = 34.084179, dense l1 cd = 0.000000, total loss = 34.084179, lr = 0.000100
+2022-07-03 13:53:00,394 - train - INFO - Training Epoch [004/400] - Iteration [360/906]: coarse loss = 34.571365, dense l1 cd = 0.000000, total loss = 34.571365, lr = 0.000100
+2022-07-03 13:53:11,368 - train - INFO - Training Epoch [004/400] - Iteration [450/906]: coarse loss = 32.250706, dense l1 cd = 0.000000, total loss = 32.250706, lr = 0.000100
+2022-07-03 13:53:21,769 - train - INFO - Training Epoch [004/400] - Iteration [540/906]: coarse loss = 35.614371, dense l1 cd = 0.000000, total loss = 35.614371, lr = 0.000100
+2022-07-03 13:53:32,084 - train - INFO - Training Epoch [004/400] - Iteration [630/906]: coarse loss = 35.421088, dense l1 cd = 0.000000, total loss = 35.421088, lr = 0.000100
+2022-07-03 13:53:42,420 - train - INFO - Training Epoch [004/400] - Iteration [720/906]: coarse loss = 39.207734, dense l1 cd = 0.000000, total loss = 39.207734, lr = 0.000100
+2022-07-03 13:53:53,374 - train - INFO - Training Epoch [004/400] - Iteration [810/906]: coarse loss = 34.774870, dense l1 cd = 0.000000, total loss = 34.774870, lr = 0.000100
+2022-07-03 13:54:04,372 - train - INFO - Training Epoch [004/400] - Iteration [900/906]: coarse loss = 34.621164, dense l1 cd = 0.000000, total loss = 34.621164, lr = 0.000100
+2022-07-03 13:54:09,467 - train - INFO - Validate Epoch [004/400]: L1 Chamfer Distance = 35.579285
+2022-07-03 13:54:21,633 - train - INFO - Training Epoch [005/400] - Iteration [090/906]: coarse loss = 32.716520, dense l1 cd = 0.000000, total loss = 32.716520, lr = 0.000100
+2022-07-03 13:54:32,399 - train - INFO - Training Epoch [005/400] - Iteration [180/906]: coarse loss = 31.814493, dense l1 cd = 0.000000, total loss = 31.814493, lr = 0.000100
+2022-07-03 13:54:43,559 - train - INFO - Training Epoch [005/400] - Iteration [270/906]: coarse loss = 35.669211, dense l1 cd = 0.000000, total loss = 35.669211, lr = 0.000100
+2022-07-03 13:54:54,526 - train - INFO - Training Epoch [005/400] - Iteration [360/906]: coarse loss = 34.228284, dense l1 cd = 0.000000, total loss = 34.228284, lr = 0.000100
+2022-07-03 13:55:05,912 - train - INFO - Training Epoch [005/400] - Iteration [450/906]: coarse loss = 38.394794, dense l1 cd = 0.000000, total loss = 38.394794, lr = 0.000100
+2022-07-03 13:55:17,635 - train - INFO - Training Epoch [005/400] - Iteration [540/906]: coarse loss = 35.447724, dense l1 cd = 0.000000, total loss = 35.447724, lr = 0.000100
+2022-07-03 13:55:29,083 - train - INFO - Training Epoch [005/400] - Iteration [630/906]: coarse loss = 33.155937, dense l1 cd = 0.000000, total loss = 33.155937, lr = 0.000100
+2022-07-03 13:55:40,226 - train - INFO - Training Epoch [005/400] - Iteration [720/906]: coarse loss = 35.822462, dense l1 cd = 0.000000, total loss = 35.822462, lr = 0.000100
+2022-07-03 13:55:51,096 - train - INFO - Training Epoch [005/400] - Iteration [810/906]: coarse loss = 39.492838, dense l1 cd = 0.000000, total loss = 39.492838, lr = 0.000100
+2022-07-03 13:56:01,610 - train - INFO - Training Epoch [005/400] - Iteration [900/906]: coarse loss = 31.919278, dense l1 cd = 0.000000, total loss = 31.919278, lr = 0.000100
+2022-07-03 13:56:06,693 - train - INFO - Validate Epoch [005/400]: L1 Chamfer Distance = 34.702348
+2022-07-03 13:56:18,033 - train - INFO - Training Epoch [006/400] - Iteration [090/906]: coarse loss = 36.352739, dense l1 cd = 0.000000, total loss = 36.352739, lr = 0.000100
