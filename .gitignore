@@ -5,3 +5,8 @@ log/
 data/pcn
 data/
 images
+build/
+dist/
+visualizations/
+models/
+optimizer/

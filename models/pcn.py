@@ -31,27 +31,27 @@ class VN_PCN(nn.Module):
             #nn.Conv1d(3, 128, 1),
             # nn.BatchNorm1d(128),
             # nn.ReLU(inplace=True),
-            VNLinear(128,256)
+            VNLinear(128,512)
             # nn.Conv1d(128, 256, 1)
         )
 
-        self.maxpool1 = VNMaxPool(256)
+        self.maxpool1 = VNMaxPool(512)
 
         self.second_conv = nn.Sequential(
-            VNLinearLeakyReLU(512,512,dim=4), 
+            VNLinearLeakyReLU(1024,1024,dim=4), 
             # nn.Conv1d(512, 512, 1),
             # nn.BatchNorm1d(512),
             # nn.ReLU(inplace=True),
-            VNLinear(512,self.latent_dim)
+            VNLinear(1024,self.latent_dim * 2)
             # nn.Conv1d(512, self.latent_dim, 1)
         )
-        self.maxpool2 = VNMaxPool(self.latent_dim)
+        self.maxpool2 = VNMaxPool(self.latent_dim * 2)
 
         self.mlp = nn.Sequential(
-            VNLinearAndLeakyReLU(self.latent_dim, 1024, dim=4, use_batchnorm='none'),
+            VNLinearAndLeakyReLU(self.latent_dim * 2, 1024 * 2, dim=4, use_batchnorm='none'),
             # nn.Linear(self.latent_dim, 1024),
             # nn.ReLU(inplace=True),
-            VNLinearAndLeakyReLU(1024, 1024, dim=4, use_batchnorm='none'),
+            VNLinearAndLeakyReLU(1024*2, 1024, dim=4, use_batchnorm='none'),
             # nn.Linear(1024, 1024),
             # nn.ReLU(inplace=True),
             VNLinear(1024, self.num_coarse)
