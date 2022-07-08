@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-python train.py train
+python main.py train
