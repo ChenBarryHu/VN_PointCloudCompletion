@@ -15,7 +15,7 @@ from dataset import ShapeNet
 from models import PCN, VN_PCN
 from metrics.metric import l1_cd
 from metrics.loss import cd_loss_L1, emd_loss
-from models.dgcnn import DGCNN
+from models.dgcnn import DGCNN, DGCNN_fps
 from visualization import plot_pcd_one_view
 from utils.experiments import get_num_params, get_num_params_total
 from utils.loss import calc_dcd
@@ -60,6 +60,8 @@ def train(config, args):
     else:
         if config.model == "dgcnn":
             model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        elif config.model == "dgcnn_fps":
+            model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
         else:
             model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
 
@@ -78,6 +80,8 @@ def train(config, args):
             start_epoch = optim_dict['epoch'] + 1
         else:
             log.info(f'Tried to resume training from experiment: {args.exp_name}, however, model.pth or optim.pth not existant. Train from start')
+    else:
+        log.info(f'Start a brand new experiment: {config.run_name}')
 
     scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
 

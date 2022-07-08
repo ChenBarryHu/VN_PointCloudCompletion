@@ -9,12 +9,16 @@ from models.utils.transform_net import Transform_Net
 from models.utils.dgcnn_util import get_graph_feature
 knn = KNN(k=16, transpose_mode=False)
 
-class DGCNN_downsize(nn.Module):
-    def __init__(self):
+class DGCNN_fps(nn.Module):
+    def __init__(self, args, latent_dim=1024, grid_size=4, only_coarse=False):
         super().__init__()
         '''
         K has to be 16
         '''
+        self.latent_dim = latent_dim
+        self.grid_size = grid_size
+        self.num_coarse = 448
+        self.only_coarse = only_coarse
         self.input_trans = nn.Conv1d(3, 8, 1)
 
         self.layer1 = nn.Sequential(nn.Conv2d(16, 32, kernel_size=1, bias=False),
@@ -36,6 +40,14 @@ class DGCNN_downsize(nn.Module):
                                    nn.GroupNorm(4, 1024),
                                    nn.LeakyReLU(negative_slope=0.2)
                                    )
+        
+        self.mlp = nn.Sequential(
+            nn.Linear(self.latent_dim, 1024),
+            nn.ReLU(inplace=True),
+            nn.Linear(1024, 1024),
+            nn.ReLU(inplace=True),
+            nn.Linear(1024, 3 * self.num_coarse)
+        )
 
     
     @staticmethod
@@ -86,6 +98,7 @@ class DGCNN_downsize(nn.Module):
         # x: bs, 3, np
 
         # bs 3 N(128)   bs C(224)128 N(128)
+        x = x.transpose(1,2).contiguous()
         coor = x
         f = self.input_trans(x)
 
@@ -107,9 +120,24 @@ class DGCNN_downsize(nn.Module):
         f = self.get_graph_feature(coor_q, f_q, coor, f) #[4,128,128,16]
         f = self.layer4(f) #[4,128,128,16]
         f = f.max(dim=-1, keepdim=False)[0] #[4,128,128]
-        coor = coor_q #[4,3,128]
+        feature_global = f.max(dim=-1, keepdim=False)[0]
+        coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)
 
-        return coor, f
+        if self.only_coarse:
+            return coarse.contiguous(), None
+
+        point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
+        point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1)               # (B, 3, num_fine)
+
+        seed = self.folding_seed.unsqueeze(2).expand(B, -1, self.num_coarse, -1)             # (B, 2, num_coarse, S)
+        seed = seed.reshape(B, -1, self.num_dense)                                           # (B, 2, num_fine)
+
+        feature_global = feature_global.unsqueeze(2).expand(-1, -1, self.num_dense)          # (B, 1024, num_fine)
+        feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
+    
+        fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
+
+        return coarse.contiguous(), fine.transpose(1, 2).contiguous()
 
 
 class DGCNN(nn.Module):
@@ -148,21 +176,6 @@ class DGCNN(nn.Module):
         self.conv6 = nn.Sequential(nn.Conv1d(192, 1024, kernel_size=1, bias=False),
                                    self.bn6,
                                    nn.LeakyReLU(negative_slope=0.2))
-        # self.conv7 = nn.Sequential(nn.Conv1d(16, 64, kernel_size=1, bias=False),
-        #                            self.bn7,
-        #                            nn.LeakyReLU(negative_slope=0.2))
-        # self.conv8 = nn.Sequential(nn.Conv1d(1280, 256, kernel_size=1, bias=False),
-        #                            self.bn8,
-        #                            nn.LeakyReLU(negative_slope=0.2))
-        # self.dp1 = nn.Dropout(p=0.5)
-        # self.conv9 = nn.Sequential(nn.Conv1d(256, 256, kernel_size=1, bias=False),
-        #                            self.bn9,
-        #                            nn.LeakyReLU(negative_slope=0.2))
-        # self.dp2 = nn.Dropout(p=0.5)
-        # self.conv10 = nn.Sequential(nn.Conv1d(256, 128, kernel_size=1, bias=False),
-        #                            self.bn10,
-        #                            nn.LeakyReLU(negative_slope=0.2))
-        # self.conv11 = nn.Conv1d(128, num_part, kernel_size=1, bias=False)
 
         self.mlp = nn.Sequential(
             nn.Linear(self.latent_dim, 1024),
@@ -201,7 +214,7 @@ class DGCNN(nn.Module):
         x = torch.cat((x1, x2, x3), dim=1)
 
         x = self.conv6(x)
-        feature_global = x.max(dim=-1, keepdim=True)[0].squeeze(2)
+        feature_global = x.max(dim=-1, keepdim=False)[0]
         coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)
 
         if self.only_coarse:
@@ -218,20 +231,4 @@ class DGCNN(nn.Module):
     
         fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 
-        # l = l.view(batch_size, -1, 1)
-        # l = self.conv7(l)
-
-        # x = torch.cat((x, l), dim=1)
-        # x = x.repeat(1, 1, num_points)
-
-        # x = torch.cat((x, x1, x2, x3), dim=1)
-
-        # x = self.conv8(x)
-        # x = self.dp1(x)
-        # x = self.conv9(x)
-        # x = self.dp2(x)
-        # x = self.conv10(x)
-        # x = self.conv11(x)
-        
-        # trans_feat = None
         return coarse.contiguous(), fine.transpose(1, 2).contiguous()

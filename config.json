@@ -1,8 +1,8 @@
 {
-    "name": "448_points_medium_dgcnn",
-    "model": "dgcnn",
+    "name": "448_points_dgcnn_fps",
+    "model": "dgcnn_fps",
     "VN": false,
-    "batch_size": 24,
+    "batch_size": 48,
     "block_num": 6,
     "check_freq_iter": 500,
     "checkpoint": 0,
