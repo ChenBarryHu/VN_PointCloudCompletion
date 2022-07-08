@@ -15,8 +15,10 @@ from dataset import ShapeNet
 from models import PCN, VN_PCN
 from metrics.metric import l1_cd
 from metrics.loss import cd_loss_L1, emd_loss
+from models.dgcnn import DGCNN
 from visualization import plot_pcd_one_view
-from utils.experiments import get_num_params
+from utils.experiments import get_num_params, get_num_params_total
+from utils.loss import calc_dcd
 
 
 log = logging.getLogger("train")
@@ -56,7 +58,10 @@ def train(config, args):
     if config.VN:
         model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
     else:
-        model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        if config.model == "dgcnn":
+            model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        else:
+            model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))
@@ -70,7 +75,7 @@ def train(config, args):
             model.load_state_dict(torch.load(model_path))
             optim_dict = torch.load(optim_path)
             optimizer.load_state_dict(optim_dict['optim_state_dict'])
-            start_epoch = optim_dict['epoch']
+            start_epoch = optim_dict['epoch'] + 1
         else:
             log.info(f'Tried to resume training from experiment: {args.exp_name}, however, model.pth or optim.pth not existant. Train from start')
 
@@ -79,9 +84,11 @@ def train(config, args):
     step = len(train_dataloader) // config.log_frequency
     n_batches = len(train_dataloader)
     
-    model_params_dict = get_num_params(model)
-    log.info(f"Model coarse part params {model_params_dict['coarse']}")
-    log.info(f"Model dense part params {model_params_dict['dense']}")
+    model_total_params = get_num_params_total(model)
+    log.info(f"Model total params: {model_total_params}")
+    # model_params_dict = get_num_params(model)
+    # log.info(f"Model coarse part params {model_params_dict['coarse']}")
+    # log.info(f"Model dense part params {model_params_dict['dense']}")
     # load pretrained model and optimizer
 
     # training
@@ -115,6 +122,11 @@ def train(config, args):
             elif config.coarse_loss == 'emd':
                 coarse_c = c[:, :1024, :]
                 loss1 = emd_loss(coarse_pred, coarse_c)
+            elif config.coarse_loss == 'dcd':
+                t_alpha = config.dcd_opts["alpha"]
+                n_lambda = config.dcd_opts["lambda"]
+                loss1, _, _ = calc_dcd(coarse_pred, c, alpha=t_alpha, n_lambda=n_lambda)
+                loss1 = loss1.mean()
             else:
                 raise ValueError('Not implemented loss {}'.format(config.coarse_loss))
             

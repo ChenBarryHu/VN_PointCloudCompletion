@@ -188,6 +188,7 @@ def config_to_dict(config: SimpleNamespace) -> dict:
 
     # NOTE: if there are any nested namespaces, convert them to dicts first
     try:
+        config_dict["dcd_opts"] = config.dcd_opts.__dict__
         config_dict["weight_dict"] = config.weight_dict.__dict__
         config_dict["lr_scheduler"] = config.lr_scheduler.__dict__
     except AttributeError:
@@ -295,6 +296,10 @@ def get_model(
     stored_dict = torch.load(model_file, map_location="cpu")
     return stored_dict["epoch"], stored_dict["model_state_dict"]
 
+def get_num_params_total(model):
+    model_parameters = model.parameters()
+    model_total_params = sum(p.numel() for p in model_parameters)
+    return model_total_params
 
 def get_num_params(model):
     # return num of total parameters

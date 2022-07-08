@@ -1,7 +1,8 @@
 {
     "name": "VN_448_points_small",
-    "VN": true,
-    "batch_size": 32,
+    "model": "dgcnn",
+    "VN": false,
+    "batch_size": 8,
     "block_num": 6,
     "check_freq_iter": 500,
     "checkpoint": 0,
@@ -54,5 +55,9 @@
         "norm_loss_weight": 0.00016,
         "point_loss_weight": 1,
         "symm_loss_weight": 0.1
+    },
+    "dcd_opts": {
+        "alpha": 200,
+        "lambda": 0.5
     }
 }
