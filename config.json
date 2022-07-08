@@ -1,8 +1,8 @@
 {
-    "name": "VN_448_points_small",
+    "name": "448_points_medium_dgcnn",
     "model": "dgcnn",
     "VN": false,
-    "batch_size": 8,
+    "batch_size": 24,
     "block_num": 6,
     "check_freq_iter": 500,
     "checkpoint": 0,
