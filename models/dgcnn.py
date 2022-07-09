@@ -10,14 +10,15 @@ from models.utils.dgcnn_util import get_graph_feature
 knn = KNN(k=16, transpose_mode=False)
 
 class DGCNN_fps(nn.Module):
-    def __init__(self, args, latent_dim=1024, grid_size=4, only_coarse=False):
+    def __init__(self, args, latent_dim=1024, grid_size=4, only_coarse=False, num_dense=16384):
         super().__init__()
         '''
         K has to be 16
         '''
         self.latent_dim = latent_dim
+        self.num_dense = num_dense
         self.grid_size = grid_size
-        self.num_coarse = 448
+        self.num_coarse = 1024
         self.only_coarse = only_coarse
         self.input_trans = nn.Conv1d(3, 8, 1)
 
@@ -48,6 +49,21 @@ class DGCNN_fps(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(1024, 3 * self.num_coarse)
         )
+
+        self.final_conv = nn.Sequential(
+            nn.Conv1d(1024 + 3 + 2, 512, 1),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(512, 512, 1),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(512, 3, 1)
+        )
+
+        a = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(1, self.grid_size).expand(self.grid_size, self.grid_size).reshape(1, -1)
+        b = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(self.grid_size, 1).expand(self.grid_size, self.grid_size).reshape(1, -1)
+        
+        self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()
 
     
     @staticmethod
@@ -99,6 +115,7 @@ class DGCNN_fps(nn.Module):
 
         # bs 3 N(128)   bs C(224)128 N(128)
         x = x.transpose(1,2).contiguous()
+        B,_,_ = x.shape
         coor = x
         f = self.input_trans(x)
 

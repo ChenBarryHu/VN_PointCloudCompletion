@@ -17,6 +17,7 @@ from metrics.metric import l1_cd
 from metrics.loss import cd_loss_L1, emd_loss
 from models.dgcnn import DGCNN, DGCNN_fps
 from visualization import plot_pcd_one_view
+from pytorch3d.transforms import RotateAxisAngle, Rotate, random_rotations
 from utils.experiments import get_num_params, get_num_params_total
 from utils.loss import calc_dcd
 
@@ -73,14 +74,20 @@ def train(config, args):
         model_path = os.path.join(exp_dir, 'models/model_last.pth')
         optim_path = os.path.join(exp_dir, 'optimizer/optim_last.pth')
         if os.path.exists(model_path) and os.path.exists(optim_path):
-            log.info(f'Resume training from experiment: {args.name}')
             model.load_state_dict(torch.load(model_path))
             optim_dict = torch.load(optim_path)
             optimizer.load_state_dict(optim_dict['optim_state_dict'])
             start_epoch = optim_dict['epoch'] + 1
+            best_cd_l1 = optim_dict['best_metrics']
+            best_epoch_l1 = optim_dict['best_epoch']
+            log.info(f'[RESUME INFO] resume ckpts @ {start_epoch - 1} epoch( best_metrics = {str(best_cd_l1 * 1e3):s})')
         else:
             log.info(f'Tried to resume training from experiment: {args.exp_name}, however, model.pth or optim.pth not existant. Train from start')
+            best_cd_l1 = 1e8
+            best_epoch_l1 = -1
     else:
+        best_cd_l1 = 1e8
+        best_epoch_l1 = -1
         log.info(f'Start a brand new experiment: {config.run_name}')
 
     scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
@@ -96,8 +103,7 @@ def train(config, args):
     # load pretrained model and optimizer
 
     # training
-    best_cd_l1 = 1e8
-    best_epoch_l1 = -1
+    
     train_step, val_step = 0, 0
     for epoch in range(start_epoch, config.max_epochs + 1):
         # hyperparameter alpha
@@ -112,8 +118,23 @@ def train(config, args):
 
         # training
         model.train()
+        train_cd_l1 = {
+            "coarse" : 0.0,
+            "dense" : 0.0,
+            "total" : 0.0
+        }
         for i, (p, c) in enumerate(train_dataloader):
             p, c = p.to(config.device), c.to(config.device)
+            
+            trot = None
+            if config.rotation == 'z':
+                trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
+            elif  config.rotation == 'so3':
+                trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+
+            if trot is not None:
+                p = trot.transform_points(p)
+                c = trot.transform_points(c)
 
             optimizer.zero_grad()
 
@@ -140,36 +161,66 @@ def train(config, args):
                 loss = loss1
             else:
                 loss2 = cd_loss_L1(dense_pred, c)
-                loss = loss1 + alpha * loss2  
+                loss = loss1 + alpha * loss2
+                train_cd_l1["dense"] += loss2.item()
 
             # back propagation
             loss.backward()
             optimizer.step()
 
+            train_cd_l1["total"] += loss.item()
+            train_cd_l1["coarse"] += loss1.item()
+            
+
             if (i + 1) % step == 0:
-                log.info("Training Epoch [{:03d}/{:03d}] - Iteration [{:03d}/{:03d}]: coarse loss = {:.6f}, dense l1 cd = {:.6f}, total loss = {:.6f}, lr = {:.6f}"
+                log.info("Training Epoch [{:03d}/{:03d}] - Iteration [{:03d}/{:03d}]: coarse loss = {:.6f}, dense loss = {:.6f}, total loss = {:.6f}, lr = {:.6f}"
                     .format(epoch, config.max_epochs, i + 1, len(train_dataloader), loss1.item() * 1e3, loss2.item() * 1e3, loss.item() * 1e3, scheduler.get_last_lr()[0]))
             
             train_step = epoch * n_batches + i
-            train_writer.add_scalar('coarse', loss1.item(), train_step)
-            train_writer.add_scalar('dense', loss2.item(), train_step)
-            train_writer.add_scalar('total', loss.item(), train_step)
+            train_writer.add_scalar('Loss/Batch/Coarse', loss1.item(), train_step)
+            train_writer.add_scalar('Loss/Batch/Dense', loss2.item(), train_step)
+            train_writer.add_scalar('Loss/Batch/Total', loss.item(), train_step)
         
         scheduler.step()
+        train_loss_epoch = train_cd_l1["total"] / len(train_dataloader)
+        train_coarse_loss_epoch = train_cd_l1["coarse"] / len(train_dataloader)
+        train_dense_loss_epoch = train_cd_l1["dense"] / len(train_dataloader)
+        log.info("Training Epoch [{:03d}/{:03d}]: Coarse Loss = {:.6f}, Dense Loss = {:.6f}, Total Loss = {:.6f}".format(
+            epoch, config.max_epochs, train_coarse_loss_epoch * 1e3, train_dense_loss_epoch * 1e3, train_loss_epoch * 1e3))
+        train_writer.add_scalar('Loss/Epoch/Coarse', train_coarse_loss_epoch, epoch)
+        train_writer.add_scalar('Loss/Epoch/Dense', train_dense_loss_epoch, epoch)
+        train_writer.add_scalar('Loss/Epoch/Total', train_loss_epoch, epoch)
 
         # evaluation
         model.eval()
-        total_cd_l1 = 0.0
+        val_loss = {
+            "coarse" : 0.0,
+            "dense" : 0.0,
+            "total" : 0.0,
+        }
         with torch.no_grad():
             rand_iter = random.randint(0, len(val_dataloader) - 1)  # for visualization
 
             for i, (p, c) in enumerate(val_dataloader):
                 p, c = p.to(config.device), c.to(config.device)
+
+                trot = None
+                if config.rotation == 'z':
+                    trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
+                elif  config.rotation == 'so3':
+                    trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+
+                if trot is not None:
+                    p = trot.transform_points(p)
+                    c = trot.transform_points(c)
+
                 coarse_pred, dense_pred = model(p)
+                val_loss["coarse"] += l1_cd(coarse_pred, c).item()
                 if config.only_coarse:
-                    total_cd_l1 += l1_cd(coarse_pred, c).item()
+                    val_loss["total"] = val_loss["coarse"]
                 else:
-                    total_cd_l1 += l1_cd(dense_pred, c).item()
+                    val_loss["dense"] += l1_cd(dense_pred, c).item()
+                    val_loss["total"] = val_loss["coarse"] + val_loss["dense"]
 
                 # save into image
                 if rand_iter == i:
@@ -183,28 +234,42 @@ def train(config, args):
                                         [p[index].detach().cpu().numpy(), coarse_pred[index].detach().cpu().numpy(), dense_pred[index].detach().cpu().numpy(), c[index].detach().cpu().numpy()],
                                         ['Input', 'Coarse', 'Dense', 'Ground Truth'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
             
-            total_cd_l1 /= len(val_dataset)
-            val_writer.add_scalar('l1_cd', total_cd_l1, epoch)
+            val_loss["coarse"] /= len(val_dataset)
+            val_loss["dense"] /= len(val_dataset)
+            val_loss["total"] /= len(val_dataset)
+
+            val_writer.add_scalar('Loss/Epoch/Coarse', val_loss["coarse"] * 1e3, epoch)
+            val_writer.add_scalar('Loss/Epoch/Dense', val_loss["dense"] * 1e3, epoch)
+            val_writer.add_scalar('Loss/Epoch/Total', val_loss["total"] * 1e3, epoch)
             val_step += 1
 
-            log.info("Validate Epoch [{:03d}/{:03d}]: L1 Chamfer Distance = {:.6f}".format(epoch, config.max_epochs, total_cd_l1 * 1e3))
+            log.info("Validate Epoch [{:03d}/{:03d}]: Coarse Loss = {:.6f}, Dense Loss = {:.6f}, Total Loss = {:.6f}".format(
+            epoch, config.max_epochs, val_loss["coarse"] * 1e3, val_loss["dense"] * 1e3, val_loss["total"] * 1e3))
         
-        if total_cd_l1 < best_cd_l1:
+        if val_loss["total"] < best_cd_l1:
             best_epoch_l1 = epoch
-            best_cd_l1 = total_cd_l1
+            best_cd_l1 = val_loss["total"]
             torch.save(model.state_dict(), os.path.join(model_dir, 'model_best.pth'))
+            log.info(f"Save checkpoint at {os.path.join(model_dir, 'model_best.pth')}")
             state_dict = deepcopy(optimizer.state_dict())
 
             torch.save(
-                {"epoch": epoch, "optim_state_dict": state_dict},
+                {"epoch": epoch, 
+                "optim_state_dict": state_dict,
+                "best_metrics": best_cd_l1,
+                "best_epoch": best_epoch_l1},
                 os.path.join(optim_dir, 'optim_best.pth')
             )
+            
         
         torch.save(model.state_dict(), os.path.join(model_dir, 'model_last.pth'))
+        log.info(f"Save checkpoint at {os.path.join(model_dir, 'model_last.pth')}")
         state_dict = deepcopy(optimizer.state_dict())
-
         torch.save(
-            {"epoch": epoch, "optim_state_dict": state_dict},
+            {"epoch": epoch, 
+            "optim_state_dict": state_dict,
+            "best_metrics": best_cd_l1,
+            "best_epoch": best_epoch_l1},
             os.path.join(optim_dir, 'optim_last.pth')
         )
             

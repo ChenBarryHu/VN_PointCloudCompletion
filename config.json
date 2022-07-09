@@ -1,8 +1,9 @@
 {
     "name": "448_points_dgcnn_fps",
     "model": "dgcnn_fps",
+    "rotation": "so3",
     "VN": false,
-    "batch_size": 48,
+    "batch_size": 24,
     "block_num": 6,
     "check_freq_iter": 500,
     "checkpoint": 0,
