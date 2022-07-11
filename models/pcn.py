@@ -24,7 +24,7 @@ class VN_PCN(nn.Module):
 
         assert self.num_dense % self.grid_size ** 2 == 0
 
-        self.num_coarse = 448 #self.num_dense // (self.grid_size ** 2)
+        self.num_coarse = 1024 #self.num_dense // (self.grid_size ** 2)
 
         self.first_conv = nn.Sequential(
             VNLinearLeakyReLU(1,128,dim=4), 
