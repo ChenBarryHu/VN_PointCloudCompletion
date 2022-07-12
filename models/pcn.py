@@ -236,7 +236,7 @@ class VN_FoldingNet(nn.Module):
         self.num_dense=16384
         self.num_coarse=1024
         self.final_conv = nn.Sequential(
-            VNLinearLeakyReLU(self.latent_dim + 1, 256, dim=4),
+            VNLinearLeakyReLU(self.latent_dim+1+1, 256, dim=4),
             # nn.Conv1d(1024 + 3 + 2, 512, 1),
             # nn.BatchNorm1d(512),
             # nn.ReLU(inplace=True),
@@ -247,9 +247,10 @@ class VN_FoldingNet(nn.Module):
             VNLinear(256, 1)
             # nn.Conv1d(512, 3, 1)
         )
-        # a = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(1, self.grid_size).expand(self.grid_size, self.grid_size).reshape(1, -1)
-        # b = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(self.grid_size, 1).expand(self.grid_size, self.grid_size).reshape(1, -1)
-        
+        a = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(1, self.grid_size).expand(self.grid_size, self.grid_size).reshape(1, -1)
+        b = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(self.grid_size, 1).expand(self.grid_size, self.grid_size).reshape(1, -1)
+        c = torch.zeros_like(a, dtype=torch.float)
+        self.folding_seed = torch.cat([a, b, c], dim=0).reshape(1,1,3,-1).cuda()
         # self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()  # (1, 2, S)
 
     def forward(self, coarse, feature_global):
@@ -257,13 +258,13 @@ class VN_FoldingNet(nn.Module):
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1).unsqueeze(1)               # (B, 3, num_fine)
 
-        # seed = self.folding_seed.unsqueeze(2).expand(B, -1, self.num_coarse, -1)             # (B, 2, num_coarse, S)
-        # seed = seed.reshape(B, -1, self.num_dense)                                           # (B, 2, num_fine)
+        seed = self.folding_seed.unsqueeze(3).expand(B, -1, -1, self.num_coarse, -1)             # (B, 2, num_coarse, S)
+        seed = seed.reshape(B, -1, 3, self.num_dense)                                           # (B, 2, num_fine)
         feat_global_dim = feature_global.shape[1]
         feature_global = feature_global[:,:(feat_global_dim//3)*3]
         feature_global = feature_global.unsqueeze(2).expand(-1, -1, self.num_dense)          # (B, 1024, num_fine)
         feature_global = feature_global.reshape(B,-1,3,self.num_dense)
-        feat = torch.cat([feature_global,  point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
+        feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
     
         fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 
