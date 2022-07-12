@@ -20,6 +20,7 @@ from visualization import plot_pcd_one_view
 from pytorch3d.transforms import RotateAxisAngle, Rotate, random_rotations
 from utils.experiments import get_num_params, get_num_params_total
 from utils.loss import calc_dcd
+from models.model import PCNNet
 
 
 log = logging.getLogger("train")
@@ -56,15 +57,17 @@ def train(config, args):
     log_dataset.info("Dataset loaded!")
 
     # model
-    if config.VN:
-        model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    else:
-        if config.model == "dgcnn":
-            model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-        elif config.model == "dgcnn_fps":
-            model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-        else:
-            model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    # if config.VN:
+    #     model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    # else:
+    #     if config.model == "dgcnn":
+    #         model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    #     elif config.model == "dgcnn_fps":
+    #         model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    #     else:
+    #         model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+
+    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))
@@ -161,7 +164,9 @@ def train(config, args):
                 loss = loss1
             else:
                 loss2 = cd_loss_L1(dense_pred, c)
-                loss = loss1 + alpha * loss2
+                loss = loss2
+                # loss2 = cd_loss_L1(dense_pred, c)
+                # loss = loss1 + alpha * loss2
                 train_cd_l1["dense"] += loss2.item()
 
             # back propagation
@@ -187,9 +192,9 @@ def train(config, args):
         train_dense_loss_epoch = train_cd_l1["dense"] / len(train_dataloader)
         log.info("Training Epoch [{:03d}/{:03d}]: Coarse Loss = {:.6f}, Dense Loss = {:.6f}, Total Loss = {:.6f}".format(
             epoch, config.max_epochs, train_coarse_loss_epoch * 1e3, train_dense_loss_epoch * 1e3, train_loss_epoch * 1e3))
-        train_writer.add_scalar('Loss/Epoch/Coarse', train_coarse_loss_epoch, epoch)
-        train_writer.add_scalar('Loss/Epoch/Dense', train_dense_loss_epoch, epoch)
-        train_writer.add_scalar('Loss/Epoch/Total', train_loss_epoch, epoch)
+        train_writer.add_scalar('Loss/Epoch/Coarse', train_coarse_loss_epoch * 1e3, epoch)
+        train_writer.add_scalar('Loss/Epoch/Dense', train_dense_loss_epoch * 1e3, epoch)
+        train_writer.add_scalar('Loss/Epoch/Total', train_loss_epoch * 1e3, epoch)
 
         # evaluation
         model.eval()
@@ -204,11 +209,11 @@ def train(config, args):
             for i, (p, c) in enumerate(val_dataloader):
                 p, c = p.to(config.device), c.to(config.device)
 
-                trot = None
-                if config.rotation == 'z':
-                    trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
-                elif  config.rotation == 'so3':
-                    trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+                # trot = None
+                # if config.rotation == 'z':
+                #     trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
+                # elif  config.rotation == 'so3':
+                trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
 
                 if trot is not None:
                     p = trot.transform_points(p)
