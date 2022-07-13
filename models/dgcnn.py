@@ -18,7 +18,7 @@ class DGCNN_fps(nn.Module):
         self.latent_dim = latent_dim
         self.num_dense = num_dense
         self.grid_size = grid_size
-        self.num_coarse = 1024
+        self.num_coarse = 448
         self.only_coarse = only_coarse
         self.input_trans = nn.Conv1d(3, 8, 1)
 

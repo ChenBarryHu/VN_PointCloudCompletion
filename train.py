@@ -57,17 +57,17 @@ def train(config, args):
     log_dataset.info("Dataset loaded!")
 
     # model
-    # if config.VN:
-    #     model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    # else:
-    #     if config.model == "dgcnn":
-    #         model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    #     elif config.model == "dgcnn_fps":
-    #         model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    #     else:
-    #         model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    if config.VN:
+        model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+    else:
+        if config.model == "dgcnn":
+            model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        elif config.model == "dgcnn_fps":
+            model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        else:
+            model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
 
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    # model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))
@@ -93,7 +93,7 @@ def train(config, args):
         best_epoch_l1 = -1
         log.info(f'Start a brand new experiment: {config.run_name}')
 
-    scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
+    scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.8)
 
     step = len(train_dataloader) // config.log_frequency
     n_batches = len(train_dataloader)
