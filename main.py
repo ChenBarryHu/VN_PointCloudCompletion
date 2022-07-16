@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 load_dotenv(".env")
 
 from train import train
+from test import test
 from utils.experiments import (
     create_experiment,
     load_config,
@@ -59,6 +60,8 @@ def main():
     train_parser = subparsers.add_parser("train", help="run training")
 
     overfit_parser = subparsers.add_parser("overfit", help="run overfitting")
+
+    test_parser = subparsers.add_parser("test", help="run testing")
 
     # NOTE: you can add other commands here
 
@@ -114,7 +117,10 @@ def main():
     # NOTE: train and overfit are sharing the same logger for convenience, can change this in the future
     setup_loggers("train", log_path=os.path.join(config.exp_dir, "train.log"))
 
-    train(config, args)
+    if args.command == "test":
+        test(config, args)
+    else:
+        train(config, args)
 
 
 if __name__ == "__main__":

@@ -10,6 +10,8 @@ from models import PCN
 from dataset import ShapeNet
 from visualization import plot_pcd_one_view
 from metrics.metric import l1_cd, l2_cd, emd, f_score
+from models.model import PCNNet
+from pytorch3d.transforms import RotateAxisAngle, Rotate, random_rotations
 
 
 CATEGORIES_PCN       = ['airplane', 'cabinet', 'car', 'chair', 'lamp', 'sofa', 'table', 'vessel']
@@ -27,24 +29,35 @@ def export_ply(filename, points):
     o3d.io.write_point_cloud(filename, pc, write_ascii=True)
 
 
-def test_single_category(category, model, params, save=True):
-    if save:
-        cat_dir = os.path.join(params.result_dir, category)
-        image_dir = os.path.join(cat_dir, 'image')
-        output_dir = os.path.join(cat_dir, 'output')
-        make_dir(cat_dir)
-        make_dir(image_dir)
-        make_dir(output_dir)
+def test_single_category(category, model, config, save=True):
+    # if save:
+    #     cat_dir = os.path.join(params.result_dir, category)
+    #     image_dir = os.path.join(cat_dir, 'image')
+    #     output_dir = os.path.join(cat_dir, 'output')
+    #     make_dir(cat_dir)
+    #     make_dir(image_dir)
+    #     make_dir(output_dir)
 
-    test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
-    test_dataloader = Data.DataLoader(test_dataset, batch_size=params.batch_size, shuffle=False)
+    # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
+    test_dataset = ShapeNet('data/PCN', 'valid', config.category)
+    test_dataloader = Data.DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
 
     index = 1
     total_l1_cd, total_l2_cd, total_f_score = 0.0, 0.0, 0.0
     with torch.no_grad():
         for p, c in test_dataloader:
-            p = p.to(params.device)
-            c = c.to(params.device)
+            p = p.to(config.device)
+            c = c.to(config.device)
+            trot = None
+            if config.rotation == 'z':
+                trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
+            elif  config.rotation == 'so3':
+                trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+
+            if trot is not None:
+                p = trot.transform_points(p)
+                c = trot.transform_points(c)
+
             _, c_ = model(p)
             total_l1_cd += l1_cd(c_, c).item()
             total_l2_cd += l2_cd(c_, c).item()
@@ -53,9 +66,9 @@ def test_single_category(category, model, params, save=True):
                 output_pc = c_[i].detach().cpu().numpy()
                 gt_pc = c[i].detach().cpu().numpy()
                 total_f_score += f_score(output_pc, gt_pc)
-                if save:
-                    plot_pcd_one_view(os.path.join(image_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
-                    export_ply(os.path.join(output_dir, '{:03d}.ply'.format(index)), output_pc)
+                # if save:
+                #     plot_pcd_one_view(os.path.join(image_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
+                #     export_ply(os.path.join(output_dir, '{:03d}.ply'.format(index)), output_pc)
                 index += 1
     
     avg_l1_cd = total_l1_cd / len(test_dataset)
@@ -65,29 +78,32 @@ def test_single_category(category, model, params, save=True):
     return avg_l1_cd, avg_l2_cd, avg_f_score
 
 
-def test(params, save=False):
-    if save:
-        make_dir(params.result_dir)
+def test(config, save=False):
+    # if save:
+    #     make_dir(params.result_dir)
 
-    print(params.exp_name)
+    print(config.name)
+    print(config.rotation)
 
     # load pretrained model
-    model = PCN(16384, 1024, 4).to(params.device)
-    model.load_state_dict(torch.load(params.ckpt_path))
+    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    # model = PCN(16384, 1024, 4).to(config.device)
+    ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
+    model.load_state_dict(torch.load(ckpt_path))
     model.eval()
 
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)'))
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))
 
-    if params.category == 'all':
-        if params.novel:
-            categories = CATEGORIES_PCN_NOVEL
-        else:
-            categories = CATEGORIES_PCN
+    if config.category == 'all':
+        # if params.novel:
+        #     categories = CATEGORIES_PCN_NOVEL
+        # else:
+        categories = CATEGORIES_PCN
         
         l1_cds, l2_cds, fscores = list(), list(), list()
         for category in categories:
-            avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(category, model, params, save)
+            avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(category, model, config, save)
             print('{:20s}{:<20.4f}{:<20.4f}{:<20.4f}'.format(category.title(), 1e3 * avg_l1_cd, 1e4 * avg_l2_cd, 1e2 * avg_f_score))
             l1_cds.append(avg_l1_cd)
             l2_cds.append(avg_l2_cd)

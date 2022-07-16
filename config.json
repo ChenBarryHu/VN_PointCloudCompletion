@@ -3,7 +3,7 @@
     "model": "dgcnn_fps",
     "rotation": "none",
     "VN": false,
-    "batch_size": 6,
+    "batch_size": 16,
     "block_num": 6,
     "check_freq_iter": 500,
     "checkpoint": 0,
