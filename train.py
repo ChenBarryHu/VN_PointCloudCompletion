@@ -57,7 +57,7 @@ def train(config, args):
     log_dataset.info("Dataset loaded!")
 
 
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))
