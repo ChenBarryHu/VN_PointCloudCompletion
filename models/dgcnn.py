@@ -170,7 +170,11 @@ class VN_DGCNN_fps(nn.Module):
         self.conv5 = VNLinearLeakyReLU(128, 128)
         self.conv6 = VNLinearLeakyReLU(256, 512)
 
-        self.conv7 = VNLinear(512, 224)
+        self.conv7 = nn.Sequential(
+            VNLinearLeakyReLU(512, 1024, dim=4),
+            VNLinear(1024, self.num_coarse),
+        )
+        
 
         self.pool1 = mean_pool
         self.pool2 = mean_pool
