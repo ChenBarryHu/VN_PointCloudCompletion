@@ -1,5 +1,5 @@
 {
-    "name": "16384_points_dgcnn_fps_vn_foldingnet_with_seed",
+    "name": "16384_points_dgcnn_fps_foldingnet_with_seed",
     "model": "dgcnn_fps",
     "rotation": "none",
     "VN": false,

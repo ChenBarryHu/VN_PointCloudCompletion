@@ -225,7 +225,7 @@ class FoldingNet(nn.Module):
     
         fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 
-        return coarse.contiguous(), fine.transpose(1, 2).contiguous()
+        return fine.transpose(1, 2).contiguous()
 
 class VN_FoldingNet(nn.Module):
     def __init__(self, latent_dim=1024//3,grid_size=4):
