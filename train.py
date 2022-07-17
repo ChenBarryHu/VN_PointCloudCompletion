@@ -56,16 +56,6 @@ def train(config, args):
     val_dataloader = DataLoader(val_dataset, batch_size=config.batch_size, shuffle=False, num_workers=config.num_workers)
     log_dataset.info("Dataset loaded!")
 
-    # model
-    # if config.VN:
-    #     model = VN_PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    # else:
-    #     if config.model == "dgcnn":
-    #         model = DGCNN(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    #     elif config.model == "dgcnn_fps":
-    #         model = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
-    #     else:
-    #         model = PCN(num_dense=16384, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
 
     model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
 
@@ -106,8 +96,7 @@ def train(config, args):
     # load pretrained model and optimizer
 
     # training
-    
-    train_step, val_step = 0, 0
+    train_step, val_step = start_epoch * n_batches, 0
     for epoch in range(start_epoch, config.max_epochs + 1):
         # hyperparameter alpha
         if train_step < 10000:
@@ -209,11 +198,11 @@ def train(config, args):
             for i, (p, c) in enumerate(val_dataloader):
                 p, c = p.to(config.device), c.to(config.device)
 
-                # trot = None
-                # if config.rotation == 'z':
-                #     trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
-                # elif  config.rotation == 'so3':
-                trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+                trot = None
+                if config.val_rotation == 'z':
+                    trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
+                elif  config.val_rotation == 'so3':
+                    trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
 
                 if trot is not None:
                     p = trot.transform_points(p)
