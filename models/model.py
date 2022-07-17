@@ -5,26 +5,37 @@ from models.dgcnn import *
 from models.pcn import *
 
 class PCNNet(nn.Module):
-    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet", enc_pretrained="/cluster/53/mrhu/VN_PCN/experiments/07-09_448_points_dgcnn_fps_000/models/model_best.pth", dec_pretrained=None):
+    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet"):
         super().__init__()
+        self.num_coarse = config.num_coarse
+        self.only_coarse = config.only_coarse
         if enc_type == "dgcnn_fps":
             self.encoder = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
         if dec_type == "vn_foldingnet":
-            self.decoder = VN_FoldingNet().to(config.device)
+            self.decoder = VN_FoldingNet(config).to(config.device)
         elif dec_type == "foldingnet":
-            self.decoder = FoldingNet().to(config.device)
+            self.decoder = FoldingNet(config).to(config.device)
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
-        if enc_pretrained is not None:
-            self.encoder.load_state_dict(torch.load(enc_pretrained))
+        if config.enc_pretrained != "none":
+            self.encoder.load_state_dict(torch.load(config.enc_pretrained))
             for param in self.encoder.parameters():
                 param.requires_grad = False
 
     def forward(self, input):
         coarse, feature_global = self.encoder(input)
-        fine = self.decoder(coarse, feature_global)
-        return coarse, fine
+        
+        if self.num_coarse == 448:
+            if self.only_coarse:
+                return coarse[1], None
+            fine = self.decoder(coarse[0], feature_global)
+            return coarse[1], fine
+        else:
+            if self.only_coarse:
+                return coarse, None
+            fine = self.decoder(coarse, feature_global)
+            return coarse, fine

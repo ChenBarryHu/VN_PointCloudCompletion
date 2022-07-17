@@ -9,8 +9,14 @@ from models.utils.transform_net import Transform_Net
 from models.utils.dgcnn_util import get_graph_feature
 knn = KNN(k=16, transpose_mode=False)
 
+
+def fps(pc, num):
+    fps_idx = pointnet2_utils.furthest_point_sample(pc, num) 
+    sub_pc = pointnet2_utils.gather_operation(pc.transpose(1, 2).contiguous(), fps_idx).transpose(1,2).contiguous()
+    return sub_pc
+
 class DGCNN_fps(nn.Module):
-    def __init__(self, args, latent_dim=1024, grid_size=4, only_coarse=False, num_dense=16384):
+    def __init__(self, config, latent_dim=1024, grid_size=4, only_coarse=False, num_dense=16384):
         super().__init__()
         '''
         K has to be 16
@@ -18,7 +24,11 @@ class DGCNN_fps(nn.Module):
         self.latent_dim = latent_dim
         self.num_dense = num_dense
         self.grid_size = grid_size
-        self.num_coarse = 1024
+        if config.num_coarse == 448:
+            self.num_coarse = config.num_coarse // 2
+        else:
+            self.num_coarse = config.num_coarse
+
         self.only_coarse = only_coarse
         self.input_trans = nn.Conv1d(3, 8, 1)
 
@@ -49,21 +59,6 @@ class DGCNN_fps(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(1024, 3 * self.num_coarse)
         )
-
-        self.final_conv = nn.Sequential(
-            nn.Conv1d(1024 + 3 + 2, 512, 1),
-            nn.BatchNorm1d(512),
-            nn.ReLU(inplace=True),
-            nn.Conv1d(512, 512, 1),
-            nn.BatchNorm1d(512),
-            nn.ReLU(inplace=True),
-            nn.Conv1d(512, 3, 1)
-        )
-
-        a = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(1, self.grid_size).expand(self.grid_size, self.grid_size).reshape(1, -1)
-        b = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(self.grid_size, 1).expand(self.grid_size, self.grid_size).reshape(1, -1)
-        
-        self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()
 
     
     @staticmethod
@@ -140,21 +135,13 @@ class DGCNN_fps(nn.Module):
         feature_global = f.max(dim=-1, keepdim=False)[0]
         coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)
 
-        # if self.only_coarse:
-        return coarse.contiguous(), feature_global
+        if self.num_coarse == 224:
+            inp_sparse = fps(x.transpose(1,2).contiguous(), 224)
+            coarse_cat = torch.cat([coarse, inp_sparse], dim=1).contiguous()
 
-        # point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
-        # point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1)               # (B, 3, num_fine)
+        return (coarse.contiguous(), coarse_cat.contiguous()), feature_global
 
-        # seed = self.folding_seed.unsqueeze(2).expand(B, -1, self.num_coarse, -1)             # (B, 2, num_coarse, S)
-        # seed = seed.reshape(B, -1, self.num_dense)                                           # (B, 2, num_fine)
 
-        # feature_global = feature_global.unsqueeze(2).expand(-1, -1, self.num_dense)          # (B, 1024, num_fine)
-        # feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
-    
-        # fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
-
-        # return coarse.contiguous(), fine.transpose(1, 2).contiguous()
 
 
 class DGCNN(nn.Module):

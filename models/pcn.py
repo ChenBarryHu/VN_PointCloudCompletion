@@ -192,12 +192,19 @@ class PCN(nn.Module):
         return coarse.contiguous(), fine.transpose(1, 2).contiguous()
 
 class FoldingNet(nn.Module):
-    def __init__(self, grid_size=4):
+    def __init__(self, config, grid_size=4):
         super().__init__()
 
         self.grid_size = grid_size
-        self.num_dense=16384
-        self.num_coarse=1024
+        
+        if config.num_coarse == 448:
+            self.num_coarse=config.num_coarse // 2
+            self.num_dense=14336
+            self.grid_size=8
+        else:
+            self.num_coarse=config.num_coarse
+            self.num_dense=16384
+            self.grid_size=4
         self.final_conv = nn.Sequential(
             nn.Conv1d(1024 + 3 + 2, 512, 1),
             nn.BatchNorm1d(512),
@@ -228,15 +235,19 @@ class FoldingNet(nn.Module):
         return fine.transpose(1, 2).contiguous()
 
 class VN_FoldingNet(nn.Module):
-    def __init__(self, latent_dim=1024//3,grid_size=4):
+    def __init__(self, config, latent_dim=1024//3,grid_size=4):
         super().__init__()
 
         self.grid_size = grid_size
         self.latent_dim = latent_dim
         self.num_dense=16384
-        self.num_coarse=1024
+        if config.num_coarse == 448:
+            self.num_coarse=config.num_coarse // 2
+        else:
+            self.num_coarse=config.num_coarse
+
         self.final_conv = nn.Sequential(
-            VNLinearLeakyReLU(self.latent_dim+1+1, 256, dim=4),
+            VNLinearLeakyReLU(1024+1+1, 256, dim=4),
             # nn.Conv1d(1024 + 3 + 2, 512, 1),
             # nn.BatchNorm1d(512),
             # nn.ReLU(inplace=True),

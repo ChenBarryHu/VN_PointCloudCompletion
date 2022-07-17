@@ -90,6 +90,8 @@ def train(config, args):
     
     model_total_params = get_num_params_total(model)
     log.info(f"Model total params: {model_total_params}")
+    log.info(f"Producing coarse only: {config.only_coarse}")
+    log.info(f"Producing num of coarse points: {config.num_coarse}")
     # model_params_dict = get_num_params(model)
     # log.info(f"Model coarse part params {model_params_dict['coarse']}")
     # log.info(f"Model dense part params {model_params_dict['dense']}")
