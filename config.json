@@ -1,8 +1,7 @@
 {
-    "name": "vn_dgcnn_448",
-    "model": "vn_dgcnn_fps",
-    "enc_type":"vn_dgcnn_fps",
-    "dec_type":"vn_foldingnet",
+    "name": "vn_pointnet_448",
+    "enc_type": "vn_pointnet",
+    "dec_type": "vn_foldingnet",
     "rotation": "none",
     "val_rotation": "so3",
     "VN": false,
