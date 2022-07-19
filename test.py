@@ -1,3 +1,4 @@
+from operator import truediv
 import os
 import argparse
 
@@ -29,32 +30,33 @@ def export_ply(filename, points):
     o3d.io.write_point_cloud(filename, pc, write_ascii=True)
 
 
-def test_single_category(category, model, config, save=True):
+def test_single_category(category, model, params, save=True):
     if save:
-        test_dir = os.path.join(config.exp_dir, "test") 
-        cat_dir = os.path.join(test_dir, category)
+        result_dir = os.path.join(params.result_dir) 
+        cat_dir = os.path.join(result_dir, category)
         image_dir = os.path.join(cat_dir, 'image')
         output_dir = os.path.join(cat_dir, 'output')
         save_counter = 32
+        make_dir(result_dir)
         make_dir(cat_dir)
         make_dir(image_dir)
         make_dir(output_dir)
 
     # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
     test_dataset = ShapeNet('data/PCN', 'valid', category)
-    test_dataloader = Data.DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
+    test_dataloader = Data.DataLoader(test_dataset, batch_size=params.batch_size, shuffle=False)
 
     index = 1
     total_l1_cd, total_l2_cd, total_f_score = 0.0, 0.0, 0.0
     with torch.no_grad():
         for p, c in test_dataloader:
-            p = p.to(config.device)
-            c = c.to(config.device)
+            p = p.to(params.device)
+            c = c.to(params.device)
             trot = None
-            if config.rotation == 'z':
-                trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
-            elif  config.rotation == 'so3':
-                trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
+            if params.rotation == 'z':
+                trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(params.device)
+            elif  params.rotation == 'so3':
+                trot = Rotate(R=random_rotations(p.shape[0])).to(params.device)
 
             if trot is not None:
                 p = trot.transform_points(p)
@@ -84,24 +86,25 @@ def test_single_category(category, model, config, save=True):
     return avg_l1_cd, avg_l2_cd, avg_f_score
 
 
-def test(config, save=False):
+def test(params, save=False):
     # if save:
     #     make_dir(params.result_dir)
 
-    print(config.name)
-    print(config.rotation)
+    # print(config.name)
+    # print(config.rotation)
 
     # load pretrained model
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="vn_foldingnet")
-    # model = PCN(16384, 1024, 4).to(config.device)
-    ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
-    model.load_state_dict(torch.load(ckpt_path))
+    # model = PCNNet(config, enc_type="dgcnn_fps", dec_type="vn_foldingnet")
+    model = PCN(16384, 1024, 4).to(params.device)
+    model.load_state_dict(torch.load(params.ckpt_path))
+    # ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
+    # model.load_state_dict(torch.load(ckpt_path))
     model.eval()
 
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)'))
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))
 
-    if config.category == 'all':
+    if params.category == 'all':
         # if params.novel:
         #     categories = CATEGORIES_PCN_NOVEL
         # else:
@@ -109,7 +112,7 @@ def test(config, save=False):
         
         l1_cds, l2_cds, fscores = list(), list(), list()
         for category in categories:
-            avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(category, model, config, save)
+            avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(category, model, params, save)
             print('{:20s}{:<20.4f}{:<20.4f}{:<20.4f}'.format(category.title(), 1e3 * avg_l1_cd, 1e4 * avg_l2_cd, 1e2 * avg_f_score))
             l1_cds.append(avg_l1_cd)
             l2_cds.append(avg_l2_cd)
@@ -172,13 +175,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser('Point Cloud Completion Testing')
     parser.add_argument('--exp_name', type=str, help='Tag of experiment')
     parser.add_argument('--only_coarse', action='store_true', help='Train on coarse prediction only')
-    parser.add_argument('--result_dir', type=str, default='results', help='Results directory')
-    parser.add_argument('--ckpt_path', type=str, help='The path of pretrained model.')
+    parser.add_argument('--result_dir', type=str, default='./results', help='Results directory')
+    parser.add_argument('--ckpt_path', type=str, default='./checkpoint/best_l1_cd.pth', help='The path of pretrained model.')
     parser.add_argument('--category', type=str, default='all', help='Category of point clouds')
+    parser.add_argument('--rotation', type=str, default='none', help='rotation of point clouds')
     parser.add_argument('--batch_size', type=int, default=1, help='Batch size for data loader')
     parser.add_argument('--num_workers', type=int, default=6, help='Num workers for data loader')
     parser.add_argument('--device', type=str, default='cuda:0', help='Device for testing')
-    parser.add_argument('--save', type=bool, default=False, help='Saving test result')
+    parser.add_argument('--save', type=bool, default=truediv, help='Saving test result')
     parser.add_argument('--novel', type=bool, default=False, help='unseen categories for testing')
     parser.add_argument('--emd', type=bool, default=False, help='Whether evaluate emd')
     params = parser.parse_args()
