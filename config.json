@@ -1,5 +1,5 @@
 {
-    "name": "dgcnn_448_dense",
+    "name": "dgcnn_448_dense_foldingnet",
     "model": "dgcnn_fps",
     "rotation": "so3",
     "val_rotation": "so3",

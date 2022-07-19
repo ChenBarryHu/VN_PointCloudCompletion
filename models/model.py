@@ -6,7 +6,7 @@ from models.dgcnn import *
 from models.pcn import *
 
 class PCNNet(nn.Module):
-    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet"):
+    def __init__(self, config, enc_type="dgcnn_fps", dec_type="foldingnet"):
         super().__init__()
         self.num_coarse = config.num_coarse
         self.only_coarse = config.only_coarse
