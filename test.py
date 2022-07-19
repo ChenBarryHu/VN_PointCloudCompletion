@@ -35,12 +35,13 @@ def test_single_category(category, model, config, save=True):
         cat_dir = os.path.join(test_dir, category)
         image_dir = os.path.join(cat_dir, 'image')
         output_dir = os.path.join(cat_dir, 'output')
+        save_counter = 32
         make_dir(cat_dir)
         make_dir(image_dir)
         make_dir(output_dir)
 
     # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
-    test_dataset = ShapeNet('data/PCN', 'valid', config.category)
+    test_dataset = ShapeNet('data/PCN', 'valid', category)
     test_dataloader = Data.DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
 
     index = 1
@@ -67,9 +68,13 @@ def test_single_category(category, model, config, save=True):
                 output_pc = c_[i].detach().cpu().numpy()
                 gt_pc = c[i].detach().cpu().numpy()
                 total_f_score += f_score(output_pc, gt_pc)
-                if save:
-                    plot_pcd_one_view(os.path.join(image_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
-                    export_ply(os.path.join(output_dir, '{:03d}.ply'.format(index)), output_pc)
+                if save and save_counter > 0:
+                    object_dir = os.path.join(output_dir, f'{index}')
+                    make_dir(object_dir)
+                    plot_pcd_one_view(os.path.join(object_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
+                    export_ply(os.path.join(object_dir, 'pred_{:03d}.ply'.format(index)), output_pc)
+                    export_ply(os.path.join(object_dir, 'gt_{:03d}.ply'.format(index)), gt_pc)
+                    save_counter -= 1
                 index += 1
     
     avg_l1_cd = total_l1_cd / len(test_dataset)

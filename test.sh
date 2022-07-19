@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-python main.py -n 07-12_16384_points_dgcnn_fps_vn_foldingnet_with_seed_001 --resume test
+python main.py -n 07-19_dgcnn_448_dense_000 --resume test
