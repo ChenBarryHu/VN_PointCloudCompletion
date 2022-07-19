@@ -58,6 +58,7 @@ def train(config, args):
 
 
     model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))

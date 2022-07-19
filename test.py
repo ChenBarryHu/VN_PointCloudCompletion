@@ -30,13 +30,14 @@ def export_ply(filename, points):
 
 
 def test_single_category(category, model, config, save=True):
-    # if save:
-    #     cat_dir = os.path.join(params.result_dir, category)
-    #     image_dir = os.path.join(cat_dir, 'image')
-    #     output_dir = os.path.join(cat_dir, 'output')
-    #     make_dir(cat_dir)
-    #     make_dir(image_dir)
-    #     make_dir(output_dir)
+    if save:
+        test_dir = os.path.join(config.exp_dir, "test") 
+        cat_dir = os.path.join(test_dir, category)
+        image_dir = os.path.join(cat_dir, 'image')
+        output_dir = os.path.join(cat_dir, 'output')
+        make_dir(cat_dir)
+        make_dir(image_dir)
+        make_dir(output_dir)
 
     # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
     test_dataset = ShapeNet('data/PCN', 'valid', config.category)
@@ -66,9 +67,9 @@ def test_single_category(category, model, config, save=True):
                 output_pc = c_[i].detach().cpu().numpy()
                 gt_pc = c[i].detach().cpu().numpy()
                 total_f_score += f_score(output_pc, gt_pc)
-                # if save:
-                #     plot_pcd_one_view(os.path.join(image_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
-                #     export_ply(os.path.join(output_dir, '{:03d}.ply'.format(index)), output_pc)
+                if save:
+                    plot_pcd_one_view(os.path.join(image_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
+                    export_ply(os.path.join(output_dir, '{:03d}.ply'.format(index)), output_pc)
                 index += 1
     
     avg_l1_cd = total_l1_cd / len(test_dataset)

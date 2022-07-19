@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import collections
 from models.vn_layers import *
 from models.dgcnn import *
 from models.pcn import *
@@ -22,9 +23,17 @@ class PCNNet(nn.Module):
             raise Exception(f"encoder type {enc_type} not supported yet")
 
         if config.enc_pretrained != "none":
-            self.encoder.load_state_dict(torch.load(config.enc_pretrained))
-            for param in self.encoder.parameters():
-                param.requires_grad = False
+            dict = collections.OrderedDict()
+            raw_dict = torch.load(config.enc_pretrained)
+            for k, v in raw_dict.items():
+                if 'encoder' in k:
+                    dict[k[8:]] = v
+            
+            self.encoder.load_state_dict(dict)
+        for param in self.encoder.parameters():
+            param.requires_grad = False
+
+        
 
     def forward(self, input):
         coarse, feature_global = self.encoder(input)
