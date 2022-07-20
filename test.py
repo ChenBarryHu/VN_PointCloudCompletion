@@ -92,7 +92,8 @@ def test(config, save=False):
     print(config.rotation)
 
     # load pretrained model
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    # model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    model = PCN().to(config.device)
     # model = PCN(16384, 1024, 4).to(config.device)
     ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
     model.load_state_dict(torch.load(ckpt_path))

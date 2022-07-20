@@ -1,7 +1,7 @@
 {
-    "name": "16384_points_dgcnn_fps_foldingnet_with_seed",
+    "name": "baseline_pcn_so3",
     "model": "dgcnn_fps",
-    "rotation": "none",
+    "rotation": "so3",
     "val_rotation": "so3",
     "VN": false,
     "batch_size": 16,
