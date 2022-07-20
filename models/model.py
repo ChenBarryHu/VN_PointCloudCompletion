@@ -15,13 +15,7 @@ class PCNNet(nn.Module):
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
-        if dec_type == "vn_foldingnet":
-            self.decoder = VN_FoldingNet(config).to(config.device)
-        elif dec_type == "foldingnet":
-            self.decoder = FoldingNet(config).to(config.device)
-        else:
-            raise Exception(f"encoder type {enc_type} not supported yet")
-
+        
         if config.enc_pretrained != "none":
             dict = collections.OrderedDict()
             raw_dict = torch.load(config.enc_pretrained)
@@ -30,8 +24,15 @@ class PCNNet(nn.Module):
                     dict[k[8:]] = v
             
             self.encoder.load_state_dict(dict)
-        for param in self.encoder.parameters():
-            param.requires_grad = False
+            for param in self.encoder.parameters():
+                param.requires_grad = False
+        if not config.only_coarse:
+            if dec_type == "vn_foldingnet":
+                self.decoder = VN_FoldingNet(config).to(config.device)
+            elif dec_type == "foldingnet":
+                self.decoder = FoldingNet(config).to(config.device)
+            else:
+                raise Exception(f"encoder type {enc_type} not supported yet")
 
         
 
