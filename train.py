@@ -84,7 +84,7 @@ def train(config, args):
         best_epoch_l1 = -1
         log.info(f'Start a brand new experiment: {config.run_name}')
 
-    scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.7)
+    scheduler = Optim.lr_scheduler.StepLR(optimizer, step_size=50, gamma=0.8)
 
     step = len(train_dataloader) // config.log_frequency
     n_batches = len(train_dataloader)
