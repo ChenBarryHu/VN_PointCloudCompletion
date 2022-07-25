@@ -210,7 +210,7 @@ def train(config, args):
                     p = trot.transform_points(p)
                     c = trot.transform_points(c)
 
-                coarse_pred, dense_pred = model(p)
+                coarse_pred, dense_pred = model(p, trot)
                 val_loss["coarse"] += l1_cd(coarse_pred, c).item()
                 if config.only_coarse:
                     val_loss["total"] = val_loss["coarse"]
