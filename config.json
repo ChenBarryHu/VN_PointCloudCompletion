@@ -1,10 +1,10 @@
 {
-    "name": "new_dgcnn_448",
+    "name": "new_dgcnn_1024",
     "model": "dgcnn_fps",
     "rotation": "so3",
     "val_rotation": "so3",
     "VN": false,
-    "num_coarse": 448,
+    "num_coarse": 1024,
     "batch_size": 48,
     "coarse_loss": "cd",
     "category": "all",
