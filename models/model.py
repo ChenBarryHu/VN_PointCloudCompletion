@@ -36,16 +36,16 @@ class PCNNet(nn.Module):
 
         
 
-    def forward(self, input):
+    def forward(self, input, rot=None):
         coarse, feature_global = self.encoder(input)
         
         if self.num_coarse == 448:
             if self.only_coarse:
                 return coarse[1], None
-            fine = self.decoder(coarse[0], feature_global)
+            fine = self.decoder(coarse[0], feature_global, rot)
             return coarse[1], fine
         else:
             if self.only_coarse:
                 return coarse, None
-            fine = self.decoder(coarse, feature_global)
+            fine = self.decoder(coarse, feature_global, rot)
             return coarse, fine

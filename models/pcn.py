@@ -219,7 +219,7 @@ class FoldingNet(nn.Module):
         
         self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()  # (1, 2, S)
 
-    def forward(self, coarse, feature_global):
+    def forward(self, coarse, feature_global, rot=None):
         B = coarse.shape[0]
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1)               # (B, 3, num_fine)
@@ -268,12 +268,18 @@ class VN_FoldingNet(nn.Module):
         self.folding_seed = torch.cat([a, b, c], dim=0).reshape(1,1,3,-1).cuda()
         # self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()  # (1, 2, S)
 
-    def forward(self, coarse, feature_global):
+    def forward(self, coarse, feature_global, rot=None):
+        # print(f"Dimension of folding_seed: {self.folding_seed.shape}\n")
+        if rot is not None:
+            tmp_grid = self.folding_seed.squeeze(1).transpose(1,2)
+            self.folding_seed = rot.transform_points(tmp_grid).transpose(1,2).unsqueeze(1)
+            # print(f"Dimension of rotated folding_seed: {self.folding_seed.shape}\n")
         B = coarse.shape[0]
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1).unsqueeze(1)               # (B, 3, num_fine)
 
         seed = self.folding_seed.unsqueeze(3).expand(B, -1, -1, self.num_coarse, -1)             # (B, 2, num_coarse, S)
+        # print(f"Dimension of seed (after expansion): {seed.shape}\n")
         seed = seed.reshape(B, -1, 3, self.num_dense)                                           # (B, 2, num_fine)
         feat_global_dim = feature_global.shape[1]
         feature_global = feature_global[:,:(feat_global_dim//3)*3]
