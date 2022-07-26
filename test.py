@@ -60,7 +60,7 @@ def test_single_category(category, model, config, save=True):
                 p = trot.transform_points(p)
                 c = trot.transform_points(c)
 
-            _, c_ = model(p)
+            _, c_ = model(p, trot)
             total_l1_cd += l1_cd(c_, c).item()
             total_l2_cd += l2_cd(c_, c).item()
             for i in range(len(c)):
@@ -92,7 +92,7 @@ def test(config, save=False):
     print(config.rotation)
 
     # load pretrained model
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
     # model = PCN(16384, 1024, 4).to(config.device)
     ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
     model.load_state_dict(torch.load(ckpt_path))
