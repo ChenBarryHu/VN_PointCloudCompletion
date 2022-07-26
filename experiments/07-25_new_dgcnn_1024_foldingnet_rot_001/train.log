@@ -1,0 +1,533 @@
+2022-07-25 19:03:53,505 - train - INFO - Start a brand new experiment: 07-25_new_dgcnn_1024_foldingnet_rot_001
+2022-07-25 19:03:53,505 - train - INFO - Model total params: 5719904
+2022-07-25 19:03:53,505 - train - INFO - Producing coarse only: False
+2022-07-25 19:03:53,505 - train - INFO - Producing num of coarse points: 1024
+2022-07-25 19:05:44,039 - train - INFO - Training Epoch [000/400] - Iteration [181/1811]: coarse loss = 19.781914, dense loss = 206.908971, total loss = 206.908971, lr = 0.000100
+2022-07-25 19:07:33,658 - train - INFO - Training Epoch [000/400] - Iteration [362/1811]: coarse loss = 20.540155, dense loss = 154.121906, total loss = 154.121906, lr = 0.000100
+2022-07-25 19:09:23,417 - train - INFO - Training Epoch [000/400] - Iteration [543/1811]: coarse loss = 20.847961, dense loss = 91.264240, total loss = 91.264240, lr = 0.000100
+2022-07-25 19:11:13,191 - train - INFO - Training Epoch [000/400] - Iteration [724/1811]: coarse loss = 20.245653, dense loss = 82.891911, total loss = 82.891911, lr = 0.000100
+2022-07-25 19:13:03,029 - train - INFO - Training Epoch [000/400] - Iteration [905/1811]: coarse loss = 19.122761, dense loss = 52.429564, total loss = 52.429564, lr = 0.000100
+2022-07-25 19:14:52,848 - train - INFO - Training Epoch [000/400] - Iteration [1086/1811]: coarse loss = 20.619642, dense loss = 32.163870, total loss = 32.163870, lr = 0.000100
+2022-07-25 19:16:42,638 - train - INFO - Training Epoch [000/400] - Iteration [1267/1811]: coarse loss = 22.428103, dense loss = 32.491922, total loss = 32.491922, lr = 0.000100
+2022-07-25 19:18:32,448 - train - INFO - Training Epoch [000/400] - Iteration [1448/1811]: coarse loss = 21.321384, dense loss = 25.103208, total loss = 25.103208, lr = 0.000100
+2022-07-25 19:20:22,300 - train - INFO - Training Epoch [000/400] - Iteration [1629/1811]: coarse loss = 20.966357, dense loss = 21.518139, total loss = 21.518139, lr = 0.000100
+2022-07-25 19:22:12,126 - train - INFO - Training Epoch [000/400] - Iteration [1810/1811]: coarse loss = 19.565264, dense loss = 19.677296, total loss = 19.677296, lr = 0.000100
+2022-07-25 19:22:13,238 - train - INFO - Training Epoch [000/400]: Coarse Loss = 20.644911, Dense Loss = 82.286109, Total Loss = 82.286109
+2022-07-25 19:22:29,867 - train - INFO - Validate Epoch [000/400]: Coarse Loss = 20.641174, Dense Loss = 20.586651, Total Loss = 41.227825
+2022-07-25 19:22:29,908 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 19:22:29,937 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 19:24:20,422 - train - INFO - Training Epoch [001/400] - Iteration [181/1811]: coarse loss = 19.854592, dense loss = 19.730099, total loss = 19.730099, lr = 0.000100
+2022-07-25 19:26:10,419 - train - INFO - Training Epoch [001/400] - Iteration [362/1811]: coarse loss = 23.392394, dense loss = 23.202918, total loss = 23.202918, lr = 0.000100
+2022-07-25 19:28:00,409 - train - INFO - Training Epoch [001/400] - Iteration [543/1811]: coarse loss = 23.073412, dense loss = 22.737727, total loss = 22.737727, lr = 0.000100
+2022-07-25 19:29:50,414 - train - INFO - Training Epoch [001/400] - Iteration [724/1811]: coarse loss = 21.517305, dense loss = 21.386199, total loss = 21.386199, lr = 0.000100
+2022-07-25 19:31:40,393 - train - INFO - Training Epoch [001/400] - Iteration [905/1811]: coarse loss = 19.683002, dense loss = 19.271422, total loss = 19.271422, lr = 0.000100
+2022-07-25 19:33:30,393 - train - INFO - Training Epoch [001/400] - Iteration [1086/1811]: coarse loss = 20.300493, dense loss = 20.022437, total loss = 20.022437, lr = 0.000100
+2022-07-25 19:35:20,400 - train - INFO - Training Epoch [001/400] - Iteration [1267/1811]: coarse loss = 17.987497, dense loss = 17.659912, total loss = 17.659912, lr = 0.000100
+2022-07-25 19:37:10,439 - train - INFO - Training Epoch [001/400] - Iteration [1448/1811]: coarse loss = 21.368064, dense loss = 21.264838, total loss = 21.264838, lr = 0.000100
+2022-07-25 19:39:00,449 - train - INFO - Training Epoch [001/400] - Iteration [1629/1811]: coarse loss = 21.019112, dense loss = 21.024983, total loss = 21.024983, lr = 0.000100
+2022-07-25 19:40:50,474 - train - INFO - Training Epoch [001/400] - Iteration [1810/1811]: coarse loss = 21.405991, dense loss = 21.231627, total loss = 21.231627, lr = 0.000100
+2022-07-25 19:40:51,088 - train - INFO - Training Epoch [001/400]: Coarse Loss = 20.609055, Dense Loss = 20.438658, Total Loss = 20.438658
+2022-07-25 19:41:07,446 - train - INFO - Validate Epoch [001/400]: Coarse Loss = 20.600555, Dense Loss = 20.536019, Total Loss = 41.136574
+2022-07-25 19:41:07,596 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 19:41:07,717 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 19:42:58,237 - train - INFO - Training Epoch [002/400] - Iteration [181/1811]: coarse loss = 18.677106, dense loss = 18.906910, total loss = 18.906910, lr = 0.000100
+2022-07-25 19:44:48,261 - train - INFO - Training Epoch [002/400] - Iteration [362/1811]: coarse loss = 21.958238, dense loss = 21.722412, total loss = 21.722412, lr = 0.000100
+2022-07-25 19:46:38,293 - train - INFO - Training Epoch [002/400] - Iteration [543/1811]: coarse loss = 21.873634, dense loss = 21.603299, total loss = 21.603299, lr = 0.000100
+2022-07-25 19:48:28,376 - train - INFO - Training Epoch [002/400] - Iteration [724/1811]: coarse loss = 20.059761, dense loss = 19.669153, total loss = 19.669153, lr = 0.000100
+2022-07-25 19:50:18,421 - train - INFO - Training Epoch [002/400] - Iteration [905/1811]: coarse loss = 18.594049, dense loss = 18.432181, total loss = 18.432181, lr = 0.000100
+2022-07-25 19:52:08,490 - train - INFO - Training Epoch [002/400] - Iteration [1086/1811]: coarse loss = 20.063136, dense loss = 20.141948, total loss = 20.141948, lr = 0.000100
+2022-07-25 19:53:58,550 - train - INFO - Training Epoch [002/400] - Iteration [1267/1811]: coarse loss = 20.077674, dense loss = 19.876918, total loss = 19.876918, lr = 0.000100
+2022-07-25 19:55:48,628 - train - INFO - Training Epoch [002/400] - Iteration [1448/1811]: coarse loss = 20.780293, dense loss = 20.237749, total loss = 20.237749, lr = 0.000100
+2022-07-25 19:57:38,787 - train - INFO - Training Epoch [002/400] - Iteration [1629/1811]: coarse loss = 19.232249, dense loss = 18.829267, total loss = 18.829267, lr = 0.000100
+2022-07-25 19:59:28,850 - train - INFO - Training Epoch [002/400] - Iteration [1810/1811]: coarse loss = 21.592766, dense loss = 21.105733, total loss = 21.105733, lr = 0.000100
+2022-07-25 19:59:29,469 - train - INFO - Training Epoch [002/400]: Coarse Loss = 20.606221, Dense Loss = 20.187753, Total Loss = 20.187753
+2022-07-25 19:59:45,922 - train - INFO - Validate Epoch [002/400]: Coarse Loss = 20.523063, Dense Loss = 19.730376, Total Loss = 40.253439
+2022-07-25 19:59:46,095 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 19:59:46,220 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 20:01:36,798 - train - INFO - Training Epoch [003/400] - Iteration [181/1811]: coarse loss = 20.426702, dense loss = 18.970812, total loss = 18.970812, lr = 0.000100
+2022-07-25 20:03:26,760 - train - INFO - Training Epoch [003/400] - Iteration [362/1811]: coarse loss = 21.971131, dense loss = 20.167492, total loss = 20.167492, lr = 0.000100
+2022-07-25 20:05:16,792 - train - INFO - Training Epoch [003/400] - Iteration [543/1811]: coarse loss = 21.070499, dense loss = 19.409843, total loss = 19.409843, lr = 0.000100
+2022-07-25 20:07:06,837 - train - INFO - Training Epoch [003/400] - Iteration [724/1811]: coarse loss = 20.299554, dense loss = 18.406399, total loss = 18.406399, lr = 0.000100
+2022-07-25 20:08:56,847 - train - INFO - Training Epoch [003/400] - Iteration [905/1811]: coarse loss = 21.136869, dense loss = 18.555712, total loss = 18.555712, lr = 0.000100
+2022-07-25 20:10:46,832 - train - INFO - Training Epoch [003/400] - Iteration [1086/1811]: coarse loss = 22.700969, dense loss = 19.860664, total loss = 19.860664, lr = 0.000100
+2022-07-25 20:12:36,844 - train - INFO - Training Epoch [003/400] - Iteration [1267/1811]: coarse loss = 20.174583, dense loss = 17.480092, total loss = 17.480092, lr = 0.000100
+2022-07-25 20:14:26,849 - train - INFO - Training Epoch [003/400] - Iteration [1448/1811]: coarse loss = 19.294772, dense loss = 17.937778, total loss = 17.937778, lr = 0.000100
+2022-07-25 20:16:16,862 - train - INFO - Training Epoch [003/400] - Iteration [1629/1811]: coarse loss = 19.821871, dense loss = 17.555477, total loss = 17.555477, lr = 0.000100
+2022-07-25 20:18:06,872 - train - INFO - Training Epoch [003/400] - Iteration [1810/1811]: coarse loss = 19.605342, dense loss = 17.306928, total loss = 17.306928, lr = 0.000100
+2022-07-25 20:18:07,488 - train - INFO - Training Epoch [003/400]: Coarse Loss = 20.629115, Dense Loss = 18.382815, Total Loss = 18.382815
+2022-07-25 20:18:23,915 - train - INFO - Validate Epoch [003/400]: Coarse Loss = 20.597422, Dense Loss = 18.040809, Total Loss = 38.638230
+2022-07-25 20:18:24,074 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 20:18:24,195 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 20:20:14,685 - train - INFO - Training Epoch [004/400] - Iteration [181/1811]: coarse loss = 17.484317, dense loss = 14.477905, total loss = 14.477905, lr = 0.000100
+2022-07-25 20:22:04,687 - train - INFO - Training Epoch [004/400] - Iteration [362/1811]: coarse loss = 20.199124, dense loss = 16.945256, total loss = 16.945256, lr = 0.000100
+2022-07-25 20:23:54,702 - train - INFO - Training Epoch [004/400] - Iteration [543/1811]: coarse loss = 18.666741, dense loss = 15.803410, total loss = 15.803410, lr = 0.000100
+2022-07-25 20:25:44,697 - train - INFO - Training Epoch [004/400] - Iteration [724/1811]: coarse loss = 21.434411, dense loss = 17.846029, total loss = 17.846029, lr = 0.000100
+2022-07-25 20:27:34,719 - train - INFO - Training Epoch [004/400] - Iteration [905/1811]: coarse loss = 23.419436, dense loss = 19.643795, total loss = 19.643795, lr = 0.000100
+2022-07-25 20:29:24,735 - train - INFO - Training Epoch [004/400] - Iteration [1086/1811]: coarse loss = 19.722927, dense loss = 16.404640, total loss = 16.404640, lr = 0.000100
+2022-07-25 20:31:14,759 - train - INFO - Training Epoch [004/400] - Iteration [1267/1811]: coarse loss = 18.518016, dense loss = 15.549431, total loss = 15.549431, lr = 0.000100
+2022-07-25 20:33:04,770 - train - INFO - Training Epoch [004/400] - Iteration [1448/1811]: coarse loss = 19.577999, dense loss = 16.167667, total loss = 16.167667, lr = 0.000100
+2022-07-25 20:34:54,744 - train - INFO - Training Epoch [004/400] - Iteration [1629/1811]: coarse loss = 20.064721, dense loss = 16.217038, total loss = 16.217038, lr = 0.000100
+2022-07-25 20:36:44,741 - train - INFO - Training Epoch [004/400] - Iteration [1810/1811]: coarse loss = 23.929622, dense loss = 19.811435, total loss = 19.811435, lr = 0.000100
+2022-07-25 20:36:45,355 - train - INFO - Training Epoch [004/400]: Coarse Loss = 20.595164, Dense Loss = 17.242408, Total Loss = 17.242408
+2022-07-25 20:37:01,775 - train - INFO - Validate Epoch [004/400]: Coarse Loss = 20.586002, Dense Loss = 17.263415, Total Loss = 37.849417
+2022-07-25 20:37:01,925 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 20:37:02,070 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 20:38:52,606 - train - INFO - Training Epoch [005/400] - Iteration [181/1811]: coarse loss = 22.738017, dense loss = 18.898353, total loss = 18.898353, lr = 0.000100
+2022-07-25 20:40:42,613 - train - INFO - Training Epoch [005/400] - Iteration [362/1811]: coarse loss = 20.039216, dense loss = 16.373273, total loss = 16.373273, lr = 0.000100
+2022-07-25 20:42:32,588 - train - INFO - Training Epoch [005/400] - Iteration [543/1811]: coarse loss = 19.346427, dense loss = 15.739335, total loss = 15.739335, lr = 0.000100
+2022-07-25 20:44:22,584 - train - INFO - Training Epoch [005/400] - Iteration [724/1811]: coarse loss = 18.351175, dense loss = 14.894461, total loss = 14.894461, lr = 0.000100
+2022-07-25 20:46:12,588 - train - INFO - Training Epoch [005/400] - Iteration [905/1811]: coarse loss = 19.700214, dense loss = 15.778724, total loss = 15.778724, lr = 0.000100
+2022-07-25 20:48:02,552 - train - INFO - Training Epoch [005/400] - Iteration [1086/1811]: coarse loss = 22.657018, dense loss = 18.180326, total loss = 18.180326, lr = 0.000100
+2022-07-25 20:49:52,534 - train - INFO - Training Epoch [005/400] - Iteration [1267/1811]: coarse loss = 24.676779, dense loss = 21.366667, total loss = 21.366667, lr = 0.000100
+2022-07-25 20:51:42,506 - train - INFO - Training Epoch [005/400] - Iteration [1448/1811]: coarse loss = 20.206567, dense loss = 16.225291, total loss = 16.225291, lr = 0.000100
+2022-07-25 20:53:32,498 - train - INFO - Training Epoch [005/400] - Iteration [1629/1811]: coarse loss = 22.427686, dense loss = 18.308900, total loss = 18.308900, lr = 0.000100
+2022-07-25 20:55:22,501 - train - INFO - Training Epoch [005/400] - Iteration [1810/1811]: coarse loss = 19.437730, dense loss = 15.484164, total loss = 15.484164, lr = 0.000100
+2022-07-25 20:55:23,110 - train - INFO - Training Epoch [005/400]: Coarse Loss = 20.600031, Dense Loss = 16.740104, Total Loss = 16.740104
+2022-07-25 20:55:39,467 - train - INFO - Validate Epoch [005/400]: Coarse Loss = 20.600548, Dense Loss = 16.882742, Total Loss = 37.483290
+2022-07-25 20:55:39,606 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 20:55:39,727 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 20:57:30,136 - train - INFO - Training Epoch [006/400] - Iteration [181/1811]: coarse loss = 18.803701, dense loss = 15.326622, total loss = 15.326622, lr = 0.000100
+2022-07-25 20:59:20,182 - train - INFO - Training Epoch [006/400] - Iteration [362/1811]: coarse loss = 17.976860, dense loss = 14.350956, total loss = 14.350956, lr = 0.000100
+2022-07-25 21:01:10,211 - train - INFO - Training Epoch [006/400] - Iteration [543/1811]: coarse loss = 22.956930, dense loss = 18.637754, total loss = 18.637754, lr = 0.000100
+2022-07-25 21:03:00,218 - train - INFO - Training Epoch [006/400] - Iteration [724/1811]: coarse loss = 22.969890, dense loss = 18.807277, total loss = 18.807277, lr = 0.000100
+2022-07-25 21:04:50,263 - train - INFO - Training Epoch [006/400] - Iteration [905/1811]: coarse loss = 24.608534, dense loss = 19.497540, total loss = 19.497540, lr = 0.000100
+2022-07-25 21:06:40,301 - train - INFO - Training Epoch [006/400] - Iteration [1086/1811]: coarse loss = 20.208593, dense loss = 16.449859, total loss = 16.449859, lr = 0.000100
+2022-07-25 21:08:30,326 - train - INFO - Training Epoch [006/400] - Iteration [1267/1811]: coarse loss = 20.337744, dense loss = 16.386846, total loss = 16.386846, lr = 0.000100
+2022-07-25 21:10:20,366 - train - INFO - Training Epoch [006/400] - Iteration [1448/1811]: coarse loss = 21.529555, dense loss = 16.840631, total loss = 16.840631, lr = 0.000100
+2022-07-25 21:12:10,406 - train - INFO - Training Epoch [006/400] - Iteration [1629/1811]: coarse loss = 19.117739, dense loss = 15.179674, total loss = 15.179674, lr = 0.000100
+2022-07-25 21:14:00,449 - train - INFO - Training Epoch [006/400] - Iteration [1810/1811]: coarse loss = 20.986009, dense loss = 16.499847, total loss = 16.499847, lr = 0.000100
+2022-07-25 21:14:01,054 - train - INFO - Training Epoch [006/400]: Coarse Loss = 20.584575, Dense Loss = 16.424190, Total Loss = 16.424190
+2022-07-25 21:14:17,500 - train - INFO - Validate Epoch [006/400]: Coarse Loss = 20.594651, Dense Loss = 16.511719, Total Loss = 37.106370
+2022-07-25 21:14:17,655 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 21:14:17,799 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 21:16:08,266 - train - INFO - Training Epoch [007/400] - Iteration [181/1811]: coarse loss = 19.580130, dense loss = 15.640706, total loss = 15.640706, lr = 0.000100
+2022-07-25 21:17:58,286 - train - INFO - Training Epoch [007/400] - Iteration [362/1811]: coarse loss = 18.997766, dense loss = 15.056548, total loss = 15.056548, lr = 0.000100
+2022-07-25 21:19:48,322 - train - INFO - Training Epoch [007/400] - Iteration [543/1811]: coarse loss = 19.804869, dense loss = 15.572177, total loss = 15.572177, lr = 0.000100
+2022-07-25 21:21:38,348 - train - INFO - Training Epoch [007/400] - Iteration [724/1811]: coarse loss = 19.402361, dense loss = 15.209736, total loss = 15.209736, lr = 0.000100
+2022-07-25 21:23:28,365 - train - INFO - Training Epoch [007/400] - Iteration [905/1811]: coarse loss = 21.856947, dense loss = 17.227570, total loss = 17.227570, lr = 0.000100
+2022-07-25 21:25:18,386 - train - INFO - Training Epoch [007/400] - Iteration [1086/1811]: coarse loss = 17.751088, dense loss = 14.021766, total loss = 14.021766, lr = 0.000100
+2022-07-25 21:27:08,397 - train - INFO - Training Epoch [007/400] - Iteration [1267/1811]: coarse loss = 19.523859, dense loss = 15.216421, total loss = 15.216421, lr = 0.000100
+2022-07-25 21:28:58,424 - train - INFO - Training Epoch [007/400] - Iteration [1448/1811]: coarse loss = 23.218736, dense loss = 18.550901, total loss = 18.550901, lr = 0.000100
+2022-07-25 21:30:48,453 - train - INFO - Training Epoch [007/400] - Iteration [1629/1811]: coarse loss = 19.119591, dense loss = 14.821030, total loss = 14.821030, lr = 0.000100
+2022-07-25 21:32:38,489 - train - INFO - Training Epoch [007/400] - Iteration [1810/1811]: coarse loss = 20.938030, dense loss = 15.983563, total loss = 15.983563, lr = 0.000100
+2022-07-25 21:32:39,097 - train - INFO - Training Epoch [007/400]: Coarse Loss = 20.607896, Dense Loss = 16.263658, Total Loss = 16.263658
+2022-07-25 21:32:55,677 - train - INFO - Validate Epoch [007/400]: Coarse Loss = 20.544950, Dense Loss = 16.318123, Total Loss = 36.863073
+2022-07-25 21:32:55,836 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 21:32:55,962 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 21:34:46,328 - train - INFO - Training Epoch [008/400] - Iteration [181/1811]: coarse loss = 21.420475, dense loss = 16.882356, total loss = 16.882356, lr = 0.000100
+2022-07-25 21:36:36,306 - train - INFO - Training Epoch [008/400] - Iteration [362/1811]: coarse loss = 22.622790, dense loss = 17.776852, total loss = 17.776852, lr = 0.000100
+2022-07-25 21:38:26,308 - train - INFO - Training Epoch [008/400] - Iteration [543/1811]: coarse loss = 20.967217, dense loss = 16.759919, total loss = 16.759919, lr = 0.000100
+2022-07-25 21:40:16,296 - train - INFO - Training Epoch [008/400] - Iteration [724/1811]: coarse loss = 20.294230, dense loss = 15.418241, total loss = 15.418241, lr = 0.000100
+2022-07-25 21:42:06,287 - train - INFO - Training Epoch [008/400] - Iteration [905/1811]: coarse loss = 17.173689, dense loss = 13.066435, total loss = 13.066435, lr = 0.000100
+2022-07-25 21:43:56,274 - train - INFO - Training Epoch [008/400] - Iteration [1086/1811]: coarse loss = 22.865649, dense loss = 17.766044, total loss = 17.766044, lr = 0.000100
+2022-07-25 21:45:46,244 - train - INFO - Training Epoch [008/400] - Iteration [1267/1811]: coarse loss = 19.604711, dense loss = 15.281153, total loss = 15.281153, lr = 0.000100
+2022-07-25 21:47:36,230 - train - INFO - Training Epoch [008/400] - Iteration [1448/1811]: coarse loss = 21.628622, dense loss = 16.760545, total loss = 16.760545, lr = 0.000100
+2022-07-25 21:49:26,237 - train - INFO - Training Epoch [008/400] - Iteration [1629/1811]: coarse loss = 20.692158, dense loss = 16.029608, total loss = 16.029608, lr = 0.000100
+2022-07-25 21:51:16,268 - train - INFO - Training Epoch [008/400] - Iteration [1810/1811]: coarse loss = 19.423001, dense loss = 15.353337, total loss = 15.353337, lr = 0.000100
+2022-07-25 21:51:16,894 - train - INFO - Training Epoch [008/400]: Coarse Loss = 20.631775, Dense Loss = 16.168814, Total Loss = 16.168814
+2022-07-25 21:51:33,374 - train - INFO - Validate Epoch [008/400]: Coarse Loss = 20.560914, Dense Loss = 16.203587, Total Loss = 36.764501
+2022-07-25 21:51:33,538 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 21:51:33,660 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 21:53:24,238 - train - INFO - Training Epoch [009/400] - Iteration [181/1811]: coarse loss = 18.458977, dense loss = 14.611745, total loss = 14.611745, lr = 0.000100
+2022-07-25 21:55:14,279 - train - INFO - Training Epoch [009/400] - Iteration [362/1811]: coarse loss = 18.974649, dense loss = 14.753688, total loss = 14.753688, lr = 0.000100
+2022-07-25 21:57:04,325 - train - INFO - Training Epoch [009/400] - Iteration [543/1811]: coarse loss = 21.821786, dense loss = 16.969645, total loss = 16.969645, lr = 0.000100
+2022-07-25 21:58:54,373 - train - INFO - Training Epoch [009/400] - Iteration [724/1811]: coarse loss = 20.280493, dense loss = 15.562623, total loss = 15.562623, lr = 0.000100
+2022-07-25 22:00:44,445 - train - INFO - Training Epoch [009/400] - Iteration [905/1811]: coarse loss = 21.420278, dense loss = 16.816072, total loss = 16.816072, lr = 0.000100
+2022-07-25 22:02:34,474 - train - INFO - Training Epoch [009/400] - Iteration [1086/1811]: coarse loss = 20.294074, dense loss = 15.632315, total loss = 15.632315, lr = 0.000100
+2022-07-25 22:04:24,540 - train - INFO - Training Epoch [009/400] - Iteration [1267/1811]: coarse loss = 17.596284, dense loss = 13.396063, total loss = 13.396063, lr = 0.000100
+2022-07-25 22:06:14,600 - train - INFO - Training Epoch [009/400] - Iteration [1448/1811]: coarse loss = 19.807123, dense loss = 15.369575, total loss = 15.369575, lr = 0.000100
+2022-07-25 22:08:04,667 - train - INFO - Training Epoch [009/400] - Iteration [1629/1811]: coarse loss = 21.855680, dense loss = 17.140621, total loss = 17.140621, lr = 0.000100
+2022-07-25 22:09:54,736 - train - INFO - Training Epoch [009/400] - Iteration [1810/1811]: coarse loss = 18.794006, dense loss = 14.762163, total loss = 14.762163, lr = 0.000100
+2022-07-25 22:09:55,348 - train - INFO - Training Epoch [009/400]: Coarse Loss = 20.606447, Dense Loss = 16.075850, Total Loss = 16.075850
+2022-07-25 22:10:11,723 - train - INFO - Validate Epoch [009/400]: Coarse Loss = 20.603356, Dense Loss = 16.089213, Total Loss = 36.692568
+2022-07-25 22:10:11,852 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 22:10:11,984 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 22:12:02,453 - train - INFO - Training Epoch [010/400] - Iteration [181/1811]: coarse loss = 20.712763, dense loss = 16.050065, total loss = 16.050065, lr = 0.000100
+2022-07-25 22:13:52,479 - train - INFO - Training Epoch [010/400] - Iteration [362/1811]: coarse loss = 23.844356, dense loss = 18.789936, total loss = 18.789936, lr = 0.000100
+2022-07-25 22:15:42,522 - train - INFO - Training Epoch [010/400] - Iteration [543/1811]: coarse loss = 21.460865, dense loss = 16.896024, total loss = 16.896024, lr = 0.000100
+2022-07-25 22:17:32,576 - train - INFO - Training Epoch [010/400] - Iteration [724/1811]: coarse loss = 18.425019, dense loss = 14.318625, total loss = 14.318625, lr = 0.000100
+2022-07-25 22:19:22,619 - train - INFO - Training Epoch [010/400] - Iteration [905/1811]: coarse loss = 21.371808, dense loss = 16.768195, total loss = 16.768195, lr = 0.000100
+2022-07-25 22:21:12,654 - train - INFO - Training Epoch [010/400] - Iteration [1086/1811]: coarse loss = 21.215882, dense loss = 16.476421, total loss = 16.476421, lr = 0.000100
+2022-07-25 22:23:02,695 - train - INFO - Training Epoch [010/400] - Iteration [1267/1811]: coarse loss = 18.721238, dense loss = 14.371024, total loss = 14.371024, lr = 0.000100
+2022-07-25 22:24:52,761 - train - INFO - Training Epoch [010/400] - Iteration [1448/1811]: coarse loss = 19.801924, dense loss = 15.111635, total loss = 15.111635, lr = 0.000100
+2022-07-25 22:26:42,820 - train - INFO - Training Epoch [010/400] - Iteration [1629/1811]: coarse loss = 22.320366, dense loss = 17.643943, total loss = 17.643943, lr = 0.000100
+2022-07-25 22:28:32,875 - train - INFO - Training Epoch [010/400] - Iteration [1810/1811]: coarse loss = 20.595327, dense loss = 16.093854, total loss = 16.093854, lr = 0.000100
+2022-07-25 22:28:33,495 - train - INFO - Training Epoch [010/400]: Coarse Loss = 20.593807, Dense Loss = 15.987294, Total Loss = 15.987294
+2022-07-25 22:28:49,984 - train - INFO - Validate Epoch [010/400]: Coarse Loss = 20.635410, Dense Loss = 16.116387, Total Loss = 36.751797
+2022-07-25 22:28:50,153 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 22:30:40,532 - train - INFO - Training Epoch [011/400] - Iteration [181/1811]: coarse loss = 20.577312, dense loss = 15.688490, total loss = 15.688490, lr = 0.000100
+2022-07-25 22:32:30,428 - train - INFO - Training Epoch [011/400] - Iteration [362/1811]: coarse loss = 22.986745, dense loss = 18.154446, total loss = 18.154446, lr = 0.000100
+2022-07-25 22:34:20,273 - train - INFO - Training Epoch [011/400] - Iteration [543/1811]: coarse loss = 18.689118, dense loss = 14.262785, total loss = 14.262785, lr = 0.000100
+2022-07-25 22:36:10,175 - train - INFO - Training Epoch [011/400] - Iteration [724/1811]: coarse loss = 18.863183, dense loss = 14.616682, total loss = 14.616682, lr = 0.000100
+2022-07-25 22:38:00,062 - train - INFO - Training Epoch [011/400] - Iteration [905/1811]: coarse loss = 21.939818, dense loss = 16.569853, total loss = 16.569853, lr = 0.000100
+2022-07-25 22:39:49,980 - train - INFO - Training Epoch [011/400] - Iteration [1086/1811]: coarse loss = 20.840561, dense loss = 16.009832, total loss = 16.009832, lr = 0.000100
+2022-07-25 22:41:39,887 - train - INFO - Training Epoch [011/400] - Iteration [1267/1811]: coarse loss = 20.993935, dense loss = 16.744316, total loss = 16.744316, lr = 0.000100
+2022-07-25 22:43:29,786 - train - INFO - Training Epoch [011/400] - Iteration [1448/1811]: coarse loss = 20.642627, dense loss = 15.806753, total loss = 15.806753, lr = 0.000100
+2022-07-25 22:45:19,670 - train - INFO - Training Epoch [011/400] - Iteration [1629/1811]: coarse loss = 20.752203, dense loss = 16.009927, total loss = 16.009927, lr = 0.000100
+2022-07-25 22:47:09,577 - train - INFO - Training Epoch [011/400] - Iteration [1810/1811]: coarse loss = 20.212993, dense loss = 15.858840, total loss = 15.858840, lr = 0.000100
+2022-07-25 22:47:10,202 - train - INFO - Training Epoch [011/400]: Coarse Loss = 20.596342, Dense Loss = 15.905006, Total Loss = 15.905006
+2022-07-25 22:47:26,667 - train - INFO - Validate Epoch [011/400]: Coarse Loss = 20.584959, Dense Loss = 16.006619, Total Loss = 36.591578
+2022-07-25 22:47:26,826 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-25 22:47:26,993 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-25 22:49:17,295 - train - INFO - Training Epoch [012/400] - Iteration [181/1811]: coarse loss = 20.479793, dense loss = 15.791703, total loss = 15.791703, lr = 0.000100
+2022-07-25 22:51:07,065 - train - INFO - Training Epoch [012/400] - Iteration [362/1811]: coarse loss = 18.921070, dense loss = 14.530865, total loss = 14.530865, lr = 0.000100
+2022-07-25 22:52:56,818 - train - INFO - Training Epoch [012/400] - Iteration [543/1811]: coarse loss = 20.639004, dense loss = 16.192921, total loss = 16.192921, lr = 0.000100
+2022-07-25 22:54:46,557 - train - INFO - Training Epoch [012/400] - Iteration [724/1811]: coarse loss = 21.554701, dense loss = 16.609695, total loss = 16.609695, lr = 0.000100
+2022-07-25 22:56:36,276 - train - INFO - Training Epoch [012/400] - Iteration [905/1811]: coarse loss = 21.115959, dense loss = 16.193330, total loss = 16.193330, lr = 0.000100
+2022-07-25 22:58:26,032 - train - INFO - Training Epoch [012/400] - Iteration [1086/1811]: coarse loss = 21.309622, dense loss = 16.585248, total loss = 16.585248, lr = 0.000100
+2022-07-25 23:00:15,769 - train - INFO - Training Epoch [012/400] - Iteration [1267/1811]: coarse loss = 19.576792, dense loss = 15.149548, total loss = 15.149548, lr = 0.000100
+2022-07-25 23:02:05,483 - train - INFO - Training Epoch [012/400] - Iteration [1448/1811]: coarse loss = 21.794412, dense loss = 16.630627, total loss = 16.630627, lr = 0.000100
+2022-07-25 23:03:55,213 - train - INFO - Training Epoch [012/400] - Iteration [1629/1811]: coarse loss = 19.618919, dense loss = 14.867753, total loss = 14.867753, lr = 0.000100
+2022-07-26 08:09:15,833 - train - INFO - [RESUME INFO] resume ckpts @ 11 epoch( best_metrics = 36.591578256338835)
+2022-07-26 08:09:15,834 - train - INFO - Model total params: 5719904
+2022-07-26 08:09:15,834 - train - INFO - Producing coarse only: False
+2022-07-26 08:09:15,834 - train - INFO - Producing num of coarse points: 1024
+2022-07-26 08:11:18,340 - train - INFO - Training Epoch [012/400] - Iteration [181/1811]: coarse loss = 23.559004, dense loss = 18.177021, total loss = 18.177021, lr = 0.000100
+2022-07-26 08:13:07,727 - train - INFO - Training Epoch [012/400] - Iteration [362/1811]: coarse loss = 21.771152, dense loss = 16.801026, total loss = 16.801026, lr = 0.000100
+2022-07-26 08:14:57,126 - train - INFO - Training Epoch [012/400] - Iteration [543/1811]: coarse loss = 20.886526, dense loss = 15.885500, total loss = 15.885500, lr = 0.000100
+2022-07-26 08:16:46,574 - train - INFO - Training Epoch [012/400] - Iteration [724/1811]: coarse loss = 22.382896, dense loss = 17.101888, total loss = 17.101888, lr = 0.000100
+2022-07-26 08:18:36,052 - train - INFO - Training Epoch [012/400] - Iteration [905/1811]: coarse loss = 21.981765, dense loss = 16.843781, total loss = 16.843781, lr = 0.000100
+2022-07-26 08:20:25,722 - train - INFO - Training Epoch [012/400] - Iteration [1086/1811]: coarse loss = 20.948384, dense loss = 16.186101, total loss = 16.186101, lr = 0.000100
+2022-07-26 08:22:15,401 - train - INFO - Training Epoch [012/400] - Iteration [1267/1811]: coarse loss = 17.331805, dense loss = 13.620509, total loss = 13.620509, lr = 0.000100
+2022-07-26 08:24:05,054 - train - INFO - Training Epoch [012/400] - Iteration [1448/1811]: coarse loss = 19.753434, dense loss = 14.974192, total loss = 14.974192, lr = 0.000100
+2022-07-26 08:25:54,738 - train - INFO - Training Epoch [012/400] - Iteration [1629/1811]: coarse loss = 22.708043, dense loss = 17.533194, total loss = 17.533194, lr = 0.000100
+2022-07-26 08:27:44,426 - train - INFO - Training Epoch [012/400] - Iteration [1810/1811]: coarse loss = 21.250902, dense loss = 16.226776, total loss = 16.226776, lr = 0.000100
+2022-07-26 08:27:45,584 - train - INFO - Training Epoch [012/400]: Coarse Loss = 20.640406, Dense Loss = 15.864221, Total Loss = 15.864221
+2022-07-26 08:28:04,419 - train - INFO - Validate Epoch [012/400]: Coarse Loss = 20.547593, Dense Loss = 15.825525, Total Loss = 36.373118
+2022-07-26 08:28:04,590 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 08:28:04,712 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 08:29:55,146 - train - INFO - Training Epoch [013/400] - Iteration [181/1811]: coarse loss = 23.343856, dense loss = 18.130813, total loss = 18.130813, lr = 0.000100
+2022-07-26 08:31:44,574 - train - INFO - Training Epoch [013/400] - Iteration [362/1811]: coarse loss = 20.499600, dense loss = 15.781600, total loss = 15.781600, lr = 0.000100
+2022-07-26 08:33:33,946 - train - INFO - Training Epoch [013/400] - Iteration [543/1811]: coarse loss = 18.191785, dense loss = 13.497807, total loss = 13.497807, lr = 0.000100
+2022-07-26 08:35:23,322 - train - INFO - Training Epoch [013/400] - Iteration [724/1811]: coarse loss = 19.980082, dense loss = 15.335756, total loss = 15.335756, lr = 0.000100
+2022-07-26 08:37:12,679 - train - INFO - Training Epoch [013/400] - Iteration [905/1811]: coarse loss = 18.468045, dense loss = 13.936647, total loss = 13.936647, lr = 0.000100
+2022-07-26 08:39:02,047 - train - INFO - Training Epoch [013/400] - Iteration [1086/1811]: coarse loss = 21.292627, dense loss = 16.225077, total loss = 16.225077, lr = 0.000100
+2022-07-26 08:40:51,429 - train - INFO - Training Epoch [013/400] - Iteration [1267/1811]: coarse loss = 21.466974, dense loss = 16.407134, total loss = 16.407134, lr = 0.000100
+2022-07-26 08:42:40,862 - train - INFO - Training Epoch [013/400] - Iteration [1448/1811]: coarse loss = 18.186536, dense loss = 14.151508, total loss = 14.151508, lr = 0.000100
+2022-07-26 08:44:30,253 - train - INFO - Training Epoch [013/400] - Iteration [1629/1811]: coarse loss = 18.129889, dense loss = 13.647247, total loss = 13.647247, lr = 0.000100
+2022-07-26 08:46:19,632 - train - INFO - Training Epoch [013/400] - Iteration [1810/1811]: coarse loss = 19.029809, dense loss = 14.445414, total loss = 14.445414, lr = 0.000100
+2022-07-26 08:46:20,284 - train - INFO - Training Epoch [013/400]: Coarse Loss = 20.581317, Dense Loss = 15.745091, Total Loss = 15.745091
+2022-07-26 08:46:36,938 - train - INFO - Validate Epoch [013/400]: Coarse Loss = 20.576478, Dense Loss = 15.798778, Total Loss = 36.375256
+2022-07-26 08:46:37,090 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 08:48:27,245 - train - INFO - Training Epoch [014/400] - Iteration [181/1811]: coarse loss = 19.293044, dense loss = 14.872743, total loss = 14.872743, lr = 0.000100
+2022-07-26 08:50:16,604 - train - INFO - Training Epoch [014/400] - Iteration [362/1811]: coarse loss = 20.405579, dense loss = 15.731372, total loss = 15.731372, lr = 0.000100
+2022-07-26 08:52:05,985 - train - INFO - Training Epoch [014/400] - Iteration [543/1811]: coarse loss = 22.227021, dense loss = 16.699236, total loss = 16.699236, lr = 0.000100
+2022-07-26 08:53:55,401 - train - INFO - Training Epoch [014/400] - Iteration [724/1811]: coarse loss = 19.156475, dense loss = 14.758153, total loss = 14.758153, lr = 0.000100
+2022-07-26 08:55:44,790 - train - INFO - Training Epoch [014/400] - Iteration [905/1811]: coarse loss = 17.717581, dense loss = 13.527421, total loss = 13.527421, lr = 0.000100
+2022-07-26 08:57:34,186 - train - INFO - Training Epoch [014/400] - Iteration [1086/1811]: coarse loss = 19.712975, dense loss = 15.290890, total loss = 15.290890, lr = 0.000100
+2022-07-26 08:59:23,561 - train - INFO - Training Epoch [014/400] - Iteration [1267/1811]: coarse loss = 20.360434, dense loss = 15.676502, total loss = 15.676502, lr = 0.000100
+2022-07-26 09:01:12,939 - train - INFO - Training Epoch [014/400] - Iteration [1448/1811]: coarse loss = 19.315302, dense loss = 14.644574, total loss = 14.644574, lr = 0.000100
+2022-07-26 09:03:02,335 - train - INFO - Training Epoch [014/400] - Iteration [1629/1811]: coarse loss = 20.941695, dense loss = 15.982900, total loss = 15.982900, lr = 0.000100
+2022-07-26 09:04:51,746 - train - INFO - Training Epoch [014/400] - Iteration [1810/1811]: coarse loss = 19.339792, dense loss = 14.953051, total loss = 14.953051, lr = 0.000100
+2022-07-26 09:04:52,414 - train - INFO - Training Epoch [014/400]: Coarse Loss = 20.597687, Dense Loss = 15.686336, Total Loss = 15.686336
+2022-07-26 09:05:09,095 - train - INFO - Validate Epoch [014/400]: Coarse Loss = 20.566373, Dense Loss = 15.674168, Total Loss = 36.240541
+2022-07-26 09:05:09,258 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 09:05:09,381 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 09:06:59,620 - train - INFO - Training Epoch [015/400] - Iteration [181/1811]: coarse loss = 22.266036, dense loss = 17.166886, total loss = 17.166886, lr = 0.000100
+2022-07-26 09:08:49,006 - train - INFO - Training Epoch [015/400] - Iteration [362/1811]: coarse loss = 22.664811, dense loss = 16.755067, total loss = 16.755067, lr = 0.000100
+2022-07-26 09:10:38,414 - train - INFO - Training Epoch [015/400] - Iteration [543/1811]: coarse loss = 21.421213, dense loss = 15.968781, total loss = 15.968781, lr = 0.000100
+2022-07-26 09:12:27,856 - train - INFO - Training Epoch [015/400] - Iteration [724/1811]: coarse loss = 23.653952, dense loss = 17.735668, total loss = 17.735668, lr = 0.000100
+2022-07-26 09:14:17,230 - train - INFO - Training Epoch [015/400] - Iteration [905/1811]: coarse loss = 19.529236, dense loss = 14.307646, total loss = 14.307646, lr = 0.000100
+2022-07-26 09:16:06,627 - train - INFO - Training Epoch [015/400] - Iteration [1086/1811]: coarse loss = 17.798699, dense loss = 13.561212, total loss = 13.561212, lr = 0.000100
+2022-07-26 09:17:56,031 - train - INFO - Training Epoch [015/400] - Iteration [1267/1811]: coarse loss = 21.116473, dense loss = 16.135532, total loss = 16.135532, lr = 0.000100
+2022-07-26 09:19:45,396 - train - INFO - Training Epoch [015/400] - Iteration [1448/1811]: coarse loss = 21.803251, dense loss = 15.934672, total loss = 15.934672, lr = 0.000100
+2022-07-26 09:21:34,792 - train - INFO - Training Epoch [015/400] - Iteration [1629/1811]: coarse loss = 21.287074, dense loss = 16.222348, total loss = 16.222348, lr = 0.000100
+2022-07-26 09:23:24,186 - train - INFO - Training Epoch [015/400] - Iteration [1810/1811]: coarse loss = 19.329324, dense loss = 14.572857, total loss = 14.572857, lr = 0.000100
+2022-07-26 09:23:24,861 - train - INFO - Training Epoch [015/400]: Coarse Loss = 20.641551, Dense Loss = 15.618498, Total Loss = 15.618498
+2022-07-26 09:23:41,578 - train - INFO - Validate Epoch [015/400]: Coarse Loss = 20.551055, Dense Loss = 15.528756, Total Loss = 36.079811
+2022-07-26 09:23:41,760 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 09:23:41,901 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 09:25:32,159 - train - INFO - Training Epoch [016/400] - Iteration [181/1811]: coarse loss = 19.972773, dense loss = 14.520663, total loss = 14.520663, lr = 0.000100
+2022-07-26 09:27:21,565 - train - INFO - Training Epoch [016/400] - Iteration [362/1811]: coarse loss = 22.129891, dense loss = 16.695615, total loss = 16.695615, lr = 0.000100
+2022-07-26 09:29:10,991 - train - INFO - Training Epoch [016/400] - Iteration [543/1811]: coarse loss = 21.832079, dense loss = 16.597666, total loss = 16.597666, lr = 0.000100
+2022-07-26 09:31:00,391 - train - INFO - Training Epoch [016/400] - Iteration [724/1811]: coarse loss = 19.695600, dense loss = 14.979310, total loss = 14.979310, lr = 0.000100
+2022-07-26 09:32:49,863 - train - INFO - Training Epoch [016/400] - Iteration [905/1811]: coarse loss = 19.895280, dense loss = 14.379833, total loss = 14.379833, lr = 0.000100
+2022-07-26 09:34:39,283 - train - INFO - Training Epoch [016/400] - Iteration [1086/1811]: coarse loss = 21.944966, dense loss = 16.270708, total loss = 16.270708, lr = 0.000100
+2022-07-26 09:36:28,697 - train - INFO - Training Epoch [016/400] - Iteration [1267/1811]: coarse loss = 19.653577, dense loss = 14.708996, total loss = 14.708996, lr = 0.000100
+2022-07-26 09:38:18,151 - train - INFO - Training Epoch [016/400] - Iteration [1448/1811]: coarse loss = 21.864451, dense loss = 16.558923, total loss = 16.558923, lr = 0.000100
+2022-07-26 09:40:07,571 - train - INFO - Training Epoch [016/400] - Iteration [1629/1811]: coarse loss = 21.143127, dense loss = 16.120762, total loss = 16.120762, lr = 0.000100
+2022-07-26 09:41:56,982 - train - INFO - Training Epoch [016/400] - Iteration [1810/1811]: coarse loss = 22.771267, dense loss = 16.824633, total loss = 16.824633, lr = 0.000100
+2022-07-26 09:41:57,653 - train - INFO - Training Epoch [016/400]: Coarse Loss = 20.607980, Dense Loss = 15.478145, Total Loss = 15.478145
+2022-07-26 09:42:14,402 - train - INFO - Validate Epoch [016/400]: Coarse Loss = 20.600919, Dense Loss = 15.467371, Total Loss = 36.068290
+2022-07-26 09:42:14,543 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 09:42:14,708 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 09:44:04,808 - train - INFO - Training Epoch [017/400] - Iteration [181/1811]: coarse loss = 21.974944, dense loss = 16.582601, total loss = 16.582601, lr = 0.000100
+2022-07-26 09:45:54,317 - train - INFO - Training Epoch [017/400] - Iteration [362/1811]: coarse loss = 19.668069, dense loss = 15.019257, total loss = 15.019257, lr = 0.000100
+2022-07-26 09:47:43,827 - train - INFO - Training Epoch [017/400] - Iteration [543/1811]: coarse loss = 18.895660, dense loss = 13.751728, total loss = 13.751728, lr = 0.000100
+2022-07-26 09:49:33,316 - train - INFO - Training Epoch [017/400] - Iteration [724/1811]: coarse loss = 21.552980, dense loss = 15.948731, total loss = 15.948731, lr = 0.000100
+2022-07-26 09:51:22,779 - train - INFO - Training Epoch [017/400] - Iteration [905/1811]: coarse loss = 20.763883, dense loss = 15.280236, total loss = 15.280236, lr = 0.000100
+2022-07-26 09:53:12,267 - train - INFO - Training Epoch [017/400] - Iteration [1086/1811]: coarse loss = 19.577883, dense loss = 14.905251, total loss = 14.905251, lr = 0.000100
+2022-07-26 09:55:01,693 - train - INFO - Training Epoch [017/400] - Iteration [1267/1811]: coarse loss = 21.366229, dense loss = 16.321879, total loss = 16.321879, lr = 0.000100
+2022-07-26 09:56:51,159 - train - INFO - Training Epoch [017/400] - Iteration [1448/1811]: coarse loss = 19.637771, dense loss = 14.400710, total loss = 14.400710, lr = 0.000100
+2022-07-26 09:58:40,627 - train - INFO - Training Epoch [017/400] - Iteration [1629/1811]: coarse loss = 20.161772, dense loss = 14.752735, total loss = 14.752735, lr = 0.000100
+2022-07-26 10:00:30,078 - train - INFO - Training Epoch [017/400] - Iteration [1810/1811]: coarse loss = 20.553650, dense loss = 15.613349, total loss = 15.613349, lr = 0.000100
+2022-07-26 10:00:30,740 - train - INFO - Training Epoch [017/400]: Coarse Loss = 20.588896, Dense Loss = 15.352820, Total Loss = 15.352820
+2022-07-26 10:00:47,490 - train - INFO - Validate Epoch [017/400]: Coarse Loss = 20.575655, Dense Loss = 15.367269, Total Loss = 35.942924
+2022-07-26 10:00:47,644 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 10:00:47,832 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 10:02:38,022 - train - INFO - Training Epoch [018/400] - Iteration [181/1811]: coarse loss = 19.260677, dense loss = 14.506394, total loss = 14.506394, lr = 0.000100
+2022-07-26 10:04:27,501 - train - INFO - Training Epoch [018/400] - Iteration [362/1811]: coarse loss = 20.952974, dense loss = 15.483119, total loss = 15.483119, lr = 0.000100
+2022-07-26 10:06:16,948 - train - INFO - Training Epoch [018/400] - Iteration [543/1811]: coarse loss = 18.112358, dense loss = 13.522145, total loss = 13.522145, lr = 0.000100
+2022-07-26 10:08:06,415 - train - INFO - Training Epoch [018/400] - Iteration [724/1811]: coarse loss = 19.278448, dense loss = 14.014546, total loss = 14.014546, lr = 0.000100
+2022-07-26 10:09:55,870 - train - INFO - Training Epoch [018/400] - Iteration [905/1811]: coarse loss = 21.666460, dense loss = 15.565570, total loss = 15.565570, lr = 0.000100
+2022-07-26 10:11:45,327 - train - INFO - Training Epoch [018/400] - Iteration [1086/1811]: coarse loss = 20.844843, dense loss = 14.878072, total loss = 14.878072, lr = 0.000100
+2022-07-26 10:13:34,803 - train - INFO - Training Epoch [018/400] - Iteration [1267/1811]: coarse loss = 21.362314, dense loss = 16.049648, total loss = 16.049648, lr = 0.000100
+2022-07-26 10:15:24,284 - train - INFO - Training Epoch [018/400] - Iteration [1448/1811]: coarse loss = 23.119988, dense loss = 17.226171, total loss = 17.226171, lr = 0.000100
+2022-07-26 10:17:13,758 - train - INFO - Training Epoch [018/400] - Iteration [1629/1811]: coarse loss = 23.396686, dense loss = 17.360289, total loss = 17.360289, lr = 0.000100
+2022-07-26 10:19:03,249 - train - INFO - Training Epoch [018/400] - Iteration [1810/1811]: coarse loss = 19.391242, dense loss = 14.072277, total loss = 14.072277, lr = 0.000100
+2022-07-26 10:19:03,915 - train - INFO - Training Epoch [018/400]: Coarse Loss = 20.600249, Dense Loss = 15.263535, Total Loss = 15.263535
+2022-07-26 10:19:20,649 - train - INFO - Validate Epoch [018/400]: Coarse Loss = 20.537212, Dense Loss = 15.204848, Total Loss = 35.742059
+2022-07-26 10:19:20,786 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 10:19:21,020 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 10:21:11,377 - train - INFO - Training Epoch [019/400] - Iteration [181/1811]: coarse loss = 21.819200, dense loss = 16.724307, total loss = 16.724307, lr = 0.000100
+2022-07-26 10:21:35,756 - train - INFO - [RESUME INFO] resume ckpts @ 18 epoch( best_metrics = 35.742059256881475)
+2022-07-26 10:21:35,756 - train - INFO - Model total params: 5719904
+2022-07-26 10:21:35,756 - train - INFO - Producing coarse only: False
+2022-07-26 10:21:35,756 - train - INFO - Producing num of coarse points: 1024
+2022-07-26 10:23:26,913 - train - INFO - Training Epoch [019/400] - Iteration [181/1811]: coarse loss = 22.435300, dense loss = 16.587425, total loss = 16.587425, lr = 0.000100
+2022-07-26 10:25:16,685 - train - INFO - Training Epoch [019/400] - Iteration [362/1811]: coarse loss = 25.107212, dense loss = 17.890440, total loss = 17.890440, lr = 0.000100
+2022-07-26 10:27:06,485 - train - INFO - Training Epoch [019/400] - Iteration [543/1811]: coarse loss = 20.514879, dense loss = 15.437691, total loss = 15.437691, lr = 0.000100
+2022-07-26 10:28:56,271 - train - INFO - Training Epoch [019/400] - Iteration [724/1811]: coarse loss = 22.506537, dense loss = 16.668066, total loss = 16.668066, lr = 0.000100
+2022-07-26 10:30:46,073 - train - INFO - Training Epoch [019/400] - Iteration [905/1811]: coarse loss = 21.909773, dense loss = 16.561212, total loss = 16.561212, lr = 0.000100
+2022-07-26 10:32:35,884 - train - INFO - Training Epoch [019/400] - Iteration [1086/1811]: coarse loss = 20.765748, dense loss = 15.130851, total loss = 15.130851, lr = 0.000100
+2022-07-26 10:34:25,647 - train - INFO - Training Epoch [019/400] - Iteration [1267/1811]: coarse loss = 20.675197, dense loss = 15.083633, total loss = 15.083633, lr = 0.000100
+2022-07-26 10:36:15,441 - train - INFO - Training Epoch [019/400] - Iteration [1448/1811]: coarse loss = 18.767007, dense loss = 13.215370, total loss = 13.215370, lr = 0.000100
+2022-07-26 10:38:05,199 - train - INFO - Training Epoch [019/400] - Iteration [1629/1811]: coarse loss = 21.674542, dense loss = 15.827306, total loss = 15.827306, lr = 0.000100
+2022-07-26 10:39:54,995 - train - INFO - Training Epoch [019/400] - Iteration [1810/1811]: coarse loss = 21.325717, dense loss = 15.519834, total loss = 15.519834, lr = 0.000100
+2022-07-26 10:39:56,138 - train - INFO - Training Epoch [019/400]: Coarse Loss = 20.620206, Dense Loss = 15.178361, Total Loss = 15.178361
+2022-07-26 10:40:12,742 - train - INFO - Validate Epoch [019/400]: Coarse Loss = 20.537627, Dense Loss = 15.108705, Total Loss = 35.646332
+2022-07-26 10:40:12,890 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 10:40:13,034 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 10:42:03,279 - train - INFO - Training Epoch [020/400] - Iteration [181/1811]: coarse loss = 24.113361, dense loss = 18.025476, total loss = 18.025476, lr = 0.000100
+2022-07-26 10:43:52,675 - train - INFO - Training Epoch [020/400] - Iteration [362/1811]: coarse loss = 18.869612, dense loss = 13.541836, total loss = 13.541836, lr = 0.000100
+2022-07-26 10:45:42,068 - train - INFO - Training Epoch [020/400] - Iteration [543/1811]: coarse loss = 20.836648, dense loss = 15.188033, total loss = 15.188033, lr = 0.000100
+2022-07-26 10:47:31,440 - train - INFO - Training Epoch [020/400] - Iteration [724/1811]: coarse loss = 20.135216, dense loss = 14.774248, total loss = 14.774248, lr = 0.000100
+2022-07-26 10:49:20,823 - train - INFO - Training Epoch [020/400] - Iteration [905/1811]: coarse loss = 20.345535, dense loss = 15.061932, total loss = 15.061932, lr = 0.000100
+2022-07-26 10:51:10,260 - train - INFO - Training Epoch [020/400] - Iteration [1086/1811]: coarse loss = 21.204159, dense loss = 15.649432, total loss = 15.649432, lr = 0.000100
+2022-07-26 10:52:59,677 - train - INFO - Training Epoch [020/400] - Iteration [1267/1811]: coarse loss = 21.795176, dense loss = 16.051032, total loss = 16.051032, lr = 0.000100
+2022-07-26 10:54:49,070 - train - INFO - Training Epoch [020/400] - Iteration [1448/1811]: coarse loss = 18.071942, dense loss = 13.102978, total loss = 13.102978, lr = 0.000100
+2022-07-26 10:56:38,429 - train - INFO - Training Epoch [020/400] - Iteration [1629/1811]: coarse loss = 17.161852, dense loss = 12.795264, total loss = 12.795264, lr = 0.000100
+2022-07-26 10:58:27,825 - train - INFO - Training Epoch [020/400] - Iteration [1810/1811]: coarse loss = 18.162914, dense loss = 13.015410, total loss = 13.015410, lr = 0.000100
+2022-07-26 10:58:28,498 - train - INFO - Training Epoch [020/400]: Coarse Loss = 20.596401, Dense Loss = 15.078669, Total Loss = 15.078669
+2022-07-26 10:58:45,142 - train - INFO - Validate Epoch [020/400]: Coarse Loss = 20.555183, Dense Loss = 15.036025, Total Loss = 35.591208
+2022-07-26 10:58:45,274 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 10:58:45,401 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 11:00:35,831 - train - INFO - Training Epoch [021/400] - Iteration [181/1811]: coarse loss = 21.745864, dense loss = 16.135789, total loss = 16.135789, lr = 0.000100
+2022-07-26 11:02:25,288 - train - INFO - Training Epoch [021/400] - Iteration [362/1811]: coarse loss = 21.002254, dense loss = 15.281590, total loss = 15.281590, lr = 0.000100
+2022-07-26 11:04:14,732 - train - INFO - Training Epoch [021/400] - Iteration [543/1811]: coarse loss = 20.071022, dense loss = 14.630763, total loss = 14.630763, lr = 0.000100
+2022-07-26 11:06:04,219 - train - INFO - Training Epoch [021/400] - Iteration [724/1811]: coarse loss = 19.565988, dense loss = 14.168798, total loss = 14.168798, lr = 0.000100
+2022-07-26 11:07:53,708 - train - INFO - Training Epoch [021/400] - Iteration [905/1811]: coarse loss = 20.511884, dense loss = 15.053080, total loss = 15.053080, lr = 0.000100
+2022-07-26 11:09:43,180 - train - INFO - Training Epoch [021/400] - Iteration [1086/1811]: coarse loss = 19.050883, dense loss = 14.059382, total loss = 14.059382, lr = 0.000100
+2022-07-26 11:11:32,677 - train - INFO - Training Epoch [021/400] - Iteration [1267/1811]: coarse loss = 18.777449, dense loss = 13.476942, total loss = 13.476942, lr = 0.000100
+2022-07-26 11:13:22,148 - train - INFO - Training Epoch [021/400] - Iteration [1448/1811]: coarse loss = 20.184679, dense loss = 14.735041, total loss = 14.735041, lr = 0.000100
+2022-07-26 11:15:11,663 - train - INFO - Training Epoch [021/400] - Iteration [1629/1811]: coarse loss = 18.975288, dense loss = 14.040897, total loss = 14.040897, lr = 0.000100
+2022-07-26 11:17:01,112 - train - INFO - Training Epoch [021/400] - Iteration [1810/1811]: coarse loss = 19.671392, dense loss = 14.382577, total loss = 14.382577, lr = 0.000100
+2022-07-26 11:17:01,784 - train - INFO - Training Epoch [021/400]: Coarse Loss = 20.585561, Dense Loss = 14.987878, Total Loss = 14.987878
+2022-07-26 11:17:18,526 - train - INFO - Validate Epoch [021/400]: Coarse Loss = 20.541909, Dense Loss = 14.973491, Total Loss = 35.515401
+2022-07-26 11:17:18,663 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 11:17:18,823 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 11:19:09,062 - train - INFO - Training Epoch [022/400] - Iteration [181/1811]: coarse loss = 20.885061, dense loss = 15.145730, total loss = 15.145730, lr = 0.000100
+2022-07-26 11:20:58,404 - train - INFO - Training Epoch [022/400] - Iteration [362/1811]: coarse loss = 23.323074, dense loss = 17.583242, total loss = 17.583242, lr = 0.000100
+2022-07-26 11:22:47,788 - train - INFO - Training Epoch [022/400] - Iteration [543/1811]: coarse loss = 20.207051, dense loss = 14.727367, total loss = 14.727367, lr = 0.000100
+2022-07-26 11:24:37,195 - train - INFO - Training Epoch [022/400] - Iteration [724/1811]: coarse loss = 20.033777, dense loss = 14.478263, total loss = 14.478263, lr = 0.000100
+2022-07-26 11:26:26,573 - train - INFO - Training Epoch [022/400] - Iteration [905/1811]: coarse loss = 24.386538, dense loss = 17.720427, total loss = 17.720427, lr = 0.000100
+2022-07-26 11:28:15,978 - train - INFO - Training Epoch [022/400] - Iteration [1086/1811]: coarse loss = 19.714497, dense loss = 14.813128, total loss = 14.813128, lr = 0.000100
+2022-07-26 11:30:05,335 - train - INFO - Training Epoch [022/400] - Iteration [1267/1811]: coarse loss = 21.192949, dense loss = 15.180213, total loss = 15.180213, lr = 0.000100
+2022-07-26 11:31:54,729 - train - INFO - Training Epoch [022/400] - Iteration [1448/1811]: coarse loss = 20.497236, dense loss = 14.802321, total loss = 14.802321, lr = 0.000100
+2022-07-26 11:33:44,102 - train - INFO - Training Epoch [022/400] - Iteration [1629/1811]: coarse loss = 22.563390, dense loss = 16.285200, total loss = 16.285200, lr = 0.000100
+2022-07-26 11:35:33,467 - train - INFO - Training Epoch [022/400] - Iteration [1810/1811]: coarse loss = 20.233262, dense loss = 14.014482, total loss = 14.014482, lr = 0.000100
+2022-07-26 11:35:34,124 - train - INFO - Training Epoch [022/400]: Coarse Loss = 20.637745, Dense Loss = 14.969782, Total Loss = 14.969782
+2022-07-26 11:35:50,840 - train - INFO - Validate Epoch [022/400]: Coarse Loss = 20.593565, Dense Loss = 14.940103, Total Loss = 35.533668
+2022-07-26 11:35:50,974 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 11:37:41,175 - train - INFO - Training Epoch [023/400] - Iteration [181/1811]: coarse loss = 19.675117, dense loss = 14.284797, total loss = 14.284797, lr = 0.000100
+2022-07-26 11:39:30,585 - train - INFO - Training Epoch [023/400] - Iteration [362/1811]: coarse loss = 22.117913, dense loss = 16.013023, total loss = 16.013023, lr = 0.000100
+2022-07-26 11:41:19,974 - train - INFO - Training Epoch [023/400] - Iteration [543/1811]: coarse loss = 21.558739, dense loss = 15.822690, total loss = 15.822690, lr = 0.000100
+2022-07-26 11:43:09,387 - train - INFO - Training Epoch [023/400] - Iteration [724/1811]: coarse loss = 22.510927, dense loss = 16.627103, total loss = 16.627103, lr = 0.000100
+2022-07-26 11:44:58,759 - train - INFO - Training Epoch [023/400] - Iteration [905/1811]: coarse loss = 19.204445, dense loss = 13.824205, total loss = 13.824205, lr = 0.000100
+2022-07-26 11:46:48,175 - train - INFO - Training Epoch [023/400] - Iteration [1086/1811]: coarse loss = 19.229006, dense loss = 13.786202, total loss = 13.786202, lr = 0.000100
+2022-07-26 11:48:37,574 - train - INFO - Training Epoch [023/400] - Iteration [1267/1811]: coarse loss = 19.300524, dense loss = 13.940210, total loss = 13.940210, lr = 0.000100
+2022-07-26 11:50:26,986 - train - INFO - Training Epoch [023/400] - Iteration [1448/1811]: coarse loss = 20.444591, dense loss = 14.278051, total loss = 14.278051, lr = 0.000100
+2022-07-26 11:52:16,384 - train - INFO - Training Epoch [023/400] - Iteration [1629/1811]: coarse loss = 21.763993, dense loss = 15.736045, total loss = 15.736045, lr = 0.000100
+2022-07-26 11:54:05,780 - train - INFO - Training Epoch [023/400] - Iteration [1810/1811]: coarse loss = 21.887925, dense loss = 15.858209, total loss = 15.858209, lr = 0.000100
+2022-07-26 11:54:06,439 - train - INFO - Training Epoch [023/400]: Coarse Loss = 20.620019, Dense Loss = 14.899291, Total Loss = 14.899291
+2022-07-26 11:54:23,092 - train - INFO - Validate Epoch [023/400]: Coarse Loss = 20.664274, Dense Loss = 14.903801, Total Loss = 35.568075
+2022-07-26 11:54:23,257 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 11:56:13,562 - train - INFO - Training Epoch [024/400] - Iteration [181/1811]: coarse loss = 22.366289, dense loss = 16.060628, total loss = 16.060628, lr = 0.000100
+2022-07-26 11:57:14,730 - train - INFO - [RESUME INFO] resume ckpts @ 23 epoch( best_metrics = 35.515400636941195)
+2022-07-26 11:57:14,730 - train - INFO - Model total params: 5719904
+2022-07-26 11:57:14,730 - train - INFO - Producing coarse only: False
+2022-07-26 11:57:14,730 - train - INFO - Producing num of coarse points: 1024
+2022-07-26 11:59:05,816 - train - INFO - Training Epoch [024/400] - Iteration [181/1811]: coarse loss = 19.058593, dense loss = 13.702132, total loss = 13.702132, lr = 0.000100
+2022-07-26 12:00:55,589 - train - INFO - Training Epoch [024/400] - Iteration [362/1811]: coarse loss = 21.547012, dense loss = 15.153027, total loss = 15.153027, lr = 0.000100
+2022-07-26 12:02:45,380 - train - INFO - Training Epoch [024/400] - Iteration [543/1811]: coarse loss = 20.283204, dense loss = 14.512363, total loss = 14.512363, lr = 0.000100
+2022-07-26 12:04:35,207 - train - INFO - Training Epoch [024/400] - Iteration [724/1811]: coarse loss = 19.846205, dense loss = 14.712444, total loss = 14.712444, lr = 0.000100
+2022-07-26 12:06:25,043 - train - INFO - Training Epoch [024/400] - Iteration [905/1811]: coarse loss = 22.104861, dense loss = 16.325766, total loss = 16.325766, lr = 0.000100
+2022-07-26 12:08:14,877 - train - INFO - Training Epoch [024/400] - Iteration [1086/1811]: coarse loss = 20.251632, dense loss = 14.261182, total loss = 14.261182, lr = 0.000100
+2022-07-26 12:10:04,713 - train - INFO - Training Epoch [024/400] - Iteration [1267/1811]: coarse loss = 24.503175, dense loss = 17.952712, total loss = 17.952712, lr = 0.000100
+2022-07-26 12:11:54,527 - train - INFO - Training Epoch [024/400] - Iteration [1448/1811]: coarse loss = 18.180994, dense loss = 12.691252, total loss = 12.691252, lr = 0.000100
+2022-07-26 12:13:44,319 - train - INFO - Training Epoch [024/400] - Iteration [1629/1811]: coarse loss = 21.902468, dense loss = 15.564710, total loss = 15.564710, lr = 0.000100
+2022-07-26 12:15:34,166 - train - INFO - Training Epoch [024/400] - Iteration [1810/1811]: coarse loss = 19.715112, dense loss = 14.334055, total loss = 14.334055, lr = 0.000100
+2022-07-26 12:15:35,293 - train - INFO - Training Epoch [024/400]: Coarse Loss = 20.634933, Dense Loss = 14.859256, Total Loss = 14.859256
+2022-07-26 12:15:51,907 - train - INFO - Validate Epoch [024/400]: Coarse Loss = 20.580828, Dense Loss = 14.826834, Total Loss = 35.407662
+2022-07-26 12:15:52,066 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 12:15:52,188 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 12:17:42,349 - train - INFO - Training Epoch [025/400] - Iteration [181/1811]: coarse loss = 20.270629, dense loss = 14.130725, total loss = 14.130725, lr = 0.000100
+2022-07-26 12:19:31,837 - train - INFO - Training Epoch [025/400] - Iteration [362/1811]: coarse loss = 19.029867, dense loss = 13.736045, total loss = 13.736045, lr = 0.000100
+2022-07-26 12:21:21,329 - train - INFO - Training Epoch [025/400] - Iteration [543/1811]: coarse loss = 18.889375, dense loss = 13.719160, total loss = 13.719160, lr = 0.000100
+2022-07-26 12:23:10,797 - train - INFO - Training Epoch [025/400] - Iteration [724/1811]: coarse loss = 22.668498, dense loss = 16.137727, total loss = 16.137727, lr = 0.000100
+2022-07-26 12:25:00,254 - train - INFO - Training Epoch [025/400] - Iteration [905/1811]: coarse loss = 19.594351, dense loss = 14.246680, total loss = 14.246680, lr = 0.000100
+2022-07-26 12:26:49,692 - train - INFO - Training Epoch [025/400] - Iteration [1086/1811]: coarse loss = 20.935768, dense loss = 14.832111, total loss = 14.832111, lr = 0.000100
+2022-07-26 12:28:39,207 - train - INFO - Training Epoch [025/400] - Iteration [1267/1811]: coarse loss = 21.490864, dense loss = 15.092378, total loss = 15.092378, lr = 0.000100
+2022-07-26 12:30:28,716 - train - INFO - Training Epoch [025/400] - Iteration [1448/1811]: coarse loss = 20.263474, dense loss = 14.619138, total loss = 14.619138, lr = 0.000100
+2022-07-26 12:32:18,208 - train - INFO - Training Epoch [025/400] - Iteration [1629/1811]: coarse loss = 20.656221, dense loss = 14.438820, total loss = 14.438820, lr = 0.000100
+2022-07-26 12:34:07,647 - train - INFO - Training Epoch [025/400] - Iteration [1810/1811]: coarse loss = 19.407108, dense loss = 13.793275, total loss = 13.793275, lr = 0.000100
+2022-07-26 12:34:08,310 - train - INFO - Training Epoch [025/400]: Coarse Loss = 20.615104, Dense Loss = 14.802365, Total Loss = 14.802365
+2022-07-26 12:34:24,994 - train - INFO - Validate Epoch [025/400]: Coarse Loss = 20.546202, Dense Loss = 14.760818, Total Loss = 35.307020
+2022-07-26 12:34:25,152 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 12:34:25,318 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 12:36:15,721 - train - INFO - Training Epoch [026/400] - Iteration [181/1811]: coarse loss = 22.200085, dense loss = 15.371084, total loss = 15.371084, lr = 0.000100
+2022-07-26 12:38:05,295 - train - INFO - Training Epoch [026/400] - Iteration [362/1811]: coarse loss = 20.405389, dense loss = 15.105343, total loss = 15.105343, lr = 0.000100
+2022-07-26 12:39:54,848 - train - INFO - Training Epoch [026/400] - Iteration [543/1811]: coarse loss = 21.554369, dense loss = 14.962940, total loss = 14.962940, lr = 0.000100
+2022-07-26 12:41:44,375 - train - INFO - Training Epoch [026/400] - Iteration [724/1811]: coarse loss = 20.679593, dense loss = 15.105486, total loss = 15.105486, lr = 0.000100
+2022-07-26 12:43:33,920 - train - INFO - Training Epoch [026/400] - Iteration [905/1811]: coarse loss = 21.033430, dense loss = 14.663021, total loss = 14.663021, lr = 0.000100
+2022-07-26 12:45:23,479 - train - INFO - Training Epoch [026/400] - Iteration [1086/1811]: coarse loss = 18.282210, dense loss = 12.791621, total loss = 12.791621, lr = 0.000100
+2022-07-26 12:47:13,023 - train - INFO - Training Epoch [026/400] - Iteration [1267/1811]: coarse loss = 20.506125, dense loss = 14.707752, total loss = 14.707752, lr = 0.000100
+2022-07-26 12:49:02,620 - train - INFO - Training Epoch [026/400] - Iteration [1448/1811]: coarse loss = 22.192799, dense loss = 16.349455, total loss = 16.349455, lr = 0.000100
+2022-07-26 12:50:52,154 - train - INFO - Training Epoch [026/400] - Iteration [1629/1811]: coarse loss = 22.764359, dense loss = 15.988845, total loss = 15.988845, lr = 0.000100
+2022-07-26 12:52:41,685 - train - INFO - Training Epoch [026/400] - Iteration [1810/1811]: coarse loss = 18.974306, dense loss = 14.053777, total loss = 14.053777, lr = 0.000100
+2022-07-26 12:52:42,344 - train - INFO - Training Epoch [026/400]: Coarse Loss = 20.603116, Dense Loss = 14.748124, Total Loss = 14.748124
+2022-07-26 12:52:59,034 - train - INFO - Validate Epoch [026/400]: Coarse Loss = 20.591436, Dense Loss = 14.740145, Total Loss = 35.331581
+2022-07-26 12:52:59,170 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 12:54:49,616 - train - INFO - Training Epoch [027/400] - Iteration [181/1811]: coarse loss = 17.661612, dense loss = 12.367196, total loss = 12.367196, lr = 0.000100
+2022-07-26 12:56:39,272 - train - INFO - Training Epoch [027/400] - Iteration [362/1811]: coarse loss = 19.919306, dense loss = 14.282759, total loss = 14.282759, lr = 0.000100
+2022-07-26 12:58:28,988 - train - INFO - Training Epoch [027/400] - Iteration [543/1811]: coarse loss = 20.226054, dense loss = 14.236388, total loss = 14.236388, lr = 0.000100
+2022-07-26 13:00:18,694 - train - INFO - Training Epoch [027/400] - Iteration [724/1811]: coarse loss = 19.617831, dense loss = 13.670732, total loss = 13.670732, lr = 0.000100
+2022-07-26 13:02:08,402 - train - INFO - Training Epoch [027/400] - Iteration [905/1811]: coarse loss = 24.055928, dense loss = 16.640160, total loss = 16.640160, lr = 0.000100
+2022-07-26 13:03:58,084 - train - INFO - Training Epoch [027/400] - Iteration [1086/1811]: coarse loss = 21.217018, dense loss = 15.335198, total loss = 15.335198, lr = 0.000100
+2022-07-26 13:05:47,781 - train - INFO - Training Epoch [027/400] - Iteration [1267/1811]: coarse loss = 19.262161, dense loss = 13.589626, total loss = 13.589626, lr = 0.000100
+2022-07-26 13:07:37,484 - train - INFO - Training Epoch [027/400] - Iteration [1448/1811]: coarse loss = 20.904019, dense loss = 14.660606, total loss = 14.660606, lr = 0.000100
+2022-07-26 13:09:27,210 - train - INFO - Training Epoch [027/400] - Iteration [1629/1811]: coarse loss = 21.883942, dense loss = 15.897624, total loss = 15.897624, lr = 0.000100
+2022-07-26 13:11:16,917 - train - INFO - Training Epoch [027/400] - Iteration [1810/1811]: coarse loss = 19.533642, dense loss = 14.000714, total loss = 14.000714, lr = 0.000100
+2022-07-26 13:11:17,582 - train - INFO - Training Epoch [027/400]: Coarse Loss = 20.593143, Dense Loss = 14.713304, Total Loss = 14.713304
+2022-07-26 13:11:34,422 - train - INFO - Validate Epoch [027/400]: Coarse Loss = 20.608238, Dense Loss = 14.736316, Total Loss = 35.344554
+2022-07-26 13:11:34,570 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 13:13:25,150 - train - INFO - Training Epoch [028/400] - Iteration [181/1811]: coarse loss = 20.329826, dense loss = 14.272336, total loss = 14.272336, lr = 0.000100
+2022-07-26 13:15:14,834 - train - INFO - Training Epoch [028/400] - Iteration [362/1811]: coarse loss = 20.141128, dense loss = 14.259622, total loss = 14.259622, lr = 0.000100
+2022-07-26 13:17:04,544 - train - INFO - Training Epoch [028/400] - Iteration [543/1811]: coarse loss = 18.838353, dense loss = 13.485549, total loss = 13.485549, lr = 0.000100
+2022-07-26 13:18:54,233 - train - INFO - Training Epoch [028/400] - Iteration [724/1811]: coarse loss = 22.852544, dense loss = 16.104924, total loss = 16.104924, lr = 0.000100
+2022-07-26 13:20:43,932 - train - INFO - Training Epoch [028/400] - Iteration [905/1811]: coarse loss = 19.747801, dense loss = 13.803537, total loss = 13.803537, lr = 0.000100
+2022-07-26 13:22:33,604 - train - INFO - Training Epoch [028/400] - Iteration [1086/1811]: coarse loss = 19.099705, dense loss = 13.509508, total loss = 13.509508, lr = 0.000100
+2022-07-26 13:24:23,283 - train - INFO - Training Epoch [028/400] - Iteration [1267/1811]: coarse loss = 20.287409, dense loss = 14.323843, total loss = 14.323843, lr = 0.000100
+2022-07-26 13:26:12,969 - train - INFO - Training Epoch [028/400] - Iteration [1448/1811]: coarse loss = 18.962225, dense loss = 13.140871, total loss = 13.140871, lr = 0.000100
+2022-07-26 13:28:02,668 - train - INFO - Training Epoch [028/400] - Iteration [1629/1811]: coarse loss = 21.547988, dense loss = 15.724007, total loss = 15.724007, lr = 0.000100
+2022-07-26 13:29:52,380 - train - INFO - Training Epoch [028/400] - Iteration [1810/1811]: coarse loss = 22.252638, dense loss = 15.544536, total loss = 15.544536, lr = 0.000100
+2022-07-26 13:29:53,032 - train - INFO - Training Epoch [028/400]: Coarse Loss = 20.572440, Dense Loss = 14.658492, Total Loss = 14.658492
+2022-07-26 13:30:09,722 - train - INFO - Validate Epoch [028/400]: Coarse Loss = 20.581476, Dense Loss = 14.645066, Total Loss = 35.226541
+2022-07-26 13:30:09,858 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 13:30:10,022 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 13:32:00,404 - train - INFO - Training Epoch [029/400] - Iteration [181/1811]: coarse loss = 19.818300, dense loss = 14.163045, total loss = 14.163045, lr = 0.000100
+2022-07-26 13:33:50,095 - train - INFO - Training Epoch [029/400] - Iteration [362/1811]: coarse loss = 21.591902, dense loss = 15.653327, total loss = 15.653327, lr = 0.000100
+2022-07-26 13:35:39,787 - train - INFO - Training Epoch [029/400] - Iteration [543/1811]: coarse loss = 19.817850, dense loss = 14.169492, total loss = 14.169492, lr = 0.000100
+2022-07-26 13:37:29,474 - train - INFO - Training Epoch [029/400] - Iteration [724/1811]: coarse loss = 19.093167, dense loss = 13.459152, total loss = 13.459152, lr = 0.000100
+2022-07-26 13:39:19,132 - train - INFO - Training Epoch [029/400] - Iteration [905/1811]: coarse loss = 21.115635, dense loss = 15.097227, total loss = 15.097227, lr = 0.000100
+2022-07-26 13:41:08,818 - train - INFO - Training Epoch [029/400] - Iteration [1086/1811]: coarse loss = 20.926217, dense loss = 14.644613, total loss = 14.644613, lr = 0.000100
+2022-07-26 13:42:58,498 - train - INFO - Training Epoch [029/400] - Iteration [1267/1811]: coarse loss = 19.212924, dense loss = 13.577227, total loss = 13.577227, lr = 0.000100
+2022-07-26 13:44:48,178 - train - INFO - Training Epoch [029/400] - Iteration [1448/1811]: coarse loss = 19.026702, dense loss = 13.428839, total loss = 13.428839, lr = 0.000100
+2022-07-26 13:46:37,878 - train - INFO - Training Epoch [029/400] - Iteration [1629/1811]: coarse loss = 20.906091, dense loss = 14.862504, total loss = 14.862504, lr = 0.000100
+2022-07-26 13:48:27,545 - train - INFO - Training Epoch [029/400] - Iteration [1810/1811]: coarse loss = 21.606030, dense loss = 15.501399, total loss = 15.501399, lr = 0.000100
+2022-07-26 13:48:28,214 - train - INFO - Training Epoch [029/400]: Coarse Loss = 20.632363, Dense Loss = 14.669266, Total Loss = 14.669266
+2022-07-26 13:48:45,098 - train - INFO - Validate Epoch [029/400]: Coarse Loss = 20.587355, Dense Loss = 14.632921, Total Loss = 35.220276
+2022-07-26 13:48:45,242 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 13:48:45,460 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 13:50:35,881 - train - INFO - Training Epoch [030/400] - Iteration [181/1811]: coarse loss = 17.004889, dense loss = 11.918879, total loss = 11.918879, lr = 0.000100
+2022-07-26 13:52:25,550 - train - INFO - Training Epoch [030/400] - Iteration [362/1811]: coarse loss = 21.109968, dense loss = 14.947004, total loss = 14.947004, lr = 0.000100
+2022-07-26 13:54:15,206 - train - INFO - Training Epoch [030/400] - Iteration [543/1811]: coarse loss = 21.832207, dense loss = 15.333235, total loss = 15.333235, lr = 0.000100
+2022-07-26 13:56:04,881 - train - INFO - Training Epoch [030/400] - Iteration [724/1811]: coarse loss = 23.490213, dense loss = 16.821038, total loss = 16.821038, lr = 0.000100
+2022-07-26 13:57:54,520 - train - INFO - Training Epoch [030/400] - Iteration [905/1811]: coarse loss = 21.631103, dense loss = 15.329996, total loss = 15.329996, lr = 0.000100
+2022-07-26 13:59:44,174 - train - INFO - Training Epoch [030/400] - Iteration [1086/1811]: coarse loss = 20.077996, dense loss = 14.053077, total loss = 14.053077, lr = 0.000100
+2022-07-26 14:01:33,808 - train - INFO - Training Epoch [030/400] - Iteration [1267/1811]: coarse loss = 19.836584, dense loss = 14.165125, total loss = 14.165125, lr = 0.000100
+2022-07-26 14:03:23,465 - train - INFO - Training Epoch [030/400] - Iteration [1448/1811]: coarse loss = 19.423954, dense loss = 13.480259, total loss = 13.480259, lr = 0.000100
+2022-07-26 14:05:13,105 - train - INFO - Training Epoch [030/400] - Iteration [1629/1811]: coarse loss = 17.690307, dense loss = 12.473705, total loss = 12.473705, lr = 0.000100
+2022-07-26 14:07:02,756 - train - INFO - Training Epoch [030/400] - Iteration [1810/1811]: coarse loss = 21.157715, dense loss = 14.925193, total loss = 14.925193, lr = 0.000100
+2022-07-26 14:07:03,428 - train - INFO - Training Epoch [030/400]: Coarse Loss = 20.614922, Dense Loss = 14.622522, Total Loss = 14.622522
+2022-07-26 14:07:20,152 - train - INFO - Validate Epoch [030/400]: Coarse Loss = 20.575532, Dense Loss = 14.621062, Total Loss = 35.196594
+2022-07-26 14:07:20,296 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 14:07:20,405 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 14:09:10,789 - train - INFO - Training Epoch [031/400] - Iteration [181/1811]: coarse loss = 21.527596, dense loss = 15.063224, total loss = 15.063224, lr = 0.000100
+2022-07-26 14:11:00,459 - train - INFO - Training Epoch [031/400] - Iteration [362/1811]: coarse loss = 19.608568, dense loss = 13.695199, total loss = 13.695199, lr = 0.000100
+2022-07-26 14:12:50,117 - train - INFO - Training Epoch [031/400] - Iteration [543/1811]: coarse loss = 18.546250, dense loss = 13.186371, total loss = 13.186371, lr = 0.000100
+2022-07-26 14:14:39,771 - train - INFO - Training Epoch [031/400] - Iteration [724/1811]: coarse loss = 20.111725, dense loss = 14.133840, total loss = 14.133840, lr = 0.000100
+2022-07-26 14:16:29,412 - train - INFO - Training Epoch [031/400] - Iteration [905/1811]: coarse loss = 19.649269, dense loss = 13.969176, total loss = 13.969176, lr = 0.000100
+2022-07-26 14:18:19,089 - train - INFO - Training Epoch [031/400] - Iteration [1086/1811]: coarse loss = 16.228946, dense loss = 11.519277, total loss = 11.519277, lr = 0.000100
+2022-07-26 14:20:08,726 - train - INFO - Training Epoch [031/400] - Iteration [1267/1811]: coarse loss = 21.300856, dense loss = 14.795857, total loss = 14.795857, lr = 0.000100
+2022-07-26 14:21:58,379 - train - INFO - Training Epoch [031/400] - Iteration [1448/1811]: coarse loss = 21.177340, dense loss = 14.914894, total loss = 14.914894, lr = 0.000100
+2022-07-26 14:23:48,051 - train - INFO - Training Epoch [031/400] - Iteration [1629/1811]: coarse loss = 18.836260, dense loss = 13.295257, total loss = 13.295257, lr = 0.000100
+2022-07-26 14:25:37,742 - train - INFO - Training Epoch [031/400] - Iteration [1810/1811]: coarse loss = 20.222519, dense loss = 14.057946, total loss = 14.057946, lr = 0.000100
+2022-07-26 14:25:38,417 - train - INFO - Training Epoch [031/400]: Coarse Loss = 20.620164, Dense Loss = 14.598505, Total Loss = 14.598505
+2022-07-26 14:25:55,153 - train - INFO - Validate Epoch [031/400]: Coarse Loss = 20.548852, Dense Loss = 14.567215, Total Loss = 35.116067
+2022-07-26 14:25:55,290 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 14:25:55,404 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 14:27:45,887 - train - INFO - Training Epoch [032/400] - Iteration [181/1811]: coarse loss = 21.009531, dense loss = 15.008620, total loss = 15.008620, lr = 0.000100
+2022-07-26 14:29:35,576 - train - INFO - Training Epoch [032/400] - Iteration [362/1811]: coarse loss = 17.410429, dense loss = 12.299133, total loss = 12.299133, lr = 0.000100
+2022-07-26 14:31:25,235 - train - INFO - Training Epoch [032/400] - Iteration [543/1811]: coarse loss = 21.856591, dense loss = 15.380766, total loss = 15.380766, lr = 0.000100
+2022-07-26 14:33:14,889 - train - INFO - Training Epoch [032/400] - Iteration [724/1811]: coarse loss = 20.846602, dense loss = 14.837537, total loss = 14.837537, lr = 0.000100
+2022-07-26 14:35:04,528 - train - INFO - Training Epoch [032/400] - Iteration [905/1811]: coarse loss = 21.139257, dense loss = 14.922648, total loss = 14.922648, lr = 0.000100
+2022-07-26 14:36:54,212 - train - INFO - Training Epoch [032/400] - Iteration [1086/1811]: coarse loss = 19.546770, dense loss = 13.740076, total loss = 13.740076, lr = 0.000100
+2022-07-26 14:38:43,883 - train - INFO - Training Epoch [032/400] - Iteration [1267/1811]: coarse loss = 22.553964, dense loss = 16.261572, total loss = 16.261572, lr = 0.000100
+2022-07-26 14:40:33,555 - train - INFO - Training Epoch [032/400] - Iteration [1448/1811]: coarse loss = 19.602310, dense loss = 13.638489, total loss = 13.638489, lr = 0.000100
+2022-07-26 14:42:23,254 - train - INFO - Training Epoch [032/400] - Iteration [1629/1811]: coarse loss = 18.905275, dense loss = 13.279619, total loss = 13.279619, lr = 0.000100
+2022-07-26 14:44:12,923 - train - INFO - Training Epoch [032/400] - Iteration [1810/1811]: coarse loss = 20.943962, dense loss = 14.737820, total loss = 14.737820, lr = 0.000100
+2022-07-26 14:44:13,575 - train - INFO - Training Epoch [032/400]: Coarse Loss = 20.578618, Dense Loss = 14.550553, Total Loss = 14.550553
+2022-07-26 14:44:30,488 - train - INFO - Validate Epoch [032/400]: Coarse Loss = 20.546205, Dense Loss = 14.523356, Total Loss = 35.069562
+2022-07-26 14:44:30,638 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 14:44:30,775 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 14:46:21,215 - train - INFO - Training Epoch [033/400] - Iteration [181/1811]: coarse loss = 20.543389, dense loss = 14.883198, total loss = 14.883198, lr = 0.000100
+2022-07-26 14:48:10,858 - train - INFO - Training Epoch [033/400] - Iteration [362/1811]: coarse loss = 20.200085, dense loss = 14.206852, total loss = 14.206852, lr = 0.000100
+2022-07-26 14:50:00,508 - train - INFO - Training Epoch [033/400] - Iteration [543/1811]: coarse loss = 19.892596, dense loss = 14.226692, total loss = 14.226692, lr = 0.000100
+2022-07-26 14:51:50,194 - train - INFO - Training Epoch [033/400] - Iteration [724/1811]: coarse loss = 20.190593, dense loss = 14.343901, total loss = 14.343901, lr = 0.000100
+2022-07-26 14:53:39,925 - train - INFO - Training Epoch [033/400] - Iteration [905/1811]: coarse loss = 21.249086, dense loss = 14.807888, total loss = 14.807888, lr = 0.000100
+2022-07-26 14:55:29,628 - train - INFO - Training Epoch [033/400] - Iteration [1086/1811]: coarse loss = 18.260479, dense loss = 12.702610, total loss = 12.702610, lr = 0.000100
+2022-07-26 14:57:19,336 - train - INFO - Training Epoch [033/400] - Iteration [1267/1811]: coarse loss = 19.344959, dense loss = 13.974314, total loss = 13.974314, lr = 0.000100
+2022-07-26 14:59:08,992 - train - INFO - Training Epoch [033/400] - Iteration [1448/1811]: coarse loss = 21.026207, dense loss = 14.621576, total loss = 14.621576, lr = 0.000100
+2022-07-26 15:00:58,665 - train - INFO - Training Epoch [033/400] - Iteration [1629/1811]: coarse loss = 22.630155, dense loss = 15.846923, total loss = 15.846923, lr = 0.000100
+2022-07-26 15:02:48,341 - train - INFO - Training Epoch [033/400] - Iteration [1810/1811]: coarse loss = 21.025028, dense loss = 14.635137, total loss = 14.635137, lr = 0.000100
+2022-07-26 15:02:49,010 - train - INFO - Training Epoch [033/400]: Coarse Loss = 20.621085, Dense Loss = 14.547363, Total Loss = 14.547363
+2022-07-26 15:03:05,892 - train - INFO - Validate Epoch [033/400]: Coarse Loss = 20.543109, Dense Loss = 14.497610, Total Loss = 35.040719
+2022-07-26 15:03:06,026 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 15:03:06,149 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 15:04:56,635 - train - INFO - Training Epoch [034/400] - Iteration [181/1811]: coarse loss = 20.425567, dense loss = 14.145684, total loss = 14.145684, lr = 0.000100
+2022-07-26 15:06:46,292 - train - INFO - Training Epoch [034/400] - Iteration [362/1811]: coarse loss = 20.743493, dense loss = 15.062347, total loss = 15.062347, lr = 0.000100
+2022-07-26 15:08:35,979 - train - INFO - Training Epoch [034/400] - Iteration [543/1811]: coarse loss = 23.277195, dense loss = 15.899248, total loss = 15.899248, lr = 0.000100
+2022-07-26 15:10:25,675 - train - INFO - Training Epoch [034/400] - Iteration [724/1811]: coarse loss = 19.988995, dense loss = 13.880137, total loss = 13.880137, lr = 0.000100
+2022-07-26 15:12:15,371 - train - INFO - Training Epoch [034/400] - Iteration [905/1811]: coarse loss = 21.257214, dense loss = 15.396001, total loss = 15.396001, lr = 0.000100
+2022-07-26 15:14:05,085 - train - INFO - Training Epoch [034/400] - Iteration [1086/1811]: coarse loss = 21.291345, dense loss = 15.162402, total loss = 15.162402, lr = 0.000100
+2022-07-26 15:15:54,791 - train - INFO - Training Epoch [034/400] - Iteration [1267/1811]: coarse loss = 20.586863, dense loss = 14.694427, total loss = 14.694427, lr = 0.000100
+2022-07-26 15:17:44,508 - train - INFO - Training Epoch [034/400] - Iteration [1448/1811]: coarse loss = 19.332159, dense loss = 13.751037, total loss = 13.751037, lr = 0.000100
+2022-07-26 15:19:34,215 - train - INFO - Training Epoch [034/400] - Iteration [1629/1811]: coarse loss = 24.551332, dense loss = 17.483458, total loss = 17.483458, lr = 0.000100
+2022-07-26 15:21:23,874 - train - INFO - Training Epoch [034/400] - Iteration [1810/1811]: coarse loss = 19.419353, dense loss = 13.325886, total loss = 13.325886, lr = 0.000100
+2022-07-26 15:21:24,557 - train - INFO - Training Epoch [034/400]: Coarse Loss = 20.600016, Dense Loss = 14.511863, Total Loss = 14.511863
+2022-07-26 15:21:41,447 - train - INFO - Validate Epoch [034/400]: Coarse Loss = 20.608686, Dense Loss = 14.561541, Total Loss = 35.170227
+2022-07-26 15:21:41,590 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 15:23:31,864 - train - INFO - Training Epoch [035/400] - Iteration [181/1811]: coarse loss = 18.279411, dense loss = 12.717852, total loss = 12.717852, lr = 0.000100
+2022-07-26 15:25:21,384 - train - INFO - Training Epoch [035/400] - Iteration [362/1811]: coarse loss = 19.776991, dense loss = 14.394661, total loss = 14.394661, lr = 0.000100
+2022-07-26 15:27:10,870 - train - INFO - Training Epoch [035/400] - Iteration [543/1811]: coarse loss = 20.050440, dense loss = 14.058210, total loss = 14.058210, lr = 0.000100
+2022-07-26 15:29:00,401 - train - INFO - Training Epoch [035/400] - Iteration [724/1811]: coarse loss = 22.810660, dense loss = 15.979225, total loss = 15.979225, lr = 0.000100
+2022-07-26 15:30:49,902 - train - INFO - Training Epoch [035/400] - Iteration [905/1811]: coarse loss = 21.086100, dense loss = 14.671375, total loss = 14.671375, lr = 0.000100
+2022-07-26 15:32:39,441 - train - INFO - Training Epoch [035/400] - Iteration [1086/1811]: coarse loss = 20.187713, dense loss = 14.305869, total loss = 14.305869, lr = 0.000100
+2022-07-26 15:34:29,014 - train - INFO - Training Epoch [035/400] - Iteration [1267/1811]: coarse loss = 19.078903, dense loss = 13.203559, total loss = 13.203559, lr = 0.000100
+2022-07-26 15:36:18,558 - train - INFO - Training Epoch [035/400] - Iteration [1448/1811]: coarse loss = 18.843751, dense loss = 13.106791, total loss = 13.106791, lr = 0.000100
+2022-07-26 15:38:08,079 - train - INFO - Training Epoch [035/400] - Iteration [1629/1811]: coarse loss = 20.620523, dense loss = 14.841668, total loss = 14.841668, lr = 0.000100
+2022-07-26 15:39:57,607 - train - INFO - Training Epoch [035/400] - Iteration [1810/1811]: coarse loss = 21.340789, dense loss = 14.649928, total loss = 14.649928, lr = 0.000100
+2022-07-26 15:39:58,278 - train - INFO - Training Epoch [035/400]: Coarse Loss = 20.620244, Dense Loss = 14.515331, Total Loss = 14.515331
+2022-07-26 15:40:14,956 - train - INFO - Validate Epoch [035/400]: Coarse Loss = 20.527785, Dense Loss = 14.450938, Total Loss = 34.978723
+2022-07-26 15:40:15,094 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_best.pth
+2022-07-26 15:40:15,239 - train - INFO - Save checkpoint at ./experiments/07-25_new_dgcnn_1024_foldingnet_rot_001/models/model_last.pth
+2022-07-26 15:42:05,635 - train - INFO - Training Epoch [036/400] - Iteration [181/1811]: coarse loss = 22.576490, dense loss = 16.127255, total loss = 16.127255, lr = 0.000100
+2022-07-26 15:43:55,139 - train - INFO - Training Epoch [036/400] - Iteration [362/1811]: coarse loss = 20.030778, dense loss = 13.653062, total loss = 13.653062, lr = 0.000100
+2022-07-26 15:45:44,630 - train - INFO - Training Epoch [036/400] - Iteration [543/1811]: coarse loss = 16.914755, dense loss = 11.962206, total loss = 11.962206, lr = 0.000100
+2022-07-26 15:47:34,161 - train - INFO - Training Epoch [036/400] - Iteration [724/1811]: coarse loss = 19.903103, dense loss = 13.750358, total loss = 13.750358, lr = 0.000100
+2022-07-26 15:49:23,662 - train - INFO - Training Epoch [036/400] - Iteration [905/1811]: coarse loss = 22.166537, dense loss = 15.365292, total loss = 15.365292, lr = 0.000100
+2022-07-26 15:51:13,163 - train - INFO - Training Epoch [036/400] - Iteration [1086/1811]: coarse loss = 20.501606, dense loss = 13.908295, total loss = 13.908295, lr = 0.000100
+2022-07-26 15:53:02,658 - train - INFO - Training Epoch [036/400] - Iteration [1267/1811]: coarse loss = 22.339258, dense loss = 16.103148, total loss = 16.103148, lr = 0.000100
+2022-07-26 15:54:52,184 - train - INFO - Training Epoch [036/400] - Iteration [1448/1811]: coarse loss = 20.037562, dense loss = 14.228081, total loss = 14.228081, lr = 0.000100
+2022-07-26 15:56:41,667 - train - INFO - Training Epoch [036/400] - Iteration [1629/1811]: coarse loss = 22.530019, dense loss = 15.720796, total loss = 15.720796, lr = 0.000100
