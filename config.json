@@ -1,11 +1,11 @@
 {
-    "name": "new_dgcnn_1024_foldingnet_rot",
+    "name": "new_dgcnn_1024_bigger_foldingnet_rot",
     "model": "dgcnn_fps",
     "rotation": "so3",
     "val_rotation": "so3",
     "VN": false,
     "num_coarse": 1024,
-    "batch_size": 16,
+    "batch_size": 8,
     "coarse_loss": "cd",
     "category": "all",
     "data_path": "./data/",

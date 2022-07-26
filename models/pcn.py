@@ -262,6 +262,18 @@ class VN_FoldingNet(nn.Module):
             VNLinear(256, 1)
             # nn.Conv1d(512, 3, 1)
         )
+        self.final_conv_2 = nn.Sequential(
+            VNLinearLeakyReLU(341+1, 256, dim=4),
+            # nn.Conv1d(1024 + 3 + 2, 512, 1),
+            # nn.BatchNorm1d(512),
+            # nn.ReLU(inplace=True),
+            VNLinearLeakyReLU(256,256, dim=4),
+            # nn.Conv1d(512, 512, 1),
+            # nn.BatchNorm1d(512),
+            # nn.ReLU(inplace=True),
+            VNLinear(256, 1)
+            # nn.Conv1d(512, 3, 1)
+        )
         a = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(1, self.grid_size).expand(self.grid_size, self.grid_size).reshape(1, -1)
         b = torch.linspace(-0.05, 0.05, steps=self.grid_size, dtype=torch.float).view(self.grid_size, 1).expand(self.grid_size, self.grid_size).reshape(1, -1)
         c = torch.zeros_like(a, dtype=torch.float)
@@ -286,7 +298,10 @@ class VN_FoldingNet(nn.Module):
         feature_global = feature_global.unsqueeze(2).expand(-1, -1, self.num_dense)          # (B, 1024, num_fine)
         feature_global = feature_global.reshape(B,-1,3,self.num_dense)
         feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
+
+        feat = self.final_conv(feat)
+        feat = torch.cat([feat, feature_global], dim=1)
     
-        fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
+        fine = self.final_conv_2(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 
         return fine.squeeze(1).transpose(1, 2).contiguous()
