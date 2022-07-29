@@ -4,6 +4,7 @@ import collections
 from models.vn_layers import *
 from models.dgcnn import *
 from models.pcn import *
+from models.pointr.vn_pointr import VN_PCTransformer
 
 class PCNNet(nn.Module):
     def __init__(self, config, enc_type="dgcnn_fps", dec_type="foldingnet"):
@@ -12,16 +13,20 @@ class PCNNet(nn.Module):
         self.only_coarse = config.only_coarse
         if enc_type == "dgcnn_fps":
             self.encoder = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
+        
+        elif enc_type == "vn_pointr":
+            self.encoder = VN_PCTransformer(in_chans = 3, embed_dim = 384, depth = [6, 8], drop_rate = 0., num_query = 224, knn_layer = 1, \
+            dgcnn='vn_dgcnn', trans='vn_trans', memory_profile=False, only_coarse=True).to(config.device)
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
         
         if config.enc_pretrained != "none":
             dict = collections.OrderedDict()
-            raw_dict = torch.load(config.enc_pretrained)
+            raw_dict = torch.load(config.enc_pretrained)['base_model']
             for k, v in raw_dict.items():
-                if 'encoder' in k:
-                    dict[k[8:]] = v
+                if 'module.base_model' in k:
+                    dict[k[18:]] = v
             
             self.encoder.load_state_dict(dict)
             for param in self.encoder.parameters():
