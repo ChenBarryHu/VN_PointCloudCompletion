@@ -300,7 +300,7 @@ class VN_FoldingNet(nn.Module):
         feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
 
         feat = self.final_conv(feat)
-        feat = torch.cat([feat, feature_global], dim=1)
+        feat = torch.cat([feature_global, feat], dim=1)
     
         fine = self.final_conv_2(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 
