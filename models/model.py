@@ -13,6 +13,8 @@ class PCNNet(nn.Module):
             self.encoder = DGCNN_fps(config, latent_dim=1024, grid_size=4, only_coarse=config.only_coarse).to(config.device)
         elif enc_type == "vn_dgcnn_fps":
             self.encoder = VN_DGCNN_fps(config, only_coarse=config.only_coarse).to(config.device)
+        elif enc_type == "vn_pointnet":
+            self.encoder = VN_PCN(only_coarse=True).to(config.device)
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
