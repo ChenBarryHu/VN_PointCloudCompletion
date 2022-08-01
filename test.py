@@ -60,7 +60,7 @@ def test_single_category(category, model, config, save=True):
                 p = trot.transform_points(p)
                 c = trot.transform_points(c)
 
-            _, c_ = model(p)
+            _, c_ = model(p, trot)
             total_l1_cd += l1_cd(c_, c).item()
             total_l2_cd += l2_cd(c_, c).item()
             for i in range(len(c)):

@@ -300,7 +300,7 @@ class FoldingNet(nn.Module):
         
         self.folding_seed = torch.cat([a, b], dim=0).view(1, 2, self.grid_size ** 2).cuda()  # (1, 2, S)
 
-    def forward(self, coarse, feature_global):
+    def forward(self, coarse, feature_global, rot=None):
         B = coarse.shape[0]
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1)               # (B, 3, num_fine)
@@ -382,9 +382,6 @@ class VN_FoldingNet(nn.Module):
         feature_global = feature_global.expand(-1, -1, -1,self.num_dense)           # (B, 1024, num_fine)
         # feature_global = feature_global.reshape(B,-1,3,self.num_dense)
         feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
-
-        # feat = self.final_conv(feat)
-        # feat = torch.cat([feature_global, feat], dim=1)
     
         fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud
 

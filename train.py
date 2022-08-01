@@ -126,7 +126,7 @@ def train(config, args):
         }
         for i, (p, c) in enumerate(train_dataloader):
             p, c = p.to(config.device), c.to(config.device)
-            
+            # print(f"Input pointcloud shape: {p.shape}\n")
             trot = None
             if config.rotation == 'z':
                 trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
@@ -206,7 +206,6 @@ def train(config, args):
 
             for i, (p, c) in enumerate(val_dataloader):
                 p, c = p.to(config.device), c.to(config.device)
-
                 trot = None
                 if config.val_rotation == 'z':
                     trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
