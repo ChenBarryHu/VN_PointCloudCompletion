@@ -332,7 +332,7 @@ class VN_FoldingNet(nn.Module):
             self.grid_size=4
 
         self.final_conv = nn.Sequential(
-            VNLinearLeakyReLU(2048+1+1, 256, dim=4),
+            VNLinearLeakyReLU(self.latent_dim+1+1, 256, dim=4),
             # nn.Conv1d(1024 + 3 + 2, 512, 1),
             # nn.BatchNorm1d(512),
             # nn.ReLU(inplace=True),

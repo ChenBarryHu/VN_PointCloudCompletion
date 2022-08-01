@@ -43,19 +43,32 @@ class DGCNN_fps(nn.Module):
                                    nn.LeakyReLU(negative_slope=0.2)
                                    )
 
-        self.layer3 = nn.Sequential(nn.Conv2d(128, 256, kernel_size=1, bias=False),
-                                   nn.GroupNorm(4, 256),
+        self.layer3 = nn.Sequential(nn.Conv2d(128, 64, kernel_size=1, bias=False),
+                                   nn.GroupNorm(4, 64),
                                    nn.LeakyReLU(negative_slope=0.2)
                                    )
 
-        self.layer4 = nn.Sequential(nn.Conv2d(512, 1024, kernel_size=1, bias=False),
-                                   nn.GroupNorm(4, 1024),
+        self.layer4 = nn.Sequential(nn.Conv2d(128, 128, kernel_size=1, bias=False),
+                                   nn.GroupNorm(4, 128),
                                    nn.LeakyReLU(negative_slope=0.2)
                                    )
         
-        self.mlp = nn.Sequential(
-            nn.Linear(self.latent_dim, 1024),
-            nn.ReLU(inplace=True),
+        # self.mlp = nn.Sequential(
+        #     nn.Linear(self.latent_dim, 1024),
+        #     nn.ReLU(inplace=True),
+        #     nn.Linear(1024, 1024),
+        #     nn.ReLU(inplace=True),
+        #     nn.Linear(1024, 3 * self.num_coarse)
+        # )
+
+        self.increase_dim = nn.Sequential(
+            nn.Conv1d(128, 1024, 1),
+            nn.BatchNorm1d(1024),
+            nn.LeakyReLU(negative_slope=0.2),
+            nn.Conv1d(1024, 1024, 1)
+        )
+
+        self.coarse_pred = nn.Sequential(
             nn.Linear(1024, 1024),
             nn.ReLU(inplace=True),
             nn.Linear(1024, 3 * self.num_coarse)
@@ -133,8 +146,12 @@ class DGCNN_fps(nn.Module):
         f = self.get_graph_feature(coor_q, f_q, coor, f) #[4,128,128,16]
         f = self.layer4(f) #[4,128,128,16]
         f = f.max(dim=-1, keepdim=False)[0] #[4,128,128]
-        feature_global = f.max(dim=-1, keepdim=False)[0]
-        coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)
+
+        feature_global = self.increase_dim(f)
+        feature_global = torch.max(feature_global, dim=-1)[0] # B 1024
+
+        coarse = self.coarse_pred(feature_global).reshape(-1, self.num_coarse, 3)
+        # coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)
 
         if self.num_coarse == 224:
             inp_sparse = fps(x.transpose(1,2).contiguous(), 224)

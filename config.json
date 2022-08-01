@@ -16,7 +16,7 @@
     "log_frequency": 10,
     "exp_dir": "./experiments/default",
     "lr": 0.0001,
-    "max_epochs": 400,
+    "max_epochs": 800,
     "num_workers": 8,
     "only_coarse": false,
     "freeze_encoder":false,

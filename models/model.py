@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import collections
 from models.vn_layers import *
 from models.dgcnn import *
 from models.pcn import *
@@ -27,8 +28,26 @@ class PCNNet(nn.Module):
 
         if config.enc_pretrained != "none" and not resume:
             self.encoder.load_state_dict(torch.load(config.enc_pretrained))
+
+            # dict = collections.OrderedDict()
+            # raw_dict = torch.load(config.enc_pretrained)
+            # for k, v in raw_dict.items():
+            #     if 'encoder' in k:
+            #         dict[k[8:]] = v
+            
+            # self.encoder.load_state_dict(dict)
+
             for param in self.encoder.parameters():
                 param.requires_grad = False
+        if not config.only_coarse:
+            if dec_type == "vn_foldingnet":
+                self.decoder = VN_FoldingNet(config).to(config.device)
+            elif dec_type == "foldingnet":
+                self.decoder = FoldingNet(config).to(config.device)
+            else:
+                raise Exception(f"encoder type {enc_type} not supported yet")
+
+        
 
     def forward(self, input, rot=None):
         coarse, feature_global = self.encoder(input)
