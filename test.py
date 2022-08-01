@@ -49,9 +49,9 @@ def test_single_category(category, model, config, save=True):
             p = p.to(config.device)
             c = c.to(config.device)
             trot = None
-            if config.rotation == 'z':
+            if config.test_rotation == 'z':
                 trot = RotateAxisAngle(angle=torch.rand(p.shape[0])*360, axis="Z", degrees=True).to(config.device)
-            elif  config.rotation == 'so3':
+            elif  config.test_rotation == 'so3':
                 trot = Rotate(R=random_rotations(p.shape[0])).to(config.device)
 
             if trot is not None:
@@ -83,10 +83,10 @@ def test(config, save=False):
     #     make_dir(params.result_dir)
 
     print(config.name)
-    print(config.rotation)
+    print(f"Rotation used during testing: {config.test_rotation}")
 
     # load pretrained model
-    model = PCNNet(config, enc_type="dgcnn_fps", dec_type="foldingnet")
+    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
     # model = PCN(16384, 1024, 4).to(config.device)
     ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
     model.load_state_dict(torch.load(ckpt_path))

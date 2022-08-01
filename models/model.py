@@ -5,7 +5,7 @@ from models.dgcnn import *
 from models.pcn import *
 
 class PCNNet(nn.Module):
-    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet"):
+    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet", resume=False):
         super().__init__()
         self.num_coarse = config.num_coarse
         self.only_coarse = config.only_coarse
@@ -25,21 +25,21 @@ class PCNNet(nn.Module):
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
-        if config.enc_pretrained != "none":
+        if config.enc_pretrained != "none" and not resume:
             self.encoder.load_state_dict(torch.load(config.enc_pretrained))
             for param in self.encoder.parameters():
                 param.requires_grad = False
 
-    def forward(self, input):
+    def forward(self, input, rot=None):
         coarse, feature_global = self.encoder(input)
         
         if self.num_coarse == 448:
             if self.only_coarse:
                 return coarse[1], None
-            fine = self.decoder(coarse[0], feature_global)
+            fine = self.decoder(coarse[0], feature_global, rot)
             return coarse[1], fine
         else:
             if self.only_coarse:
                 return coarse, None
-            fine = self.decoder(coarse, feature_global)
+            fine = self.decoder(coarse, feature_global, rot)
             return coarse, fine

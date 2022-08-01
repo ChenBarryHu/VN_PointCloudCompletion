@@ -57,7 +57,14 @@ def train(config, args):
     log_dataset.info("Dataset loaded!")
 
 
-    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
+    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type, resume=args.resume)
+    if config.freeze_decoder:
+        for param in model.decoder.parameters():
+            param.requires_grad = False
+    if config.freeze_encoder:
+        for param in model.encoder.parameters():
+            param.requires_grad = False
+    
 
     # optimizer
     optimizer = Optim.Adam(model.parameters(), lr=config.lr, betas=(0.9, 0.999))
@@ -133,7 +140,7 @@ def train(config, args):
             optimizer.zero_grad()
 
             # forward propagation
-            coarse_pred, dense_pred = model(p)
+            coarse_pred, dense_pred = model(p, trot)
             
             # loss function
             if config.coarse_loss == 'cd':
@@ -210,7 +217,7 @@ def train(config, args):
                     p = trot.transform_points(p)
                     c = trot.transform_points(c)
 
-                coarse_pred, dense_pred = model(p)
+                coarse_pred, dense_pred = model(p, trot)
                 val_loss["coarse"] += l1_cd(coarse_pred, c).item()
                 if config.only_coarse:
                     val_loss["total"] = val_loss["coarse"]
