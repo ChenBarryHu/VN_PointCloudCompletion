@@ -1,6 +1,12 @@
 import torch
 import torch.nn as nn
 from models.vn_layers import *
+from pointnet2_ops import pointnet2_utils
+
+def fps(pc, num):
+    fps_idx = pointnet2_utils.furthest_point_sample(pc, num) 
+    sub_pc = pointnet2_utils.gather_operation(pc.transpose(1, 2).contiguous(), fps_idx).transpose(1,2).contiguous()
+    return sub_pc
 
 class VN_PCN(nn.Module):
     """
@@ -101,6 +107,81 @@ class VN_PCN(nn.Module):
 
         return coarse.contiguous(), fine.transpose(1, 2).contiguous()
         
+class VN_PointNet(nn.Module):
+    """
+    "PCN: Point Cloud Completion Network"
+    (https://arxiv.org/pdf/1808.00671.pdf)
+
+    Attributes:
+        num_dense:  16384
+        latent_dim: 1024
+        grid_size:  4
+        num_coarse: 1024
+    """
+
+    def __init__(self, config, num_dense=16384, latent_dim=1024):
+        super().__init__()
+
+        self.num_dense = num_dense
+        self.latent_dim = latent_dim
+        if config.num_coarse == 448:
+            self.num_coarse = config.num_coarse // 2
+        else:
+            self.num_coarse = config.num_coarse
+
+        self.first_conv = nn.Sequential(
+            VNLinearLeakyReLU(1,128,dim=4), 
+            #nn.Conv1d(3, 128, 1),
+            # nn.BatchNorm1d(128),
+            # nn.ReLU(inplace=True),
+            VNLinear(128,512)
+            # nn.Conv1d(128, 256, 1)
+        )
+
+        self.maxpool1 = VNMaxPool(512)
+
+        self.second_conv = nn.Sequential(
+            VNLinearLeakyReLU(1024,1024,dim=4), 
+            # nn.Conv1d(512, 512, 1),
+            # nn.BatchNorm1d(512),
+            # nn.ReLU(inplace=True),
+            VNLinear(1024,self.latent_dim * 2)
+            # nn.Conv1d(512, self.latent_dim, 1)
+        )
+        self.maxpool2 = VNMaxPool(self.latent_dim * 2)
+
+        self.mlp = nn.Sequential(
+            VNLinearAndLeakyReLU(self.latent_dim * 2, 1024 * 2, dim=4, use_batchnorm='none'),
+            # nn.Linear(self.latent_dim, 1024),
+            # nn.ReLU(inplace=True),
+            VNLinearAndLeakyReLU(1024*2, 1024, dim=4, use_batchnorm='none'),
+            # nn.Linear(1024, 1024),
+            # nn.ReLU(inplace=True),
+            VNLinear(1024, self.num_coarse)
+            # nn.Linear(1024, 3 * self.num_coarse)
+        )
+
+
+    def forward(self, xyz):
+        B, N, _ = xyz.shape
+        
+        # encoder
+        feature = self.first_conv(xyz.transpose(2, 1).unsqueeze(1))                                       # (B,  256, N)
+        feature_global = self.maxpool1(feature).unsqueeze(-1)
+
+        feature = torch.cat([feature_global.expand(-1, -1, -1, N), feature], dim=1)              # (B,  512, N)
+        feature = self.second_conv(feature)                                                  # (B, 1024, N)
+        feature_global = self.maxpool2(feature).unsqueeze(-1)                        # (B, 1024)
+        
+        # decoder
+        coarse = self.mlp(feature_global).reshape(-1, self.num_coarse, 3)                    # (B, num_coarse, 3), coarse point cloud
+
+        if self.num_coarse == 224:
+            inp_sparse = fps(xyz.contiguous(), 224)
+            coarse_cat = torch.cat([coarse, inp_sparse], dim=1).contiguous()
+            return (coarse.contiguous(), coarse_cat.contiguous()), feature_global
+
+        return coarse.contiguous(), feature_global
 
 class PCN(nn.Module):
     """

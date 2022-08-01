@@ -1,6 +1,5 @@
 {
     "name": "vn_pointnet_1024_vn_foldingnet_with_rot",
-    "model": "vn_pointnet_vn_folding",
     "enc_type": "vn_pointnet",
     "dec_type": "vn_foldingnet",
     "rotation": "none",
