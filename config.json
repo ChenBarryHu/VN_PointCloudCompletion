@@ -1,7 +1,7 @@
 {
-    "name": "new_dgcnn_1024_foldingnet_rot",
+    "name": "new_dgcnn_1024_vn_foldingnet_rot",
     "model": "dgcnn_fps",
-    "rotation": "none",
+    "rotation": "so3",
     "val_rotation": "so3",
     "VN": false,
     "num_coarse": 1024,
@@ -20,7 +20,7 @@
     "enc_pretrained": "./experiments/07-21_new_dgcnn_1024_002/models/model_best.pth",
     "enc_type": "dgcnn_fps",
     "dec_type": "vn_foldingnet",
-    "run_name": "07-03_PSGN_5000_2_1_000",
+    "run_name": "new_dgcnn_1024_vn_foldingnet_rot",
     "use_cuda": true,
     "dcd_opts": {
         "alpha": 200,
