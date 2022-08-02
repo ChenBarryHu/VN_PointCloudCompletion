@@ -274,6 +274,8 @@ class VN_FoldingNet(nn.Module):
             folding_seed = self.folding_seed.squeeze(1).transpose(1,2)
             folding_seed = rot.transform_points(folding_seed).transpose(1,2).unsqueeze(1)
             # print(f"Dimension of rotated folding_seed: {self.folding_seed.shape}\n")
+        else:
+            folding_seed = self.folding_seed
         B = coarse.shape[0]
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1).unsqueeze(1)               # (B, 3, num_fine)

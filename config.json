@@ -1,7 +1,7 @@
 {
     "name": "new_dgcnn_1024_foldingnet_rot",
     "model": "dgcnn_fps",
-    "rotation": "so3",
+    "rotation": "none",
     "val_rotation": "so3",
     "VN": false,
     "num_coarse": 1024,
