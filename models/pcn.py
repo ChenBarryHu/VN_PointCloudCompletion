@@ -316,11 +316,11 @@ class FoldingNet(nn.Module):
         return fine.transpose(1, 2).contiguous()
 
 class VN_FoldingNet(nn.Module):
-    def __init__(self, config, latent_dim=1024//3,grid_size=4):
+    def __init__(self, config,grid_size=4):
         super().__init__()
 
         self.grid_size = grid_size
-        self.latent_dim = latent_dim
+        self.latent_dim = config.latent_dim
         self.num_dense=16384
         if config.num_coarse == 448:
             self.num_coarse=config.num_coarse // 2

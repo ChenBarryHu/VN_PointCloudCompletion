@@ -246,7 +246,7 @@ def train(config, args):
             val_step += 1
 
             log.info("Validate Epoch [{:03d}/{:03d}]: Coarse Loss = {:.6f}, Dense Loss = {:.6f}, Total Loss = {:.6f}".format(
-            epoch, config.max_epochs, val_loss["coarse"] * 1e3, val_loss["dense"] * 1e3, val_loss["total"] * 1e3))
+            epoch, config.max_epochs, val_loss["coarse"] * 1e3, val_loss["dense"] * 1e3, val_loss["dense"] * 1e3))
         
         if val_loss["total"] < best_cd_l1:
             best_epoch_l1 = epoch

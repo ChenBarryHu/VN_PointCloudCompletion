@@ -8,5 +8,6 @@ images
 build/
 dist/
 visualizations/
-models/
 optimizer/
+experiments/
+experiments_3090/

@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-python main.py -n 07-30_vn_pointnet_1024_vn_foldingnet_008 --resume test
+python main.py -n 07-09_1024_points_vn_pcn_so3_002 --resume test

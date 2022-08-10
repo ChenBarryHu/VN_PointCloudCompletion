@@ -31,13 +31,16 @@ def export_ply(filename, points):
 
 def test_single_category(category, model, config, save=True):
     if save:
-        test_dir = os.path.join(config.exp_dir, "test") 
+        if config.only_coarse == True:
+            test_dir = os.path.join(config.exp_dir, "test_coarse")
+        else:
+            test_dir = os.path.join(config.exp_dir, "test")
         cat_dir = os.path.join(test_dir, category)
-        image_dir = os.path.join(cat_dir, 'image')
+        # image_dir = os.path.join(cat_dir, 'image')
         output_dir = os.path.join(cat_dir, 'output')
         save_counter = 32
         make_dir(cat_dir)
-        make_dir(image_dir)
+        # make_dir(image_dir)
         make_dir(output_dir)
 
     # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
@@ -60,7 +63,10 @@ def test_single_category(category, model, config, save=True):
                 p = trot.transform_points(p)
                 c = trot.transform_points(c)
 
-            _, c_ = model(p, trot)
+            if not config.only_coarse:
+                _, c_ = model(p, trot)
+            else:
+                c_, _ = model(p, trot)
             total_l1_cd += l1_cd(c_, c).item()
             total_l2_cd += l2_cd(c_, c).item()
             for i in range(len(c)):
@@ -94,9 +100,9 @@ def test(config, save=False):
     # load pretrained model
     model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
     # model = PCN(16384, 1024, 4).to(config.device)
-    ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
-    model.load_state_dict(torch.load(ckpt_path))
-    model.eval()
+    # ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
+    # model.load_state_dict(torch.load(ckpt_path))
+    # model.eval()
 
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)'))
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))

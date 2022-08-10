@@ -16,6 +16,8 @@ class PCNNet(nn.Module):
             self.encoder = VN_DGCNN_fps(config, only_coarse=config.only_coarse).to(config.device)
         elif enc_type == "vn_pointnet":
             self.encoder = VN_PointNet(config).to(config.device)
+        elif enc_type == "vn_pointnet++":
+            raise Exception(f"encoder type {enc_type} not supported yet")
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
@@ -27,7 +29,7 @@ class PCNNet(nn.Module):
             raise Exception(f"encoder type {enc_type} not supported yet")
 
         if config.enc_pretrained != "none" and not resume:
-            self.encoder.load_state_dict(torch.load(config.enc_pretrained))
+            self.encoder.load_state_dict(torch.load(config.enc_pretrained), strict=False)
 
             # dict = collections.OrderedDict()
             # raw_dict = torch.load(config.enc_pretrained)
