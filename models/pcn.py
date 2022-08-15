@@ -321,15 +321,15 @@ class VN_FoldingNet(nn.Module):
 
         self.grid_size = grid_size
         self.latent_dim = config.latent_dim
-        self.num_dense=16384
-        if config.num_coarse == 448:
-            self.num_coarse=config.num_coarse // 2
-            self.num_dense=14336
-            self.grid_size=8
-        else:
-            self.num_coarse=config.num_coarse
-            self.num_dense=16384
-            self.grid_size=4
+        # self.num_dense=16384
+        # if config.num_coarse == 448:
+        #     self.num_coarse=config.num_coarse // 2
+        #     self.num_dense=14336
+        #     self.grid_size=8
+        # else:
+        self.num_coarse=config.num_coarse
+        self.grid_size=4
+        self.num_dense=self.num_coarse * self.grid_size ** 2
 
         self.final_conv = nn.Sequential(
             VNLinearLeakyReLU(self.latent_dim+1+1, 256, dim=4),

@@ -29,15 +29,15 @@ class PCNNet(nn.Module):
             raise Exception(f"encoder type {enc_type} not supported yet")
 
         if config.enc_pretrained != "none" and not resume:
-            self.encoder.load_state_dict(torch.load(config.enc_pretrained), strict=False)
+            # self.encoder.load_state_dict(torch.load(config.enc_pretrained), strict=False)
 
-            # dict = collections.OrderedDict()
-            # raw_dict = torch.load(config.enc_pretrained)
-            # for k, v in raw_dict.items():
-            #     if 'encoder' in k:
-            #         dict[k[8:]] = v
+            dict = collections.OrderedDict()
+            raw_dict = torch.load(config.enc_pretrained)
+            for k, v in raw_dict.items():
+                if 'encoder' in k:
+                    dict[k[8:]] = v
             
-            # self.encoder.load_state_dict(dict)
+            self.encoder.load_state_dict(dict)
 
             for param in self.encoder.parameters():
                 param.requires_grad = False
@@ -63,4 +63,5 @@ class PCNNet(nn.Module):
             if self.only_coarse:
                 return coarse, None
             fine = self.decoder(coarse, feature_global, rot)
+            fine = torch.concat([fine, input],dim=1)
             return coarse, fine

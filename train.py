@@ -77,6 +77,8 @@ def train(config, args):
             model.load_state_dict(torch.load(model_path))
             optim_dict = torch.load(optim_path)
             optimizer.load_state_dict(optim_dict['optim_state_dict'])
+            for g in optimizer.param_groups:
+                g['lr'] = 0.00005
             start_epoch = optim_dict['epoch'] + 1
             best_cd_l1 = optim_dict['best_metrics']
             best_epoch_l1 = optim_dict['best_epoch']
