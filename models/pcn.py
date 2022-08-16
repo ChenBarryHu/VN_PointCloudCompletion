@@ -151,10 +151,10 @@ class VN_PointNet(nn.Module):
         self.maxpool2 = VNMaxPool(self.latent_dim * 2)
 
         self.mlp = nn.Sequential(
-            VNLinearAndLeakyReLU(self.latent_dim * 2, 1024 * 2, dim=4, use_batchnorm='none'),
+            VNLinearAndLeakyReLU(self.latent_dim * 2, 1024 * 2, dim=4),
             # nn.Linear(self.latent_dim, 1024),
             # nn.ReLU(inplace=True),
-            VNLinearAndLeakyReLU(1024*2, 1024, dim=4, use_batchnorm='none'),
+            VNLinearAndLeakyReLU(1024*2, 1024, dim=4),
             # nn.Linear(1024, 1024),
             # nn.ReLU(inplace=True),
             VNLinear(1024, self.num_coarse)

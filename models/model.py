@@ -4,6 +4,12 @@ import collections
 from models.vn_layers import *
 from models.dgcnn import *
 from models.pcn import *
+from pointnet2_ops import pointnet2_utils
+
+def fps(pc, num):
+    fps_idx = pointnet2_utils.furthest_point_sample(pc, num) 
+    sub_pc = pointnet2_utils.gather_operation(pc.transpose(1, 2).contiguous(), fps_idx).transpose(1,2).contiguous()
+    return sub_pc
 
 class PCNNet(nn.Module):
     def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet", resume=False):
@@ -53,7 +59,8 @@ class PCNNet(nn.Module):
 
     def forward(self, input, rot=None):
         coarse, feature_global = self.encoder(input)
-        
+        inp_sparse = fps(input, 224)
+        coarse = torch.concat([coarse, inp_sparse], dim=1)
         if self.num_coarse == 448:
             if self.only_coarse:
                 return coarse[1], None
