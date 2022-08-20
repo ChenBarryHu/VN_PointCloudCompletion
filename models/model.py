@@ -60,15 +60,15 @@ class PCNNet(nn.Module):
     def forward(self, input, rot=None):
         coarse, feature_global = self.encoder(input)
         inp_sparse = fps(input, 224)
-        coarse = torch.concat([coarse, inp_sparse], dim=1)
+        coarse_aug = torch.concat([coarse, inp_sparse], dim=1)
         if self.num_coarse == 448:
             if self.only_coarse:
-                return coarse[1], None
+                return coarse_aug, None
             fine = self.decoder(coarse[0], feature_global, rot)
-            return coarse[1], fine
+            return coarse_aug, fine
         else:
             if self.only_coarse:
-                return coarse, None
+                return coarse_aug, None
             fine = self.decoder(coarse, feature_global, rot)
             fine = torch.concat([fine, input],dim=1)
             return coarse, fine
