@@ -108,9 +108,9 @@ def train(config, args):
     train_step, val_step = start_epoch * n_batches, 0
     for epoch in range(start_epoch, config.max_epochs + 1):
         # hyperparameter alpha
-        if train_step < 10000:
+        if train_step < 50:
             alpha = 0.01
-        elif train_step < 20000:
+        elif train_step < 100:
             alpha = 0.1
         elif epoch < 50000:
             alpha = 0.5
@@ -161,10 +161,10 @@ def train(config, args):
                 loss2 = torch.zeros(1)
                 loss = loss1
             else:
-                loss2 = cd_loss_L1(dense_pred, c)
-                loss = loss2
                 # loss2 = cd_loss_L1(dense_pred, c)
-                # loss = loss1 + alpha * loss2
+                # loss = loss2
+                loss2 = cd_loss_L1(dense_pred, c)
+                loss = loss1 + loss2
                 train_cd_l1["dense"] += loss2.item()
 
             # back propagation
