@@ -21,13 +21,6 @@ class PCNNet(nn.Module):
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
-        if dec_type == "vn_foldingnet":
-            self.decoder = VN_FoldingNet(config).to(config.device)
-        elif dec_type == "foldingnet":
-            self.decoder = FoldingNet(config).to(config.device)
-        else:
-            raise Exception(f"encoder type {enc_type} not supported yet")
-
         if config.enc_pretrained != "none" and not resume:
             self.encoder.load_state_dict(torch.load(config.enc_pretrained), strict=False)
 
@@ -46,6 +39,8 @@ class PCNNet(nn.Module):
                 self.decoder = VN_FoldingNet(config).to(config.device)
             elif dec_type == "foldingnet":
                 self.decoder = FoldingNet(config).to(config.device)
+            elif dec_type == "attention_vn_foldingnet":
+                self.decoder = Attention_VN_FoldingNet(config).to(config.device)
             else:
                 raise Exception(f"encoder type {enc_type} not supported yet")
 
