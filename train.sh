@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-python main.py -n 09-08_vn_pointnet_1024_foldingnet_002 --resume train
+python main.py -n 08-28_vn_pointnet_1024_vn_foldingnet_end_to_end_000 --resume train

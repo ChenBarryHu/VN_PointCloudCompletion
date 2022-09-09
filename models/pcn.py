@@ -329,11 +329,11 @@ class VN_FoldingNet(nn.Module):
             self.grid_size=8
         else:
             self.num_coarse=config.num_coarse
-            self.num_dense=19968
+            self.num_dense=16384
             self.grid_size=4
 
         self.final_conv = nn.Sequential(
-            VNLinearLeakyReLU(1024+1+1, 256, dim=4),
+            VNLinearLeakyReLU(self.latent_dim+1+1, 256, dim=4),
             # nn.Conv1d(1024 + 3 + 2, 512, 1),
             # nn.BatchNorm1d(512),
             # nn.ReLU(inplace=True),
@@ -379,9 +379,9 @@ class VN_FoldingNet(nn.Module):
         # print(f"Dimension of seed (after expansion): {seed.shape}\n")
         seed = seed.reshape(B, -1, 3, self.num_dense)                                           # (B, 2, num_fine)
         feat_global_dim = feature_global.shape[1]
-        feature_global = feature_global[:,:(feat_global_dim//3)*3]
-        feature_global = feature_global.unsqueeze(2).expand(-1, -1, self.num_dense)          # (B, 1024, num_fine)
-        feature_global = feature_global.reshape(B,-1,3,self.num_dense)
+        # feature_global = feature_global[:,:(feat_global_dim//3)*3]
+        feature_global = feature_global.expand(-1, -1, -1,self.num_dense)           # (B, 1024, num_fine)
+        # feature_global = feature_global.reshape(B,-1,3,self.num_dense)
         feat = torch.cat([feature_global, seed, point_feat], dim=1)                          # (B, 1024+2+3, num_fine)
     
         fine = self.final_conv(feat) + point_feat                                            # (B, 3, num_fine), fine point cloud

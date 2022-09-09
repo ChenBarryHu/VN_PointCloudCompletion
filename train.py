@@ -169,7 +169,7 @@ def train(config, args):
 
             # back propagation
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), config.clip_gradient)
+            # torch.nn.utils.clip_grad_norm_(model.parameters(), config.clip_gradient)
             optimizer.step()
 
             train_cd_l1["total"] += loss.item()
