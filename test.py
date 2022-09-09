@@ -12,6 +12,7 @@ from visualization import plot_pcd_one_view
 from metrics.metric import l1_cd, l2_cd, emd, f_score
 from models.model import PCNNet
 from pytorch3d.transforms import RotateAxisAngle, Rotate, random_rotations
+from utils.voxel_util import points_to_voxels, evaluate_iou, voxel2obj
 
 
 CATEGORIES_PCN       = ['airplane', 'cabinet', 'car', 'chair', 'lamp', 'sofa', 'table', 'vessel']
@@ -29,7 +30,7 @@ def export_ply(filename, points):
     o3d.io.write_point_cloud(filename, pc, write_ascii=True)
 
 
-def test_single_category(category, model, config, save=False):
+def test_single_category(category, model, config, save=True):
     if save:
         if config.only_coarse == True:
             test_dir = os.path.join(config.exp_dir, "test_coarse")
@@ -38,7 +39,7 @@ def test_single_category(category, model, config, save=False):
         cat_dir = os.path.join(test_dir, category)
         # image_dir = os.path.join(cat_dir, 'image')
         output_dir = os.path.join(cat_dir, 'output')
-        save_counter = 32
+        save_counter = 200
         make_dir(cat_dir)
         # make_dir(image_dir)
         make_dir(output_dir)
@@ -48,9 +49,9 @@ def test_single_category(category, model, config, save=False):
     test_dataloader = Data.DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
 
     index = 1
-    total_l1_cd, total_l2_cd, total_f_score = 0.0, 0.0, 0.0
+    total_l1_cd, total_l2_cd, total_f_score, total_iou = 0.0, 0.0, 0.0, 0.0
     with torch.no_grad():
-        for p, c in test_dataloader:
+        for p, c  in test_dataloader:
             p = p.to(config.device)
             c = c.to(config.device)
             trot = None
@@ -74,20 +75,26 @@ def test_single_category(category, model, config, save=False):
                 output_pc = c_[i].detach().cpu().numpy()
                 gt_pc = c[i].detach().cpu().numpy()
                 total_f_score += f_score(output_pc, gt_pc)
-                if save and save_counter > 0:
-                    object_dir = os.path.join(output_dir, f'{index}')
-                    make_dir(object_dir)
-                    plot_pcd_one_view(os.path.join(object_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
-                    export_ply(os.path.join(object_dir, 'pred_{:03d}.ply'.format(index)), output_pc)
-                    export_ply(os.path.join(object_dir, 'gt_{:03d}.ply'.format(index)), gt_pc)
-                    save_counter -= 1
+                total_iou += evaluate_iou(output_pc, gt_pc)
+                # if save and save_counter > 0:
+                #     object_dir = os.path.join(output_dir, f'{index}')
+                #     make_dir(object_dir)
+                #     plot_pcd_one_view(os.path.join(object_dir, '{:03d}.png'.format(index)), [input_pc, output_pc, gt_pc], ['Input', 'Output', 'GT'], xlim=(-0.35, 0.35), ylim=(-0.35, 0.35), zlim=(-0.35, 0.35))
+                #     export_ply(os.path.join(object_dir, 'pred_{:03d}.ply'.format(index)), output_pc)
+                #     export_ply(os.path.join(object_dir, 'gt_{:03d}.ply'.format(index)), gt_pc)
+                #     pred_voxel = points_to_voxels(output_pc, size_grid=64)
+                #     gt_voxel = points_to_voxels(gt_pc, size_grid=64)
+                #     voxel2obj(filename=os.path.join(object_dir, "pred.obj"), pred=pred_voxel)
+                #     voxel2obj(filename=os.path.join(object_dir, "gt.obj"), pred=gt_voxel)
+                #     save_counter -= 1
                 index += 1
     
     avg_l1_cd = total_l1_cd / len(test_dataset)
     avg_l2_cd = total_l2_cd / len(test_dataset)
     avg_f_score = total_f_score / len(test_dataset)
+    avg_iou = total_iou / len(test_dataset)
 
-    return avg_l1_cd, avg_l2_cd, avg_f_score
+    return avg_l1_cd, avg_l2_cd, avg_f_score, avg_iou
 
 
 def test(config, save=False):
@@ -104,8 +111,8 @@ def test(config, save=False):
     model.load_state_dict(torch.load(ckpt_path))
     model.eval()
 
-    print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)'))
-    print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))
+    print('\033[33m{:20s}{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)','iou-0.01(%)'))
+    print('\033[33m{:20s}{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------','-----------'))
 
     if config.category == 'all':
         # if params.novel:
@@ -113,16 +120,17 @@ def test(config, save=False):
         # else:
         categories = CATEGORIES_PCN
         
-        l1_cds, l2_cds, fscores = list(), list(), list()
+        l1_cds, l2_cds, fscores, iou = list(), list(), list(), list()
         for category in categories:
-            avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(category, model, config, save)
-            print('{:20s}{:<20.4f}{:<20.4f}{:<20.4f}'.format(category.title(), 1e3 * avg_l1_cd, 1e4 * avg_l2_cd, 1e2 * avg_f_score))
+            avg_l1_cd, avg_l2_cd, avg_f_score, avg_iou = test_single_category(category, model, config, save)
+            print('{:20s}{:<20.4f}{:<20.4f}{:<20.4f}{:<20.4f}'.format(category.title(), 1e3 * avg_l1_cd, 1e4 * avg_l2_cd, 1e2 * avg_f_score, 1e2 * avg_iou))
             l1_cds.append(avg_l1_cd)
             l2_cds.append(avg_l2_cd)
             fscores.append(avg_f_score)
+            iou.append(avg_iou)
         
-        print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))
-        print('\033[32m{:20s}{:<20.4f}{:<20.4f}{:<20.4f}\033[0m'.format('Average', np.mean(l1_cds) * 1e3, np.mean(l2_cds) * 1e4, np.mean(fscores) * 1e2))
+        print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------','-----------'))
+        print('\033[32m{:20s}{:<20.4f}{:<20.4f}{:<20.4f}{:<20.4f}\033[0m'.format('Average', np.mean(l1_cds) * 1e3, np.mean(l2_cds) * 1e4, np.mean(fscores) * 1e2, np.mean(avg_iou) * 1e2))
     else:
         avg_l1_cd, avg_l2_cd, avg_f_score = test_single_category(params.category, model, params, save)
         print('{:20s}{:<20.4f}{:<20.4f}{:<20.4f}'.format(params.category.title(), 1e3 * avg_l1_cd, 1e4 * avg_l2_cd, 1e2 * avg_f_score))

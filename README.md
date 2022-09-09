@@ -23,7 +23,13 @@ python setup.py install
 cd ../earth_movers_distance
 python setup.py install
 ```
-
+Install PointNet++ and GPU kNN
+```
+# PointNet++
+pip install "git+git://github.com/erikwijmans/Pointnet2_PyTorch.git#egg=pointnet2_ops&subdirectory=pointnet2_ops_lib"
+# GPU kNN
+pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.2/KNN_CUDA-0.2-py3-none-any.whl
+```
 As for other modules, please install and create a conda environment by:
 
 ```shell
@@ -36,7 +42,7 @@ conda activate VN
 Please download PCN.zip from [Google Drive](https://drive.google.com/file/d/1OvvRyx02-C_DkzYiJ5stpin0mnXydHQ7/view?usp=sharing), and unzip the file under `/data` folder.
 
 ## Experiment Configuration
-The training configuration is stored in `config.json`, where you can adjust common training parameters like `learning rate', 'batch size' as well as project-specific arguments. Here is the explanation of some of the key arguments in config.json:
+The configuration is stored in `config.json`, where you can adjust common training parameters like `learning rate', 'batch size' as well as project-specific arguments. Here is the explanation of some of the key arguments in config.json:
 
 ```shell
 enc_type: choose the encoder to be used in the pipeline, candidates are ["vn_pointnet", "dgcnn_fps", "vn_dgcnn_fps", "vn_pointr"]
@@ -82,12 +88,18 @@ During training, a point cloud visualization of a random  sample would be produc
 During testing, the ply and obj files will be generated automatically under the `test` folder in the current experiment folder.
 
 ## Pretrained Model
-
-The pretrained model is in `checkpoint/`.
+We provide the pretrained weight for the best pipeline. To evaluate it:
+```shell
+python main.py -n 08-28_vn_pointnet_1024_vn_foldingnet_end_to_end_000 --resume test
+```
+To continue training it:
+```shell
+python main.py -n 08-28_vn_pointnet_1024_vn_foldingnet_end_to_end_000 --resume train
+```
 
 
 ## Acknowledgement
-We acknowledge that our work is based on PCN, PoinTr and Vector Neuron framework and this repo is based on this [PCN repo](https://github.com/qinglew/PCN-PyTorch) and this [Pointr repo](https://github.com/yuxumin/PoinTr).
+We acknowledge that our work is based on PCN, PoinTr and Vector Neuron framework and this repo is based on this [PCN repo](https://github.com/qinglew/PCN-PyTorch), this [Pointr repo](https://github.com/yuxumin/PoinTr) and this [vnn repo](https://github.com/FlyingGiraffe/vnn).
 
 * [PCN: Point Completion Network](https://arxiv.org/pdf/1808.00671.pdf)
 * [PCN's official Tensorflow implementation](https://github.com/wentaoyuan/pcn)
