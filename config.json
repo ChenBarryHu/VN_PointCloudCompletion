@@ -31,5 +31,6 @@
     "run_name": "",
     "test_rotation": "so3",
     "use_cuda": true,
+    "clip_gradient": 0.5,
     "val_rotation": "so3"
 }

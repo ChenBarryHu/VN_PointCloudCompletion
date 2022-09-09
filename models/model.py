@@ -4,9 +4,10 @@ import collections
 from models.vn_layers import *
 from models.dgcnn import *
 from models.pcn import *
+from models.pointr.vn_pointr import VN_PCTransformer
 
 class PCNNet(nn.Module):
-    def __init__(self, config, enc_type="dgcnn_fps", dec_type="vn_foldingnet", resume=False):
+    def __init__(self, config, enc_type="dgcnn_fps", dec_type="foldingnet"):
         super().__init__()
         self.num_coarse = config.num_coarse
         self.only_coarse = config.only_coarse
@@ -18,20 +19,21 @@ class PCNNet(nn.Module):
             self.encoder = VN_PointNet(config).to(config.device)
         elif enc_type == "vn_pointnet++":
             raise Exception(f"encoder type {enc_type} not supported yet")
+        elif enc_type == "vn_pointr":
+            self.encoder = VN_PCTransformer(in_chans = 3, embed_dim = 384, depth = [6, 8], drop_rate = 0., num_query = 224, knn_layer = 1, \
+            dgcnn='vn_dgcnn', trans='vn_trans', memory_profile=False, only_coarse=True).to(config.device)
         else:
             raise Exception(f"encoder type {enc_type} not supported yet")
 
-        if config.enc_pretrained != "none" and not resume:
-            self.encoder.load_state_dict(torch.load(config.enc_pretrained), strict=False)
-
-            # dict = collections.OrderedDict()
-            # raw_dict = torch.load(config.enc_pretrained)
-            # for k, v in raw_dict.items():
-            #     if 'encoder' in k:
-            #         dict[k[8:]] = v
+        
+        if config.enc_pretrained != "none":
+            dict = collections.OrderedDict()
+            raw_dict = torch.load(config.enc_pretrained)['base_model']
+            for k, v in raw_dict.items():
+                if 'module.base_model' in k:
+                    dict[k[18:]] = v
             
-            # self.encoder.load_state_dict(dict)
-
+            self.encoder.load_state_dict(dict)
             for param in self.encoder.parameters():
                 param.requires_grad = False
         if not config.only_coarse:
