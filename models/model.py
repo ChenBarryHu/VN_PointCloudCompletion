@@ -27,13 +27,14 @@ class PCNNet(nn.Module):
 
         
         if config.enc_pretrained != "none":
-            dict = collections.OrderedDict()
-            raw_dict = torch.load(config.enc_pretrained)['base_model']
-            for k, v in raw_dict.items():
-                if 'module.base_model' in k:
-                    dict[k[18:]] = v
+            dict = torch.load(config.enc_pretrained)
+            # dict = collections.OrderedDict()
+            # raw_dict = torch.load(config.enc_pretrained)['base_model']
+            # for k, v in raw_dict.items():
+            #     if 'module.base_model' in k:
+            #         dict[k[18:]] = v
             
-            self.encoder.load_state_dict(dict)
+            self.encoder.load_state_dict(dict, strict=False)
             for param in self.encoder.parameters():
                 param.requires_grad = False
         if not config.only_coarse:

@@ -57,7 +57,7 @@ def train(config, args):
     log_dataset.info("Dataset loaded!")
 
 
-    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type, resume=args.resume)
+    model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
     if config.freeze_decoder:
         for param in model.decoder.parameters():
             param.requires_grad = False
