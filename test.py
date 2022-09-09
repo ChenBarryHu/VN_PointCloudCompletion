@@ -29,7 +29,7 @@ def export_ply(filename, points):
     o3d.io.write_point_cloud(filename, pc, write_ascii=True)
 
 
-def test_single_category(category, model, config, save=True):
+def test_single_category(category, model, config, save=False):
     if save:
         if config.only_coarse == True:
             test_dir = os.path.join(config.exp_dir, "test_coarse")
@@ -44,7 +44,7 @@ def test_single_category(category, model, config, save=True):
         make_dir(output_dir)
 
     # test_dataset = ShapeNet('/media/server/new/datasets/PCN', 'test_novel' if params.novel else 'test', category)
-    test_dataset = ShapeNet('data/PCN', 'valid', category)
+    test_dataset = ShapeNet('data/PCN', 'test', category)
     test_dataloader = Data.DataLoader(test_dataset, batch_size=config.batch_size, shuffle=False)
 
     index = 1
@@ -100,9 +100,9 @@ def test(config, save=False):
     # load pretrained model
     model = PCNNet(config, enc_type=config.enc_type, dec_type=config.dec_type)
     # model = PCN(16384, 1024, 4).to(config.device)
-    # ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
-    # model.load_state_dict(torch.load(ckpt_path))
-    # model.eval()
+    ckpt_path = os.path.join(config.exp_dir, "models/model_best.pth")
+    model.load_state_dict(torch.load(ckpt_path))
+    model.eval()
 
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('Category', 'L1_CD(1e-3)', 'L2_CD(1e-4)', 'FScore-0.01(%)'))
     print('\033[33m{:20s}{:20s}{:20s}{:20s}\033[0m'.format('--------', '-----------', '-----------', '--------------'))
