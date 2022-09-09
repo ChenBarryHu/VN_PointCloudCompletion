@@ -1,6 +1,6 @@
 {
     "VN": false,
-    "batch_size": 4,
+    "batch_size": 12,
     "category": "all",
     "checkpoint": 0,
     "coarse_loss": "cd",
@@ -10,7 +10,7 @@
         "alpha": 200,
         "lambda": 0.5
     },
-    "dec_type": "attention_vn_foldingnet",
+    "dec_type": "foldingnet",
     "device": "cuda:0",
     "enc_pretrained": "/home/barry/guided_research/PCN-PyTorch/experiments/07-09_1024_points_vn_pcn_so3_002/models/model_best.pth",
     "enc_type": "vn_pointnet",
@@ -22,9 +22,9 @@
     "lr": 0.0001,
     "max_epochs": 400,
     "model": "vn_dgcnn_fps",
-    "name": "vn_pointnet_1024_vn_attention_foldingnet",
+    "name": "vn_pointnet_1024_foldingnet",
     "num_coarse": 1024,
-    "num_workers": 2,
+    "num_workers": 8,
     "only_coarse": false,
     "overfit": false,
     "rotation": "none",

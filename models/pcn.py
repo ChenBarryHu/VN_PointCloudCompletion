@@ -287,7 +287,7 @@ class FoldingNet(nn.Module):
             self.num_dense=16384
             self.grid_size=4
         self.final_conv = nn.Sequential(
-            nn.Conv1d(1024 + 3 + 2, 512, 1),
+            nn.Conv1d(2048 * 3 + 3 + 2, 512, 1),
             nn.BatchNorm1d(512),
             nn.ReLU(inplace=True),
             nn.Conv1d(512, 512, 1),
@@ -302,6 +302,7 @@ class FoldingNet(nn.Module):
 
     def forward(self, coarse, feature_global, rot=None):
         B = coarse.shape[0]
+        feature_global = feature_global.reshape(B, -1)
         point_feat = coarse.unsqueeze(2).expand(-1, -1, self.grid_size ** 2, -1)             # (B, num_coarse, S, 3)
         point_feat = point_feat.reshape(-1, self.num_dense, 3).transpose(2, 1)               # (B, 3, num_fine)
 
