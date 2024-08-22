@@ -4,7 +4,7 @@
 
 ![PCN](images/network.png)
 
-This is a Vector Neuron implementation of a point cloud completion pipeline in pytorch. This ongoing project is based on [PCN](https://arxiv.org/abs/1808.00671) and [PoinTr](https://arxiv.org/abs/2108.08839).
+This is a Vector Neuron implementation of a point cloud completion pipeline in pytorch. This project is based on [PCN](https://arxiv.org/abs/1808.00671) and [PoinTr](https://arxiv.org/abs/2108.08839), and please download [the technical report](./images/RotationInvariantShapeCompletion.pdf) to read it if github shows error viewing the PDF files.
 
 ## Environment
 
